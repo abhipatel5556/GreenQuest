@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   Create Post | GreenQuest Student
+  </title>
+  <!-- Brand Typography -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+   <!-- Font Awesome 6 -->
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet"/>
+   <!-- SweetAlert2 CSS -->
+   <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet"/>
+   <!-- Site Theme -->
+   <link href="style.css" rel="stylesheet"/>
+   <!-- Page-specific CSS -->
+   <link href="create_post.css" rel="stylesheet"/>
+  </link>
+ </head>
+ <body>
+  <!-- Sidebar (student) - visible on lg+ screens; fixed on left -->
+  <aside class="d-none d-lg-flex flex-column flex-shrink-0 bg-light border-end position-fixed" id="sidebar-student" style="width:260px; height:100vh;">
+   <div class="p-3 border-bottom">
+    <div class="d-flex align-items-center mb-2">
+     <i class="fa-solid fa-leaf me-2" style="color:#008000;">
+     </i>
+     <span class="fw-bold" style="color:#008000;">
+      GreenQuest
+     </span>
+    </div>
+    <div class="d-flex align-items-center">
+     <img alt="avatar" class="rounded-circle me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/studentavatar/40/40';" src="https://via.placeholder.com/40"/>
+     <div>
+      <div class="fw-semibold">
+       Student Name
+      </div>
+      <small class="text-muted">
+       Student
+      </small>
+     </div>
+    </div>
+   </div>
+   <nav class="flex-grow-1 overflow-auto p-2">
+    <ul class="nav nav-pills flex-column mb-auto">
+     <li class="nav-item">
+      <a class="nav-link text-dark" href="./student_dashboard.html">
+       <i class="fa-solid fa-home me-2">
+       </i>
+       Dashboard
+      </a>
+     </li>
+     <li>
+      <a aria-expanded="true" class="nav-link text-dark" data-bs-toggle="collapse" href="#learnMenu" role="button">
+       <i class="fa-solid fa-book me-2">
+       </i>
+       Learn
+      </a>
+      <div class="collapse show" id="learnMenu">
+       <ul class="btn-toggle-nav list-unstyled ms-4 my-2">
+        <li>
+         <a class="link-dark d-block py-1 rounded" href="./lesson_library.html">
+          Lesson Library
+         </a>
+        </li>
+       </ul>
+      </div>
+     </li>
+     <li>
+      <a aria-expanded="true" class="nav-link text-dark" data-bs-toggle="collapse" href="#challengeMenu" role="button">
+       <i class="fa-solid fa-tasks me-2">
+       </i>
+       Challenges
+      </a>
+      <div class="collapse show" id="challengeMenu">
+       <ul class="btn-toggle-nav list-unstyled ms-4 my-2">
+        <li>
+         <a class="link-dark d-block py-1 rounded" href="./challenge_library.html">
+          Challenge Library
+         </a>
+        </li>
+       </ul>
+      </div>
+     </li>
+     <li class="nav-item">
+      <a class="nav-link text-dark" href="./leaderboard_page.html">
+       <i class="fa-solid fa-trophy me-2">
+       </i>
+       Leaderboards
+      </a>
+     </li>
+     <li class="nav-item">
+      <a class="nav-link text-dark" href="./community_feed.html">
+       <i class="fa-solid fa-users me-2">
+       </i>
+       Green Feed
+      </a>
+     </li>
+     <li class="nav-item">
+      <a class="nav-link text-dark" href="./join_class.html">
+       <i class="fa-solid fa-sign-in-alt me-2">
+       </i>
+       Join Class
+      </a>
+     </li>
+    </ul>
+   </nav>
+   <div class="p-3 border-top">
+    <a class="btn btn-success w-100 mb-2" href="./challenge_library.html">
+     <i class="fa-solid fa-flag-checkered me-2">
+     </i>
+     Find a Challenge
+    </a>
+    <a class="btn btn-outline-success w-100" href="./lesson_library.html">
+     <i class="fa-solid fa-play-circle me-2">
+     </i>
+     Browse Lessons
+    </a>
+   </div>
+   <style>
+    #sidebar-student .nav-link.active, #sidebar-student .btn-toggle-nav a.active{ background:#008000; color:white; border-radius:8px; }
+      #sidebar-student a.link-dark:hover, #sidebar-student .nav-link:hover{ background:rgba(0,128,0,.08); border-radius:8px; }
+   </style>
+  </aside>
+  <!-- Header -->
+  <header class="navbar navbar-expand-lg navbar-light bg-white border-bottom sticky-top" style="margin-left:260px;">
+   <style>
+    :root { --gq-primary:#008000; --gq-secondary:#00FFFF; }
+      .gq-badge{background:var(--gq-secondary); color:#004a4a;}
+      .gq-nav-icon:hover{background:rgba(0,128,0,0.08); border-radius:8px;}
+   </style>
+   <div class="container-fluid">
+    <button class="btn d-lg-none me-2" data-bs-target="#offcanvasStudent" data-bs-toggle="offcanvas" type="button">
+     <i class="fa-solid fa-bars">
+     </i>
+    </button>
+    <a class="navbar-brand d-none d-lg-inline-block" href="./student_dashboard.html" style="color:#008000; font-weight:600;">
+     Student
+    </a>
+    <form class="d-none d-md-flex ms-2 flex-grow-1" onsubmit="event.preventDefault();" role="search">
+     <div class="input-group">
+      <span class="input-group-text bg-white">
+       <i class="fa-solid fa-search text-muted">
+       </i>
+      </span>
+      <input class="form-control" placeholder="Search lessons or challenges..." type="search"/>
+     </div>
+    </form>
+    <ul class="navbar-nav ms-auto align-items-center">
+     <li class="nav-item me-2">
+      <a class="btn btn-outline-success" href="./challenge_library.html">
+       <i class="fa-solid fa-flag me-1">
+       </i>
+       New Challenge
+      </a>
+     </li>
+     <li class="nav-item me-2 position-relative">
+      <a aria-label="Notifications" class="btn gq-nav-icon" href="#notifications">
+       <i class="fa-solid fa-bell">
+       </i>
+      </a>
+      <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill gq-badge">
+       3
+      </span>
+     </li>
+     <li class="nav-item dropdown">
+      <a class="d-flex align-items-center text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" href="#">
+       <img alt="student" class="rounded-circle me-2" height="32" onerror="this.onerror=null;this.src='https://picsum.photos/seed/student/32/32';" src="https://via.placeholder.com/32" width="32"/>
+       <strong>
+        Student
+       </strong>
+      </a>
+      <ul class="dropdown-menu dropdown-menu-end">
+       <li>
+        <h6 class="dropdown-header">
+         <i class="fa-solid fa-user-circle me-2">
+         </i>
+         Student
+        </h6>
+       </li>
+       <li>
+        <a class="dropdown-item" href="./student_dashboard.html">
+         Dashboard
+        </a>
+       </li>
+       <li>
+        <hr class="dropdown-divider"/>
+       </li>
+       <li>
+        <a class="dropdown-item" href="#settings">
+         <i class="fa-solid fa-cog me-2">
+         </i>
+         Settings
+        </a>
+       </li>
+       <li>
+        <a class="dropdown-item text-danger" href="#logout">
+         <i class="fa-solid fa-right-from-bracket me-2">
+         </i>
+         Logout
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </div>
+   <div class="offcanvas offcanvas-start" id="offcanvasStudent" tabindex="-1">
+    <div class="offcanvas-header">
+     <h5 class="offcanvas-title">
+      Menu
+     </h5>
+     <button class="btn-close" data-bs-dismiss="offcanvas" type="button">
+     </button>
+    </div>
+    
+  </header>
+  <!-- Main Content -->
+  <main class="main-panel" id="mainContent">
+   <div class="container py-4">
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb" class="breadcrumb">
+     <ol class="breadcrumb mb-3">
+      <li class="breadcrumb-item">
+       <a href="./community_feed.html">
+        Community Feed
+       </a>
+      </li>
+      <li aria-current="page" class="breadcrumb-item active">
+       Create Post
+      </li>
+     </ol>
+    </nav>
+    <!-- Page header -->
+    <div class="page-header">
+     <div class="d-flex align-items-center gap-2">
+      <i class="fa-solid fa-pen-to-square text-success">
+      </i>
+      <h1 class="page-title m-0">
+       Create a New Post
+      </h1>
+     </div>
+     <div class="text-muted">
+      Share your eco-action with the GreenQuest community
+     </div>
+    </div>
+    <!-- Alert placeholder (optional system feedback area) -->
+    <div aria-live="polite" class="mb-3" id="alertPlaceholder">
+    </div>
+    <!-- Create Post Card -->
+    <section class="card app-card create-post-card">
+     <div class="card-header">
+      <div class="title d-flex align-items-center gap-2">
+       <i class="fa-solid fa-seedling text-success">
+       </i>
+       <span class="widget-title">
+        Post to Green Feed
+       </span>
+      </div>
+      <span class="badge-soft info">
+       <i class="fa-solid fa-circle-info">
+       </i>
+       Max 500 characters
+      </span>
+     </div>
+     <div class="card-body">
+      <form id="createPostForm" novalidate="">
+       <!-- Text area -->
+       <div class="mb-3">
+        <label class="form-label" for="postText">
+         Your post
+        </label>
+        <textarea aria-describedby="charCount" class="form-control" id="postText" maxlength="500" placeholder="Share your latest eco-action..." rows="8"></textarea>
+        <div class="d-flex justify-content-between mt-1">
+         <small class="text-muted">
+          Tip: Give context and impact. Example: “I organized a campus cleanup and collected 12 kg of trash.”
+         </small>
+         <small class="text-muted" id="charCount">
+          <span id="typedCount">
+           0
+          </span>
+          /500
+         </small>
+        </div>
+       </div>
+       <!-- Image attachment -->
+       <div class="mb-4">
+        <label class="form-label">
+         Optional photo
+        </label>
+        <div class="add-photo-area p-3 border rounded d-flex align-items-center justify-content-between bg-white" id="addPhotoArea">
+         <div class="d-flex align-items-center gap-2">
+          <button class="btn btn-light" id="addPhotoBtn" type="button">
+           <i class="fa-solid fa-camera me-2">
+           </i>
+           Add Photo
+          </button>
+          <small class="text-muted">
+           JPG or PNG, up to 5MB
+          </small>
+         </div>
+         <input accept="image/jpeg,image/png" class="d-none" id="imageInput" type="file">
+         </input>
+        </div>
+        <div class="image-preview-wrapper mt-3 d-none" id="imagePreviewWrapper">
+         <div class="image-preview position-relative rounded border overflow-hidden">
+          <img alt="Selected image preview" class="w-100 h-100 object-fit-cover" id="imagePreview" src="">
+           <button class="btn btn-sm btn-danger position-absolute top-0 end-0 m-2" id="removeImageBtn" type="button">
+            <i class="fa-solid fa-xmark">
+            </i>
+           </button>
+          </img>
+         </div>
+        </div>
+       </div>
+       <!-- Sticky action bar -->
+       <div class="form-actions-bar d-flex align-items-center justify-content-between">
+        <a class="btn btn-light" href="#" id="cancelBtn">
+         <i class="fa-solid fa-arrow-left me-2">
+         </i>
+         Cancel
+        </a>
+        <button class="btn btn-success" disabled="" id="postBtn" type="submit">
+         <span class="btn-label">
+          <i class="fa-solid fa-paper-plane me-2">
+          </i>
+          Post
+         </span>
+         <span aria-hidden="true" class="spinner-border spinner-border-sm ms-2 d-none" role="status">
+         </span>
+        </button>
+       </div>
+      </form>
+     </div>
+    </section>
+    <!-- Help / Guidance -->
+    <div class="alert alert-info mt-3" role="alert">
+     <i class="fa-solid fa-lightbulb me-2">
+     </i>
+     Remember to be respectful and factual. Images should be your own and relevant to your activity.
+    </div>
+   </div>
+  </main>
+  <!-- Footer -->
+  <footer class="border-top bg-white" style="margin-left:260px;">
+   <div class="container py-3 d-flex flex-wrap justify-content-between align-items-center">
+    <div class="text-muted d-flex align-items-center">
+     <i class="fa-solid fa-leaf me-2" style="color:#008000;">
+     </i>
+     <small>
+      GreenQuest Student
+     </small>
+    </div>
+    <div class="d-flex gap-2">
+     <a class="btn btn-sm btn-success" href="./challenge_library.html">
+      <i class="fa-solid fa-flag me-1">
+      </i>
+      Find Challenge
+     </a>
+     <a class="btn btn-sm btn-outline-success" href="./lesson_library.html">
+      <i class="fa-solid fa-play-circle me-1">
+      </i>
+      Lessons
+     </a>
+    </div>
+    <ul class="nav">
+     <li class="nav-item">
+      <a class="nav-link px-2 text-muted" href="#terms">
+       Terms
+      </a>
+     </li>
+     <li class="nav-item">
+      <a class="nav-link px-2 text-muted" href="#privacy">
+       Privacy
+      </a>
+     </li>
+    </ul>
+   </div>
+  </footer>
+  <!-- Bootstrap 5 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+  </script>
+  <!-- SweetAlert2 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js">
+  </script>
+  <script>
+   (function() {
+    const textarea = document.getElementById('postText');
+    const typedCountEl = document.getElementById('typedCount');
+    const postBtn = document.getElementById('postBtn');
+    const postBtnSpinner = postBtn.querySelector('.spinner-border');
+    const addPhotoBtn = document.getElementById('addPhotoBtn');
+    const imageInput = document.getElementById('imageInput');
+    const previewWrapper = document.getElementById('imagePreviewWrapper');
+    const previewImg = document.getElementById('imagePreview');
+    const removeImageBtn = document.getElementById('removeImageBtn');
+    const cancelBtn = document.getElementById('cancelBtn');
+    const form = document.getElementById('createPostForm');
+
+    let selectedFile = null;
+    const MIN_CHARS = 10;
+    const MAX_SIZE_BYTES = 5 * 1024 * 1024; // 5MB
+    const ACCEPT_TYPES = ['image/jpeg', 'image/png'];
+
+    function updateCounter() {
+        const len = textarea.value.trim().length;
+        typedCountEl.textContent = String(len);
+        postBtn.disabled = len < MIN_CHARS;
+    }
+
+    textarea.addEventListener('input', updateCounter);
+    updateCounter();
+
+    addPhotoBtn.addEventListener('click', () => imageInput.click());
+
+    imageInput.addEventListener('change', (e) => {
+        const file = e.target.files && e.target.files[0] ? e.target.files[0] : null;
+        if (!file) return;
+        if (!ACCEPT_TYPES.includes(file.type)) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Unsupported file type',
+                text: 'Please select a JPG or PNG image.'
+            });
+            imageInput.value = '';
+            return;
+        }
+        if (file.size > MAX_SIZE_BYTES) {
+            Swal.fire({
+                icon: 'error',
+                title: 'File too large',
+                text: 'Image must be 5MB or smaller.'
+            });
+            imageInput.value = '';
+            return;
+        }
+        selectedFile = file;
+        const reader = new FileReader();
+        reader.onload = (evt) => {
+            previewImg.src = evt.target.result;
+            previewWrapper.classList.remove('d-none');
+            addPhotoBtn.classList.add('d-none');
+        };
+        reader.readAsDataURL(file);
+    });
+
+    removeImageBtn.addEventListener('click', () => {
+        selectedFile = null;
+        previewImg.src = '';
+        previewWrapper.classList.add('d-none');
+        addPhotoBtn.classList.remove('d-none');
+        imageInput.value = '';
+    });
+
+    cancelBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const hasContent = textarea.value.trim().length > 0 || !!selectedFile;
+        if (!hasContent) {
+            window.location.href = './community_feed.html';
+            return;
+        }
+        Swal.fire({
+            title: 'Discard this post?',
+            text: 'Your text and image will be lost.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#6c757d',
+            confirmButtonText: 'Discard',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = './community_feed.html';
+            }
+        });
+    });
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        // Simulate submit
+        setSubmitting(true);
+        try {
+            await mockApiSubmit();
+            await Swal.fire({
+                icon: 'success',
+                title: 'Posted!',
+                text: 'Your update has been shared to the Green Feed.',
+                timer: 1200,
+                showConfirmButton: false
+            });
+            window.location.href = './community_feed.html';
+        } catch (err) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Submission failed',
+                text: 'Please try again.'
+            });
+        } finally {
+            setSubmitting(false);
+        }
+    });
+
+    function setSubmitting(isSubmitting) {
+        textarea.disabled = isSubmitting;
+        addPhotoBtn.disabled = isSubmitting;
+        removeImageBtn.disabled = isSubmitting;
+        postBtn.disabled = isSubmitting || textarea.value.trim().length < MIN_CHARS;
+        postBtnSpinner.classList.toggle('d-none', !isSubmitting);
+    }
+
+    function mockApiSubmit() {
+        // Create form data, would normally send to backend
+        const data = new FormData();
+        data.append('content', textarea.value.trim());
+        if (selectedFile) data.append('image', selectedFile);
+        // Simulate success 85% of time
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                Math.random() < 0.85 ? resolve() : reject(new Error('Network error'));
+            }, 1200);
+        });
+    }
+})();
+  </script>
+  <script src="auth.js"></script>
+
+ </body>
+</html>

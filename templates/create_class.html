@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   GreenQuest Teacher - Create Class
+  </title>
+  <!-- Google Fonts: Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <!-- Bootstrap 5 CSS -->
+  <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" rel="stylesheet"/>
+  <!-- Font Awesome 6 -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+   <!-- Site Theme CSS -->
+   <link href="style.css" rel="stylesheet">
+    <!-- Page Specific CSS -->
+    <link href="create_class.css" rel="stylesheet"/>
+   </link>
+  </link>
+ </head>
+ <body>
+  <!-- Left Sidebar (Teacher) - Included for this Teacher tool page -->
+  <aside class="d-flex flex-column flex-shrink-0 bg-light border-end position-fixed" id="sidebar-teacher" style="width:260px; height:100vh;">
+   <div class="p-3 border-bottom">
+    <div class="d-flex align-items-center mb-2">
+     <i class="fa-solid fa-leaf me-2" style="color:#008000;">
+     </i>
+     <span class="fw-bold" style="color:#008000;">
+      GreenQuest
+     </span>
+    </div>
+    <div class="d-flex align-items-center">
+     <img alt="avatar" class="rounded-circle me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/teacher/40/40';" src="https://via.placeholder.com/40"/>
+     <div>
+      <div class="fw-semibold">
+       Teacher Name
+      </div>
+      <small class="text-muted">
+       Teacher / Coordinator
+      </small>
+     </div>
+    </div>
+   </div>
+   <nav class="flex-grow-1 overflow-auto p-2">
+    <ul class="nav nav-pills flex-column mb-auto">
+     <li class="nav-item">
+      <a class="nav-link text-dark" href="./teacher_dashboard.html">
+       <i class="fa-solid fa-chalkboard-user me-2">
+       </i>
+       Dashboard
+      </a>
+     </li>
+     <li>
+      <a class="nav-link text-dark" href="./verification_queue.html">
+       <i class="fa-solid fa-inbox me-2">
+       </i>
+       Verification Queue
+      </a>
+     </li>
+     <li>
+      <a aria-expanded="true" class="nav-link text-dark" data-bs-toggle="collapse" href="#manageMenu" role="button">
+       <i class="fa-solid fa-tools me-2">
+       </i>
+       Manage
+      </a>
+      <div class="collapse show" id="manageMenu">
+       <ul class="btn-toggle-nav list-unstyled ms-4 my-2">
+        <li>
+         <a class="d-block link-dark py-1 rounded active" href="./create_class.html">
+          <i class="fa-solid fa-square-plus me-2">
+          </i>
+          Create Class
+         </a>
+        </li>
+        <li>
+         <a class="d-block link-dark py-1 rounded" href="./create_challenge.html">
+          <i class="fa-solid fa-circle-plus me-2">
+          </i>
+          Create Challenge
+         </a>
+        </li>
+        <li>
+         <a class="d-block link-dark py-1 rounded" href="./student_analytics.html">
+          <i class="fa-solid fa-user-chart me-2">
+          </i>
+          Student Analytics
+         </a>
+        </li>
+       </ul>
+      </div>
+     </li>
+     <li class="nav-item">
+      <a class="nav-link text-dark" href="./leaderboard_page.html">
+       <i class="fa-solid fa-trophy me-2">
+       </i>
+       Leaderboards
+      </a>
+     </li>
+     <li class="nav-item">
+      <a class="nav-link text-dark" href="./community_feed.html">
+       <i class="fa-solid fa-users me-2">
+       </i>
+       Green Feed
+      </a>
+     </li>
+    </ul>
+   </nav>
+   <div class="p-3 border-top">
+    <a class="btn btn-success w-100 mb-2" href="./verification_queue.html">
+     <i class="fa-solid fa-circle-check me-2">
+     </i>
+     Verify Now
+    </a>
+    <a class="btn btn-outline-success w-100" href="./create_challenge.html">
+     <i class="fa-solid fa-circle-plus me-2">
+     </i>
+     New Challenge
+    </a>
+   </div>
+  </aside>
+  <style>
+   #sidebar-teacher .nav-link.active, #sidebar-teacher .btn-toggle-nav a.active{ background:#008000; color:#fff; border-radius:8px; }
+    #sidebar-teacher .nav-link:hover, #sidebar-teacher .btn-toggle-nav a:hover{ background:rgba(0,128,0,.08); border-radius:8px; }
+  </style>
+  <!-- Header (Top Navbar) - Included for this page -->
+  <header class="navbar navbar-expand-lg navbar-light bg-white border-bottom sticky-top" style="margin-left:260px;">
+   <style>
+    :root { --gq-primary:#008000; --gq-secondary:#00FFFF; }
+      .gq-badge{background:var(--gq-secondary); color:#004a4a;}
+      .gq-nav-icon:hover{background:rgba(0,128,0,0.08); border-radius:8px;}
+   </style>
+   <div class="container-fluid">
+    <button class="btn d-lg-none me-2" data-bs-target="#offcanvasTeacher" data-bs-toggle="offcanvas" type="button">
+     <i class="fa-solid fa-bars">
+     </i>
+    </button>
+    <a class="navbar-brand d-none d-lg-inline-block" href="./teacher_dashboard.html" style="color:#008000; font-weight:600;">
+     Teacher
+    </a>
+    <form class="d-none d-md-flex ms-2 flex-grow-1" role="search">
+     <div class="input-group">
+      <span class="input-group-text bg-white">
+       <i class="fa-solid fa-magnifying-glass text-muted">
+       </i>
+      </span>
+      <input class="form-control" placeholder="Search students or submissions..." type="search"/>
+     </div>
+    </form>
+    <ul class="navbar-nav ms-auto align-items-center">
+     <li class="nav-item me-2">
+      <a class="btn btn-outline-success" href="./create_challenge.html">
+       <i class="fa-solid fa-circle-plus me-1">
+       </i>
+       Create Challenge
+      </a>
+     </li>
+     <li class="nav-item me-2 position-relative">
+      <a class="btn gq-nav-icon" href="#notifications">
+       <i class="fa-solid fa-bell">
+       </i>
+      </a>
+      <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill gq-badge">
+       5
+      </span>
+     </li>
+     <li class="nav-item dropdown">
+      <a class="d-flex align-items-center text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" href="#">
+       <img class="rounded-circle me-2" height="32" onerror="this.onerror=null;this.src='https://picsum.photos/seed/teacher-mini/32/32';" src="https://via.placeholder.com/32" width="32"/>
+       <strong>
+        Teacher
+       </strong>
+      </a>
+      <ul class="dropdown-menu dropdown-menu-end">
+       <li>
+        <h6 class="dropdown-header">
+         <i class="fa-solid fa-user-tie me-2">
+         </i>
+         Teacher
+        </h6>
+       </li>
+       <li>
+        <a class="dropdown-item" href="./teacher_dashboard.html">
+         Dashboard
+        </a>
+       </li>
+       <li>
+        <a class="dropdown-item" href="./verification_queue.html">
+         Verification Queue
+        </a>
+       </li>
+       <li>
+        <hr class="dropdown-divider"/>
+       </li>
+       <li>
+        <a class="dropdown-item" href="#settings">
+         <i class="fa-solid fa-gear me-2">
+         </i>
+         Settings
+        </a>
+       </li>
+       <li>
+        <a class="dropdown-item text-danger" href="#logout">
+         <i class="fa-solid fa-right-from-bracket me-2">
+         </i>
+         Logout
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </div>
+   <div class="offcanvas offcanvas-start" id="offcanvasTeacher" tabindex="-1">
+    <div class="offcanvas-header">
+     <h5 class="offcanvas-title">
+      Menu
+     </h5>
+     <button class="btn-close" data-bs-dismiss="offcanvas" type="button">
+     </button>
+    </div>
+    <div class="offcanvas-body">
+     <a class="btn w-100 mb-2 btn-outline-success" href="./teacher_dashboard.html">
+      <i class="fa-solid fa-chalkboard-user me-2">
+      </i>
+      Dashboard
+     </a>
+     <a class="btn w-100 mb-2 btn-outline-success" href="./verification_queue.html">
+      <i class="fa-solid fa-inbox me-2">
+      </i>
+      Verification Queue
+     </a>
+     <a class="btn w-100 mb-2 btn-success" href="./create_class.html">
+      <i class="fa-solid fa-square-plus me-2">
+      </i>
+      Create Class
+     </a>
+     <a class="btn w-100 mb-2 btn-outline-success" href="./create_challenge.html">
+      <i class="fa-solid fa-circle-plus me-2">
+      </i>
+      Create Challenge
+     </a>
+     <a class="btn w-100 mb-2 btn-outline-success" href="./student_analytics.html">
+      <i class="fa-solid fa-user-chart me-2">
+      </i>
+      Student Analytics
+     </a>
+     <a class="btn w-100 mb-2 btn-outline-success" href="./community_feed.html">
+      <i class="fa-solid fa-users me-2">
+      </i>
+      Green Feed
+     </a>
+    </div>
+   </div>
+  </header>
+  <!-- Main Content -->
+  <main class="main-panel" id="main-content" style="margin-left:260px; padding:20px;">
+   <div class="container-fluid">
+    <!-- Page Header -->
+    <div class="page-header">
+     <div class="d-flex align-items-center gap-2">
+      <i class="fa-solid fa-square-plus text-success">
+      </i>
+      <h1 class="page-title m-0">
+       Create a New Class
+      </h1>
+     </div>
+     <div class="navigation-controls">
+      <a class="btn btn-light" href="./teacher_dashboard.html">
+       <i class="fa-solid fa-arrow-left me-1">
+       </i>
+       Back to Dashboard
+      </a>
+     </div>
+    </div>
+    <!-- System feedback area (hidden by default) -->
+    <div class="alert d-none" id="systemFeedback" role="alert">
+    </div>
+    <!-- Create Class Component -->
+    <section class="create-class-wrapper" id="createClassComponent">
+     <!-- Form State -->
+     <div class="card app-card mx-auto" id="createClassFormCard" style="max-width: 720px;">
+      <div class="card-header">
+       <div class="title d-flex align-items-center gap-2">
+        <i class="fa-solid fa-chalkboard text-success">
+        </i>
+        <span class="widget-title">
+         Class Details
+        </span>
+       </div>
+       <div>
+        <span class="badge-soft info">
+         <i class="fa-solid fa-lock me-1">
+         </i>
+         Secure
+        </span>
+       </div>
+      </div>
+      <div class="card-body">
+       <form id="createClassForm" novalidate="">
+        <div class="mb-3">
+         <label class="form-label" for="className">
+          Class Name
+          <span class="text-danger">
+           *
+          </span>
+         </label>
+         <input aria-describedby="classNameHelp" class="form-control" id="className" maxlength="50" minlength="3" name="className" placeholder="e.g., Grade 8 Science" required="" type="text"/>
+         <div class="form-text" id="classNameHelp">
+          3–50 characters. Example: "Grade 8 Science".
+         </div>
+         <div class="invalid-feedback">
+          Please enter a class name between 3 and 50 characters.
+         </div>
+        </div>
+        <div class="mb-3">
+         <label class="form-label" for="gradeLevel">
+          Grade Level (Optional)
+         </label>
+         <select class="form-select" id="gradeLevel" name="gradeLevel">
+          <option value="">
+           Select a grade level...
+          </option>
+          <option>
+           Grade 6
+          </option>
+          <option>
+           Grade 7
+          </option>
+          <option>
+           Grade 8
+          </option>
+          <option>
+           Grade 9
+          </option>
+          <option>
+           Grade 10
+          </option>
+          <option>
+           Grade 11
+          </option>
+          <option>
+           Grade 12
+          </option>
+          <option>
+           College
+          </option>
+         </select>
+        </div>
+        <div class="mb-3">
+         <label class="form-label" for="classDescription">
+          Class Description (Optional)
+         </label>
+         <textarea class="form-control" id="classDescription" maxlength="240" name="classDescription" placeholder="Add a short description (max 240 characters)" rows="4"></textarea>
+         <div class="form-text">
+          Helps students identify the right class. Example: "Eco-club weekly sustainability challenge group."
+         </div>
+        </div>
+        <div class="d-flex align-items-center justify-content-between">
+         <div class="text-muted small">
+          <i class="fa-solid fa-circle-info me-1">
+          </i>
+          A unique join code will be generated after creation.
+         </div>
+         <div class="d-flex gap-2">
+          <a class="btn btn-light" href="./teacher_dashboard.html">
+           Cancel
+          </a>
+          <button class="btn btn-success" disabled="" id="createClassBtn" type="submit">
+           <span class="default-text">
+            <i class="fa-solid fa-plus me-2">
+            </i>
+            Create Class
+           </span>
+           <span class="loading-text d-none">
+            <span class="spinner-border spinner-border-sm me-2">
+            </span>
+            Creating...
+           </span>
+          </button>
+         </div>
+        </div>
+       </form>
+      </div>
+     </div>
+     <!-- Success State -->
+     <div class="card app-card mx-auto d-none" id="creationSuccessCard" style="max-width: 720px;">
+      <div class="card-body text-center p-4">
+       <div class="success-icon mb-3">
+        <i class="fa-solid fa-circle-check text-success" style="font-size:48px;">
+        </i>
+       </div>
+       <h3 class="mb-2">
+        Success! Your class has been created.
+       </h3>
+       <p class="text-muted mb-4">
+        Share this code with your students to have them join your class.
+       </p>
+       <div aria-label="Class Join Code" aria-readonly="true" class="code-display rounded border mx-auto mb-3" id="generatedCodeBox" role="textbox" tabindex="0">
+        GQ-XXXX-XXXX
+       </div>
+       <div class="d-flex justify-content-center gap-2 mb-3">
+        <button class="btn btn-outline-success" id="copyCodeBtn">
+         <i class="fa-solid fa-copy me-1">
+         </i>
+         <span class="copy-label">
+          Copy Code
+         </span>
+        </button>
+        <button class="btn btn-light" id="createAnotherBtn">
+         <i class="fa-solid fa-plus me-1">
+         </i>
+         Create Another
+        </button>
+        <button class="btn btn-success" id="goToDashboardBtn">
+         <i class="fa-solid fa-check me-1">
+         </i>
+         Done
+        </button>
+       </div>
+       <small class="text-muted d-block">
+        Tip: You can also share via your class page in the dashboard.
+       </small>
+      </div>
+     </div>
+    </section>
+    <!-- Supplemental: Quick Stats (Chart) -->
+    <section class="mt-4">
+     <div class="row g-3">
+      <div class="col-12 col-xl-6">
+       <div class="card app-card h-100">
+        <div class="card-header">
+         <div class="title d-flex align-items-center gap-2">
+          <i class="fa-solid fa-chart-pie text-success">
+          </i>
+          <span class="widget-title">
+           Your Classes by Grade
+          </span>
+         </div>
+         <div>
+          <span class="badge-soft primary">
+           <i class="fa-solid fa-clock me-1">
+           </i>
+           Updated just now
+          </span>
+         </div>
+        </div>
+        <div class="card-body">
+         <div style="height: 280px;">
+          <canvas aria-label="Distribution of classes by grade" id="classesByGradeChart" role="img">
+          </canvas>
+         </div>
+        </div>
+       </div>
+      </div>
+      <!-- Supplemental: Recent Classes Table with search/sort -->
+      <div class="col-12 col-xl-6">
+       <div class="card app-card h-100">
+        <div class="card-header">
+         <div class="title d-flex align-items-center gap-2">
+          <i class="fa-solid fa-list text-success">
+          </i>
+          <span class="widget-title">
+           Recent Classes
+          </span>
+         </div>
+         <div class="d-flex gap-2">
+          <div class="input-group input-group-sm" style="width: 220px;">
+           <span class="input-group-text">
+            <i class="fa-solid fa-magnifying-glass">
+            </i>
+           </span>
+           <input class="form-control" id="tableSearch" placeholder="Search classes..." type="text"/>
+          </div>
+          <select class="form-select form-select-sm" id="sortSelect" style="width: 160px;">
+           <option value="created_desc">
+            Newest
+           </option>
+           <option value="created_asc">
+            Oldest
+           </option>
+           <option value="name_asc">
+            Name A→Z
+           </option>
+           <option value="name_desc">
+            Name Z→A
+           </option>
+          </select>
+         </div>
+        </div>
+        <div class="card-body p-0">
+         <div class="table-responsive">
+          <table class="table table-theme align-middle mb-0" id="recentClassesTable">
+           <thead>
+            <tr>
+             <th>
+              Class Name
+             </th>
+             <th>
+              Grade
+             </th>
+             <th class="text-end">
+              Students
+             </th>
+             <th>
+              Created
+             </th>
+             <th>
+              Code
+             </th>
+             <th class="text-end">
+              Actions
+             </th>
+            </tr>
+           </thead>
+           <tbody>
+            <!-- Rows injected by JS -->
+           </tbody>
+          </table>
+         </div>
+        </div>
+        <div class="card-footer d-flex justify-content-between align-items-center">
+         <small class="text-muted" id="tableInfo">
+          Showing 0 items
+         </small>
+         <div class="text-muted small">
+          <i class="fa-solid fa-circle-info me-1">
+          </i>
+          Sample data for preview
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section>
+   </div>
+  </main>
+  <!-- Footer (included) -->
+  <footer class="border-top bg-white" style="margin-left:260px;">
+   <div class="container py-3 d-flex flex-wrap justify-content-between align-items-center">
+    <div class="text-muted d-flex align-items-center">
+     <i class="fa-solid fa-leaf me-2" style="color:#008000;">
+     </i>
+     <small>
+      GreenQuest Teacher
+     </small>
+    </div>
+    <div class="d-flex gap-2">
+     <a class="btn btn-sm btn-success" href="./verification_queue.html">
+      <i class="fa-solid fa-circle-check me-1">
+      </i>
+      Verify
+     </a>
+     <a class="btn btn-sm btn-outline-success" href="./create_challenge.html">
+      <i class="fa-solid fa-circle-plus me-1">
+      </i>
+      New Challenge
+     </a>
+    </div>
+    <ul class="nav">
+     <li class="nav-item">
+      <a class="nav-link px-2 text-muted" href="#terms">
+       Terms
+      </a>
+     </li>
+     <li class="nav-item">
+      <a class="nav-link px-2 text-muted" href="#privacy">
+       Privacy
+      </a>
+     </li>
+    </ul>
+   </div>
+  </footer>
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11">
+  </script>
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js">
+  </script>
+  <!-- Bootstrap 5 JS Bundle -->
+  <script crossorigin="anonymous" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+  </script>
+  <script>
+   // Mock authenticated IDs (would normally come from session/localStorage or server)
+const teacherId = 'TCHR-12345';
+const schoolId = 'SCH-98765';
+
+// UI Elements
+const form = document.getElementById('createClassForm');
+const classNameInput = document.getElementById('className');
+const gradeLevelSelect = document.getElementById('gradeLevel');
+const classDescription = document.getElementById('classDescription');
+const createBtn = document.getElementById('createClassBtn');
+const createBtnDefaultText = createBtn.querySelector('.default-text');
+const createBtnLoadingText = createBtn.querySelector('.loading-text');
+
+const formCard = document.getElementById('createClassFormCard');
+const successCard = document.getElementById('creationSuccessCard');
+const generatedCodeBox = document.getElementById('generatedCodeBox');
+const copyCodeBtn = document.getElementById('copyCodeBtn');
+const goToDashboardBtn = document.getElementById('goToDashboardBtn');
+const createAnotherBtn = document.getElementById('createAnotherBtn');
+
+const systemFeedback = document.getElementById('systemFeedback');
+
+// Table & Chart elements
+const tableBody = document.querySelector('#recentClassesTable tbody');
+const tableInfo = document.getElementById('tableInfo');
+const tableSearch = document.getElementById('tableSearch');
+const sortSelect = document.getElementById('sortSelect');
+let classesData = [{
+    name: 'Grade 8 Science',
+    grade: 'Grade 8',
+    students: 28,
+    created: '2025-02-20',
+    code: 'GQ-AB12-9XCD'
+}, {
+    name: 'Grade 7 Eco Club',
+    grade: 'Grade 7',
+    students: 22,
+    created: '2025-02-18',
+    code: 'GQ-77PQ-88RS'
+}, {
+    name: 'Grade 10 Biology',
+    grade: 'Grade 10',
+    students: 31,
+    created: '2025-02-15',
+    code: 'GQ-1BIO-10GY'
+}, {
+    name: 'Grade 6 Green Team',
+    grade: 'Grade 6',
+    students: 18,
+    created: '2025-02-12',
+    code: 'GQ-6GTX-2025'
+}, {
+    name: 'Grade 12 Environmental Studies',
+    grade: 'Grade 12',
+    students: 25,
+    created: '2025-02-10',
+    code: 'GQ-EN12-3456'
+}, {
+    name: 'College Sustainability 101',
+    grade: 'College',
+    students: 40,
+    created: '2025-02-05',
+    code: 'GQ-CLG1-01SS'
+}];
+
+function formatDateDisplay(iso) {
+    const d = new Date(iso + 'T00:00:00');
+    return d.toLocaleDateString(undefined, {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+    });
+}
+
+function renderTable(data) {
+    tableBody.innerHTML = '';
+    data.forEach(item => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${item.name}</td>
+          <td>${item.grade || '-'}</td>
+          <td class="text-end">${item.students.toLocaleString()}</td>
+          <td>${formatDateDisplay(item.created)}</td>
+          <td><code>${item.code}</code></td>
+          <td class="text-end">
+            <div class="btn-group btn-group-sm" role="group">
+              <a href="./teacher_dashboard.html" class="btn btn-light"><i class="fa-solid fa-eye"></i></a>
+              <button type="button" class="btn btn-outline-success btn-copy-row" data-code="${item.code}"><i class="fa-solid fa-copy"></i></button>
+            </div>
+          </td>
+        `;
+        tableBody.appendChild(tr);
+    });
+    tableInfo.textContent = `Showing ${data.length} items`;
+}
+
+function sortData(data, mode) {
+    const sorted = [...data];
+    switch (mode) {
+        case 'created_asc':
+            sorted.sort((a, b) => a.created.localeCompare(b.created));
+            break;
+        case 'created_desc':
+            sorted.sort((a, b) => b.created.localeCompare(a.created));
+            break;
+        case 'name_asc':
+            sorted.sort((a, b) => a.name.localeCompare(b.name));
+            break;
+        case 'name_desc':
+            sorted.sort((a, b) => b.name.localeCompare(a.name));
+            break;
+    }
+    return sorted;
+}
+
+function filterData(data, query) {
+    const q = query.trim().toLowerCase();
+    if (!q) return data;
+    return data.filter(item => {
+        return (
+            (item.name && item.name.toLowerCase().includes(q)) ||
+            (item.grade && item.grade.toLowerCase().includes(q)) ||
+            (item.code && item.code.toLowerCase().includes(q))
+        );
+    });
+}
+
+// Chart.js setup
+let gradeChart;
+
+function buildGradeChart(data) {
+    const ctx = document.getElementById('classesByGradeChart');
+    const counts = {};
+    data.forEach(d => {
+        const g = d.grade || 'Unspecified';
+        counts[g] = (counts[g] || 0) + 1;
+    });
+    const labels = Object.keys(counts);
+    const values = Object.values(counts);
+    const colors = labels.map((_, idx) => {
+        const palette = ['#008000', '#00b894', '#55efc4', '#00a8ff', '#9c88ff', '#feca57', '#ff9f43', '#ee5253', '#10ac84'];
+        return palette[idx % palette.length];
+    });
+
+    if (gradeChart) gradeChart.destroy();
+    gradeChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels,
+            datasets: [{
+                data: values,
+                backgroundColor: colors,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                },
+                tooltip: {
+                    enabled: true
+                }
+            }
+        }
+    });
+}
+
+function updateCopyButtons() {
+    document.querySelectorAll('.btn-copy-row').forEach(btn => {
+        btn.addEventListener('click', async (e) => {
+            const code = btn.getAttribute('data-code');
+            try {
+                await navigator.clipboard.writeText(code);
+                Swal.fire({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Code copied!',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            } catch (err) {
+                Swal.fire('Copy failed', 'Please copy manually: ' + code, 'error');
+            }
+        });
+    });
+}
+
+// Form validation helpers
+function validateForm() {
+    const cn = classNameInput.value.trim();
+    const valid = cn.length >= 3 && cn.length <= 50;
+    if (!valid) {
+        classNameInput.classList.add('is-invalid');
+    } else {
+        classNameInput.classList.remove('is-invalid');
+    }
+    createBtn.disabled = !valid;
+    return valid;
+}
+
+classNameInput.addEventListener('input', validateForm);
+classNameInput.addEventListener('blur', validateForm);
+
+function setSubmittingState(isSubmitting) {
+    if (isSubmitting) {
+        createBtn.disabled = true;
+        createBtnDefaultText.classList.add('d-none');
+        createBtnLoadingText.classList.remove('d-none');
+    } else {
+        createBtnDefaultText.classList.remove('d-none');
+        createBtnLoadingText.classList.add('d-none');
+        validateForm();
+    }
+}
+
+function showSystemAlert(type, message) {
+    systemFeedback.className = 'alert alert-' + type;
+    systemFeedback.textContent = message;
+    systemFeedback.classList.remove('d-none');
+    setTimeout(() => systemFeedback.classList.add('d-none'), 4000);
+}
+
+function generateJoinCode() {
+    // GQ-XXXX-XXXX (alphanumeric)
+    const seg = () => Math.random().toString(36).substring(2, 6).toUpperCase();
+    return `GQ-${seg()}-${seg()}`;
+}
+
+async function createClass(payload) {
+    // Simulate API
+    await new Promise(res => setTimeout(res, 1200));
+    // 15% chance to throw error (simulation)
+    if (Math.random() < 0.15) {
+        const error = new Error('Network error. Please try again.');
+        error.api = true;
+        throw error;
+    }
+    return {
+        code: generateJoinCode()
+    };
+}
+
+form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!validateForm()) return;
+
+    setSubmittingState(true);
+    Swal.fire({
+        title: 'Creating class...',
+        didOpen: () => Swal.showLoading(),
+        allowOutsideClick: false,
+        allowEscapeKey: false
+    });
+
+    const payload = {
+        teacherId,
+        schoolId,
+        className: classNameInput.value.trim(),
+        gradeLevel: gradeLevelSelect.value || null,
+        classDescription: classDescription.value.trim() || null
+    };
+
+    try {
+        const resp = await createClass(payload);
+        const code = resp.code;
+        // Update UI state to success
+        generatedCodeBox.textContent = code;
+        formCard.classList.add('d-none');
+        successCard.classList.remove('d-none');
+
+        // Add to sample table & refresh displays
+        const today = new Date();
+        const iso = today.toISOString().slice(0, 10);
+        classesData.unshift({
+            name: payload.className,
+            grade: payload.gradeLevel || '-',
+            students: Math.floor(Math.random() * 10) + 15,
+            created: iso,
+            code
+        });
+        applyTableTransforms();
+        buildGradeChart(classesData);
+
+        Swal.fire({
+            icon: 'success',
+            title: 'Class Created',
+            text: 'Your join code is ' + code,
+            confirmButtonText: 'OK'
+        });
+    } catch (err) {
+        console.error(err);
+        Swal.close();
+        showSystemAlert('danger', err.api ? err.message : 'Something went wrong.');
+    } finally {
+        setSubmittingState(false);
+    }
+});
+
+copyCodeBtn.addEventListener('click', async () => {
+    const code = generatedCodeBox.textContent.trim();
+    try {
+        await navigator.clipboard.writeText(code);
+        const label = copyCodeBtn.querySelector('.copy-label');
+        const old = label.textContent;
+        label.textContent = 'Copied!';
+        copyCodeBtn.classList.remove('btn-outline-success');
+        copyCodeBtn.classList.add('btn-success');
+        setTimeout(() => {
+            label.textContent = old;
+            copyCodeBtn.classList.add('btn-outline-success');
+            copyCodeBtn.classList.remove('btn-success');
+        }, 1300);
+    } catch (err) {
+        Swal.fire('Copy failed', 'Please copy manually: ' + code, 'error');
+    }
+});
+
+goToDashboardBtn.addEventListener('click', () => {
+    window.location.href = './teacher_dashboard.html';
+});
+
+createAnotherBtn.addEventListener('click', () => {
+    form.reset();
+    classNameInput.classList.remove('is-invalid');
+    validateForm();
+    successCard.classList.add('d-none');
+    formCard.classList.remove('d-none');
+});
+
+function applyTableTransforms() {
+    const sorted = sortData(classesData, sortSelect.value);
+    const filtered = filterData(sorted, tableSearch.value);
+    renderTable(filtered);
+    updateCopyButtons();
+}
+
+sortSelect.addEventListener('change', applyTableTransforms);
+tableSearch.addEventListener('input', applyTableTransforms);
+
+// Init on load
+document.addEventListener('DOMContentLoaded', () => {
+    validateForm();
+    renderTable(classesData);
+    updateCopyButtons();
+    buildGradeChart(classesData);
+});
+  </script>
+  <script src="auth.js"></script>
+
+ </body>
+</html>

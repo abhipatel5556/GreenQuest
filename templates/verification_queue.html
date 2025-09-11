@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   Verification Queue — GreenQuest Teacher
+  </title>
+  <!-- Google Fonts: Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <!-- Bootstrap 5 CSS -->
+  <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" rel="stylesheet"/>
+  <!-- Font Awesome 6 -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+   <!-- Site Theme -->
+   <link href="style.css" rel="stylesheet">
+    <!-- Page-specific CSS -->
+    <link href="verification_queue.css" rel="stylesheet"/>
+   </link>
+  </link>
+ </head>
+ <body>
+  <!-- Left Sidebar (Teacher) -->
+  <aside class="d-flex flex-column flex-shrink-0 bg-light border-end position-fixed" id="sidebar-teacher" style="width:260px; height:100vh;">
+   <div class="p-3 border-bottom">
+    <div class="d-flex align-items-center mb-2">
+     <i class="fas fa-leaf me-2" style="color:#008000;">
+     </i>
+     <span class="fw-bold" style="color:#008000;">
+      GreenQuest
+     </span>
+    </div>
+    <div class="d-flex align-items-center">
+     <img alt="avatar" class="rounded-circle me-2" src="https://via.placeholder.com/40"/>
+     <div>
+      <div class="fw-semibold">
+       Teacher Name
+      </div>
+      <small class="text-muted">
+       Teacher / Coordinator
+      </small>
+     </div>
+    </div>
+   </div>
+   <nav class="flex-grow-1 overflow-auto p-2">
+    <ul class="nav nav-pills flex-column mb-auto">
+     <li class="nav-item">
+      <a class="nav-link text-dark" href="/teacher_dashboard.html">
+       <i class="fas fa-chalkboard-teacher me-2">
+       </i>
+       Dashboard
+      </a>
+     </li>
+     <li>
+      <a class="nav-link text-dark active" href="/verification_queue.html">
+       <i class="fas fa-inbox me-2">
+       </i>
+       Verification Queue
+      </a>
+     </li>
+     <li>
+      <a aria-expanded="true" class="nav-link text-dark" data-bs-toggle="collapse" href="#manageMenu" role="button">
+       <i class="fas fa-tools me-2">
+       </i>
+       Manage
+      </a>
+      <div class="collapse show" id="manageMenu">
+       <ul class="btn-toggle-nav list-unstyled ms-4 my-2">
+        <li>
+         <a class="d-block link-dark py-1 rounded" href="/create_class.html">
+          <i class="fas fa-plus-square me-2">
+          </i>
+          Create Class
+         </a>
+        </li>
+        <li>
+         <a class="d-block link-dark py-1 rounded" href="/create_challenge.html">
+          <i class="fas fa-plus-circle me-2">
+          </i>
+          Create Challenge
+         </a>
+        </li>
+        <li>
+         <a class="d-block link-dark py-1 rounded" href="/student_analytics.html">
+          <i class="fas fa-user-chart me-2">
+          </i>
+          Student Analytics
+         </a>
+        </li>
+       </ul>
+      </div>
+     </li>
+     <li class="nav-item">
+      <a class="nav-link text-dark" href="/leaderboard_page.html">
+       <i class="fas fa-trophy me-2">
+       </i>
+       Leaderboards
+      </a>
+     </li>
+     <li class="nav-item">
+      <a class="nav-link text-dark" href="/community_feed.html">
+       <i class="fas fa-users me-2">
+       </i>
+       Green Feed
+      </a>
+     </li>
+    </ul>
+   </nav>
+   <div class="p-3 border-top">
+    <a class="btn btn-success w-100 mb-2" href="/verification_queue.html">
+     <i class="fas fa-check-circle me-2">
+     </i>
+     Verify Now
+    </a>
+    <a class="btn btn-outline-success w-100" href="/create_challenge.html">
+     <i class="fas fa-plus-circle me-2">
+     </i>
+     New Challenge
+    </a>
+   </div>
+  </aside>
+  <style>
+   #sidebar-teacher .nav-link.active, #sidebar-teacher .btn-toggle-nav a.active{ background:#008000; color:#fff; border-radius:8px; }
+    #sidebar-teacher .nav-link:hover, #sidebar-teacher .btn-toggle-nav a:hover{ background:rgba(0,128,0,.08); border-radius:8px; }
+  </style>
+  <!-- Top Header -->
+  <header class="navbar navbar-expand-lg navbar-light bg-white border-bottom sticky-top" style="margin-left:260px;">
+   <style>
+    :root { --gq-primary:#008000; --gq-secondary:#00FFFF; }
+      .gq-badge{background:var(--gq-secondary); color:#004a4a;}
+      .gq-nav-icon:hover{background:rgba(0,128,0,0.08); border-radius:8px;}
+   </style>
+   <div class="container-fluid">
+    <button class="btn d-lg-none me-2" data-bs-target="#offcanvasTeacher" data-bs-toggle="offcanvas" type="button">
+     <i class="fas fa-bars">
+     </i>
+    </button>
+    <a class="navbar-brand d-none d-lg-inline-block" href="/teacher_dashboard" style="color:#008000; font-weight:600;">
+     Teacher
+    </a>
+    <form class="d-none d-md-flex ms-2 flex-grow-1" role="search">
+     <div class="input-group">
+      <span class="input-group-text bg-white">
+       <i class="fas fa-search text-muted">
+       </i>
+      </span>
+      <input class="form-control" id="globalSearch" placeholder="Search students or submissions..." type="search"/>
+     </div>
+    </form>
+    <ul class="navbar-nav ms-auto align-items-center">
+     <li class="nav-item me-2">
+      <a class="btn btn-outline-success" href="/create_challenge">
+       <i class="fas fa-plus-circle me-1">
+       </i>
+       Create Challenge
+      </a>
+     </li>
+     <li class="nav-item me-2 position-relative">
+      <a class="btn gq-nav-icon" href="#notifications">
+       <i class="fas fa-bell">
+       </i>
+      </a>
+      <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill gq-badge">
+       5
+      </span>
+     </li>
+     <li class="nav-item dropdown">
+      <a class="d-flex align-items-center text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" href="#">
+       <img alt="profile" class="rounded-circle me-2" height="32" src="https://via.placeholder.com/32" width="32"/>
+       <strong>
+        Teacher
+       </strong>
+      </a>
+      <ul class="dropdown-menu dropdown-menu-end">
+       <li>
+        <h6 class="dropdown-header">
+         <i class="fas fa-user-tie me-2">
+         </i>
+         Teacher
+        </h6>
+       </li>
+       <li>
+        <a class="dropdown-item" href="/teacher_dashboard">
+         Dashboard
+        </a>
+       </li>
+       <li>
+        <a class="dropdown-item" href="/verification_queue">
+         Verification Queue
+        </a>
+       </li>
+       <li>
+        <hr class="dropdown-divider"/>
+       </li>
+       <li>
+        <a class="dropdown-item" href="#settings">
+         <i class="fas fa-cog me-2">
+         </i>
+         Settings
+        </a>
+       </li>
+       <li>
+        <a class="dropdown-item text-danger" href="#logout">
+         <i class="fas fa-sign-out-alt me-2">
+         </i>
+         Logout
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </div>
+   <div class="offcanvas offcanvas-start" id="offcanvasTeacher" tabindex="-1">
+    <div class="offcanvas-header">
+     <h5 class="offcanvas-title">
+      Menu
+     </h5>
+     <button class="btn-close" data-bs-dismiss="offcanvas" type="button">
+     </button>
+    </div>
+    <div class="offcanvas-body">
+     <a class="btn w-100 mb-2 btn-outline-success" href="/teacher_dashboard">
+      <i class="fas fa-chalkboard-teacher me-2">
+      </i>
+      Dashboard
+     </a>
+     <a class="btn w-100 mb-2 btn-outline-success" href="/verification_queue">
+      <i class="fas fa-inbox me-2">
+      </i>
+      Verification Queue
+     </a>
+     <a class="btn w-100 mb-2 btn-outline-success" href="/create_challenge">
+      <i class="fas fa-plus-circle me-2">
+      </i>
+      Create Challenge
+     </a>
+     <a class="btn w-100 mb-2 btn-outline-success" href="/student_analytics">
+      <i class="fas fa-user-chart me-2">
+      </i>
+      Student Analytics
+     </a>
+     <a class="btn w-100 mb-2 btn-outline-success" href="/community_feed">
+      <i class="fas fa-users me-2">
+      </i>
+      Green Feed
+     </a>
+    </div>
+   </div>
+  </header>
+  <!-- Main Content -->
+  <main class="main-panel" style="margin-left:260px;">
+   <div class="container-fluid">
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb" class="breadcrumb mt-2">
+     <ol class="breadcrumb mb-0">
+      <li class="breadcrumb-item">
+       <a href="./teacher_dashboard.html">
+        <i class="fa-solid fa-house me-1">
+        </i>
+        Dashboard
+       </a>
+      </li>
+      <li aria-current="page" class="breadcrumb-item active">
+       Verification Queue
+      </li>
+     </ol>
+    </nav>
+    <!-- Page Header -->
+    <div class="page-header mt-3">
+     <div class="d-flex align-items-center gap-3">
+      <h1 class="page-title mb-0">
+       Verification Queue
+      </h1>
+      <span class="badge-soft info" id="queueStatusBadge">
+       <i class="fa-solid fa-circle-notch me-1">
+       </i>
+       Loading
+      </span>
+     </div>
+     <div class="d-flex align-items-center gap-2">
+      <button class="btn btn-light" id="refreshBtn">
+       <i class="fa-solid fa-rotate me-2">
+       </i>
+       Refresh
+      </button>
+      <a class="btn btn-primary" href="./submission_review.html">
+       <i class="fa-solid fa-check-double me-2">
+       </i>
+       Go to Review
+      </a>
+     </div>
+    </div>
+    <!-- System Alert Placeholder -->
+    <div class="mb-3" id="systemAlert">
+    </div>
+    <!-- Filters Bar -->
+    <section class="app-card mb-4" id="filtersCard">
+     <div class="card-header">
+      <div class="title d-flex align-items-center gap-2">
+       <i class="fa-solid fa-filter text-primary">
+       </i>
+       <span class="widget-title">
+        Queue Filters
+       </span>
+      </div>
+      <div class="text-muted small">
+       Adjust filters to focus your review
+      </div>
+     </div>
+     <div class="card-body">
+      <form class="row g-3 queue-filters align-items-end" id="filtersForm">
+       <div class="col-12 col-md-4 col-lg-3">
+        <label class="form-label" for="filterClass">
+         Filter by Class
+        </label>
+        <select class="form-select" id="filterClass">
+         <option selected="" value="all">
+          All Classes
+         </option>
+        </select>
+       </div>
+       <div class="col-12 col-md-4 col-lg-3">
+        <label class="form-label" for="filterChallenge">
+         Filter by Challenge
+        </label>
+        <select class="form-select" id="filterChallenge">
+         <option selected="" value="all">
+          All Challenges
+         </option>
+        </select>
+       </div>
+       <div class="col-12 col-md-4 col-lg-3">
+        <label class="form-label" for="sortBy">
+         Sort By
+        </label>
+        <select class="form-select" id="sortBy">
+         <option selected="" value="newest">
+          Newest First
+         </option>
+         <option value="oldest">
+          Oldest First
+         </option>
+        </select>
+       </div>
+       <div class="col-12 col-lg-3 d-flex gap-2">
+        <button class="btn btn-success flex-grow-1" type="submit">
+         <i class="fa-solid fa-sliders me-2">
+         </i>
+         Apply Filters
+        </button>
+        <button class="btn btn-outline-secondary" id="resetFilters" type="button">
+         <i class="fa-solid fa-undo me-2">
+         </i>
+         Reset
+        </button>
+       </div>
+      </form>
+     </div>
+    </section>
+    <div class="row g-4">
+     <!-- Left: Submission List -->
+     <div class="col-12 col-lg-8 col-xl-9">
+      <section class="app-card h-100">
+       <div class="card-header">
+        <div class="d-flex align-items-center gap-2">
+         <i class="fa-solid fa-inbox text-primary">
+         </i>
+         <span class="widget-title">
+          Pending Submissions
+         </span>
+        </div>
+        <div class="small text-muted" id="listMeta">
+         Showing 0 of 0
+        </div>
+       </div>
+       <div class="card-body">
+        <!-- Loading State -->
+        <div class="loading-state" id="loadingState" style="display:none;">
+         <div class="skeleton w-100 mb-2" style="height:20px;">
+         </div>
+         <div class="skeleton w-100 mb-2" style="height:20px;">
+         </div>
+         <div class="skeleton w-100 mb-2" style="height:20px;">
+         </div>
+         <div class="skeleton w-100 mb-2" style="height:20px;">
+         </div>
+        </div>
+        <!-- Error State -->
+        <div class="alert alert-danger d-none" id="errorState" role="alert">
+         <i class="fa-solid fa-triangle-exclamation me-2">
+         </i>
+         Failed to load submissions.
+         <button class="btn btn-sm btn-light ms-2" id="retryLoad">
+          Retry
+         </button>
+        </div>
+        <!-- Empty State -->
+        <div class="empty-state d-none" id="emptyState">
+         <i class="fa-solid fa-leaf fa-2xl text-success">
+         </i>
+         <div class="h5 mb-1">
+          Great job! The verification queue is empty.
+         </div>
+         <p class="empty-state-text">
+          You're all caught up. New submissions will appear here automatically.
+         </p>
+         <a class="btn btn-info" href="./challenge_library.html">
+          <i class="fa-solid fa-compass me-2">
+          </i>
+          Explore Challenges
+         </a>
+        </div>
+        <!-- Submissions List -->
+        <div class="submission-list d-grid gap-3" id="submissionsList">
+        </div>
+        <!-- Pagination -->
+        <div class="d-flex justify-content-between align-items-center mt-3">
+         <small class="text-muted" id="paginationInfo">
+          Page 1 of 1
+         </small>
+         <nav>
+          <ul class="pagination mb-0">
+           <li class="page-item">
+            <button class="page-link" disabled="" id="prevPage">
+             Previous
+            </button>
+           </li>
+           <li class="page-item">
+            <button class="page-link" disabled="" id="nextPage">
+             Next
+            </button>
+           </li>
+          </ul>
+         </nav>
+        </div>
+       </div>
+      </section>
+     </div>
+     <!-- Right: Metrics & Insights -->
+     <div class="col-12 col-lg-4 col-xl-3">
+      <section class="metric-card mb-3">
+       <div class="metric-title">
+        Total Pending
+       </div>
+       <div class="metric-value" id="totalPending">
+        0
+       </div>
+       <div class="d-flex gap-2">
+        <span class="badge-soft primary">
+         <i class="fa-solid fa-hourglass-half me-1">
+         </i>
+         Awaiting
+        </span>
+        <span class="badge-soft info">
+         <i class="fa-solid fa-circle-info me-1">
+         </i>
+         Updated
+         <span id="lastUpdated">
+          now
+         </span>
+        </span>
+       </div>
+      </section>
+      <section class="app-card">
+       <div class="card-header">
+        <div class="title d-flex align-items-center gap-2">
+         <i class="fa-solid fa-chart-column text-primary">
+         </i>
+         <span class="widget-title">
+          By Class
+         </span>
+        </div>
+        <small class="text-muted">
+         Distribution of pending submissions
+        </small>
+       </div>
+       <div class="card-body">
+        <canvas aria-label="Pending by class" height="200" id="classChart" role="img">
+        </canvas>
+        <div class="small text-muted mt-2">
+         Hover to see counts
+        </div>
+       </div>
+      </section>
+     </div>
+    </div>
+   </div>
+  </main>
+  <!-- Footer -->
+  <footer class="border-top bg-white" style="margin-left:260px;">
+   <div class="container py-3 d-flex flex-wrap justify-content-between align-items-center">
+    <div class="text-muted d-flex align-items-center">
+     <i class="fas fa-leaf me-2" style="color:#008000;">
+     </i>
+     <small>
+      GreenQuest Teacher
+     </small>
+    </div>
+    <div class="d-flex gap-2">
+     <a class="btn btn-sm btn-success" href="/verification_queue">
+      <i class="fas fa-check-circle me-1">
+      </i>
+      Verify
+     </a>
+     <a class="btn btn-sm btn-outline-success" href="/create_challenge">
+      <i class="fas fa-plus-circle me-1">
+      </i>
+      New Challenge
+     </a>
+    </div>
+    <ul class="nav">
+     <li class="nav-item">
+      <a class="nav-link px-2 text-muted" href="#terms">
+       Terms
+      </a>
+     </li>
+     <li class="nav-item">
+      <a class="nav-link px-2 text-muted" href="#privacy">
+       Privacy
+      </a>
+     </li>
+    </ul>
+   </div>
+  </footer>
+  <!-- Toasts -->
+  <div class="position-fixed top-0 end-0 p-3" style="z-index: 1090">
+   <div aria-atomic="true" aria-live="assertive" class="toast align-items-center text-bg-success border-0" id="actionToast" role="alert">
+    <div class="d-flex">
+     <div class="toast-body">
+      <i class="fa-solid fa-circle-check me-2">
+      </i>
+      <span id="toastMsg">
+       Action completed
+      </span>
+     </div>
+     <button aria-label="Close" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" type="button">
+     </button>
+    </div>
+   </div>
+  </div>
+  <!-- Scripts -->
+  <script crossorigin="anonymous" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/dayjs@1/plugin/relativeTime.js">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js">
+  </script>
+  <script>
+   // Day.js setup for relative time
+dayjs.extend(window.dayjs_plugin_relativeTime);
+
+// Mock Data
+const classesData = [
+    'Grade 6 - A',
+    'Grade 7 - B',
+    'Eco Club Juniors',
+    'Grade 8 - C'
+];
+
+const challengesData = [
+    'Plastic-Free Lunch',
+    'Bicycle to School Week',
+    'Plant a Tree',
+    'Home Energy Audit'
+];
+
+let submissionsData = [{
+    id: 'S1001',
+    studentName: 'Ava Johnson',
+    avatar: 'https://picsum.photos/seed/avaj/64',
+    challenge: 'Plastic-Free Lunch',
+    ts: dayjs().subtract(12, 'minute').toISOString(),
+    className: 'Grade 6 - A'
+}, {
+    id: 'S1002',
+    studentName: 'Liam Chen',
+    avatar: 'https://picsum.photos/seed/liamc/64',
+    challenge: 'Bicycle to School Week',
+    ts: dayjs().subtract(2, 'hour').toISOString(),
+    className: 'Eco Club Juniors'
+}, {
+    id: 'S1003',
+    studentName: 'Sophia Patel',
+    avatar: 'https://picsum.photos/seed/sophiap/64',
+    challenge: 'Plant a Tree',
+    ts: dayjs().subtract(1, 'day').toISOString(),
+    className: 'Grade 7 - B'
+}, {
+    id: 'S1004',
+    studentName: 'Noah Williams',
+    avatar: 'https://picsum.photos/seed/noahw/64',
+    challenge: 'Home Energy Audit',
+    ts: dayjs().subtract(3, 'day').toISOString(),
+    className: 'Grade 6 - A'
+}, {
+    id: 'S1005',
+    studentName: 'Emma Garcia',
+    avatar: 'https://picsum.photos/seed/emmag/64',
+    challenge: 'Plastic-Free Lunch',
+    ts: dayjs().subtract(45, 'minute').toISOString(),
+    className: 'Grade 8 - C'
+}, {
+    id: 'S1006',
+    studentName: 'James Lee',
+    avatar: 'https://picsum.photos/seed/jamesl/64',
+    challenge: 'Plant a Tree',
+    ts: dayjs().subtract(5, 'hour').toISOString(),
+    className: 'Eco Club Juniors'
+}, {
+    id: 'S1007',
+    studentName: 'Mia Rodriguez',
+    avatar: 'https://picsum.photos/seed/miar/64',
+    challenge: 'Bicycle to School Week',
+    ts: dayjs().subtract(9, 'hour').toISOString(),
+    className: 'Grade 7 - B'
+}, {
+    id: 'S1008',
+    studentName: 'Ethan Brown',
+    avatar: 'https://picsum.photos/seed/ethanb/64',
+    challenge: 'Home Energy Audit',
+    ts: dayjs().subtract(6, 'day').toISOString(),
+    className: 'Grade 8 - C'
+}, {
+    id: 'S1009',
+    studentName: 'Olivia Davis',
+    avatar: 'https://picsum.photos/seed/oliviad/64',
+    challenge: 'Plant a Tree',
+    ts: dayjs().subtract(14, 'minute').toISOString(),
+    className: 'Grade 6 - A'
+}, {
+    id: 'S1010',
+    studentName: 'William Thompson',
+    avatar: 'https://picsum.photos/seed/willt/64',
+    challenge: 'Plastic-Free Lunch',
+    ts: dayjs().subtract(12, 'day').toISOString(),
+    className: 'Grade 7 - B'
+}];
+
+// State
+let state = {
+    selectedClass: 'all',
+    selectedChallenge: 'all',
+    sortOrder: 'newest',
+    isLoading: true,
+    error: false,
+    page: 1,
+    pageSize: 6
+};
+
+// Elements
+const filterClassEl = document.getElementById('filterClass');
+const filterChallengeEl = document.getElementById('filterChallenge');
+const sortByEl = document.getElementById('sortBy');
+const filtersForm = document.getElementById('filtersForm');
+const resetFiltersBtn = document.getElementById('resetFilters');
+const submissionsListEl = document.getElementById('submissionsList');
+const emptyStateEl = document.getElementById('emptyState');
+const loadingStateEl = document.getElementById('loadingState');
+const errorStateEl = document.getElementById('errorState');
+const listMetaEl = document.getElementById('listMeta');
+const paginationInfoEl = document.getElementById('paginationInfo');
+const prevPageBtn = document.getElementById('prevPage');
+const nextPageBtn = document.getElementById('nextPage');
+const queueStatusBadge = document.getElementById('queueStatusBadge');
+const totalPendingEl = document.getElementById('totalPending');
+const lastUpdatedEl = document.getElementById('lastUpdated');
+const systemAlertEl = document.getElementById('systemAlert');
+
+// Toast
+const bsToast = new bootstrap.Toast(document.getElementById('actionToast'));
+const toastMsgEl = document.getElementById('toastMsg');
+
+// Chart
+let classChart;
+
+// Init
+document.addEventListener('DOMContentLoaded', () => {
+    initFilters();
+    simulateLoad();
+    bindEvents();
+    initTooltips();
+});
+
+function initFilters() {
+    // Populate class filter
+    classesData.forEach(c => {
+        const opt = document.createElement('option');
+        opt.value = c;
+        opt.textContent = c;
+        filterClassEl.appendChild(opt);
+    });
+    // Populate challenge filter
+    challengesData.forEach(ch => {
+        const opt = document.createElement('option');
+        opt.value = ch;
+        opt.textContent = ch;
+        filterChallengeEl.appendChild(opt);
+    });
+}
+
+function bindEvents() {
+    filtersForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        state.selectedClass = filterClassEl.value;
+        state.selectedChallenge = filterChallengeEl.value;
+        state.sortOrder = sortByEl.value;
+        state.page = 1;
+        renderAll();
+        showInfoAlert(`Filters applied: ${getFilterSummary()}`);
+    });
+
+    resetFiltersBtn.addEventListener('click', () => {
+        filterClassEl.value = 'all';
+        filterChallengeEl.value = 'all';
+        sortByEl.value = 'newest';
+        state.selectedClass = 'all';
+        state.selectedChallenge = 'all';
+        state.sortOrder = 'newest';
+        state.page = 1;
+        renderAll();
+        showInfoAlert('Filters reset to defaults.');
+    });
+
+    document.getElementById('refreshBtn').addEventListener('click', simulateLoad);
+    document.getElementById('retryLoad').addEventListener('click', simulateLoad);
+
+    prevPageBtn.addEventListener('click', () => {
+        if (state.page > 1) {
+            state.page--;
+            renderAll();
+        }
+    });
+    nextPageBtn.addEventListener('click', () => {
+        state.page++;
+        renderAll();
+    });
+
+    document.getElementById('globalSearch').addEventListener('input', (e) => {
+        // simple search by student or challenge
+        const q = e.target.value.trim().toLowerCase();
+        state.page = 1;
+        renderAll(q);
+    });
+}
+
+function initTooltips() {
+    const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    tooltipTriggerList.map(el => new bootstrap.Tooltip(el));
+}
+
+function simulateLoad() {
+    state.isLoading = true;
+    state.error = false;
+    updateBadges();
+    loadingStateEl.style.display = 'grid';
+    emptyStateEl.classList.add('d-none');
+    errorStateEl.classList.add('d-none');
+    submissionsListEl.innerHTML = '';
+    setTimeout(() => {
+        // randomize to show new timestamps for demo
+        lastUpdatedEl.textContent = dayjs().fromNow();
+        state.isLoading = false;
+        updateBadges();
+        renderAll();
+    }, 800);
+}
+
+function getFilteredSortedData(searchQuery = '') {
+    let data = [...submissionsData];
+    // filters
+    if (state.selectedClass !== 'all') {
+        data = data.filter(s => s.className === state.selectedClass);
+    }
+    if (state.selectedChallenge !== 'all') {
+        data = data.filter(s => s.challenge === state.selectedChallenge);
+    }
+    if (searchQuery) {
+        data = data.filter(s =>
+            s.studentName.toLowerCase().includes(searchQuery) ||
+            s.challenge.toLowerCase().includes(searchQuery) ||
+            s.className.toLowerCase().includes(searchQuery)
+        );
+    }
+    // sort
+    data.sort((a, b) => state.sortOrder === 'newest' ? dayjs(b.ts) - dayjs(a.ts) : dayjs(a.ts) - dayjs(b.ts));
+    return data;
+}
+
+function renderAll(searchQuery = '') {
+    if (state.error) {
+        errorStateEl.classList.remove('d-none');
+        return;
+    }
+    loadingStateEl.style.display = 'none';
+
+    const data = getFilteredSortedData(searchQuery);
+    const total = data.length;
+    totalPendingEl.textContent = total;
+
+    // pagination compute
+    const totalPages = Math.max(1, Math.ceil(total / state.pageSize));
+    if (state.page > totalPages) state.page = totalPages;
+    const startIdx = (state.page - 1) * state.pageSize;
+    const pageItems = data.slice(startIdx, startIdx + state.pageSize);
+
+    // update UI
+    listMetaEl.textContent = `Showing ${pageItems.length} of ${total}`;
+    paginationInfoEl.textContent = `Page ${state.page} of ${totalPages}`;
+    prevPageBtn.disabled = state.page <= 1;
+    nextPageBtn.disabled = state.page >= totalPages;
+
+    submissionsListEl.innerHTML = '';
+    if (total === 0) {
+        emptyStateEl.classList.remove('d-none');
+    } else {
+        emptyStateEl.classList.add('d-none');
+        pageItems.forEach(renderCard);
+    }
+
+    updateBadges(total);
+    renderChart(data);
+    initTooltips();
+}
+
+function renderCard(s) {
+    const card = document.createElement('div');
+    card.className = 'submission-card card hover-shadow';
+    card.innerHTML = `
+        <div class="card-body d-flex gap-3 align-items-start">
+          <img class="avatar rounded-circle flex-shrink-0" width="48" height="48" src="${s.avatar}" alt="${s.studentName}"
+               onerror="this.onerror=null;this.src='https://picsum.photos/seed/${encodeURIComponent(s.studentName)}/64';" />
+          <div class="flex-grow-1">
+            <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
+              <div>
+                <div class="fw-bold student-name">${escapeHtml(s.studentName)}</div>
+                <div class="text-muted small">Submitted <span title="${dayjs(s.ts).format('YYYY-MM-DD HH:mm')}">${dayjs(s.ts).fromNow()}</span></div>
+              </div>
+              <div class="d-flex gap-2 align-items-center">
+                <span class="badge-soft success class-badge" data-bs-toggle="tooltip" data-bs-placement="top" title="Class">${escapeHtml(s.className)}</span>
+                <span class="badge-soft info" data-bs-toggle="tooltip" data-bs-placement="top" title="Challenge">${escapeHtml(s.challenge)}</span>
+              </div>
+            </div>
+            <div class="mt-2 text-truncate-2" title="${escapeHtml(s.challenge)}">
+              <i class="fa-solid fa-flag-checkered me-1 text-primary"></i> ${escapeHtml(s.challenge)}
+            </div>
+            <div class="mt-3 d-flex flex-wrap gap-2">
+              <a href="./submission_review.html?id=${encodeURIComponent(s.id)}" class="btn btn-sm btn-primary">
+                <i class="fa-solid fa-eye me-1"></i>Open Review
+              </a>
+              <button class="btn btn-sm btn-success" data-action="approve" data-id="${s.id}"><i class="fa-solid fa-thumbs-up me-1"></i>Quick Approve</button>
+              <button class="btn btn-sm btn-danger" data-action="reject" data-id="${s.id}"><i class="fa-solid fa-thumbs-down me-1"></i>Quick Reject</button>
+            </div>
+          </div>
+        </div>`;
+
+    // Actions
+    card.querySelectorAll('button[data-action]').forEach(btn => {
+        btn.addEventListener('click', () => handleQuickAction(btn.dataset.action, btn.dataset.id));
+    });
+
+    submissionsListEl.appendChild(card);
+}
+
+function handleQuickAction(action, id) {
+    const s = submissionsData.find(x => x.id === id);
+    if (!s) return;
+    const isApprove = action === 'approve';
+    Swal.fire({
+        icon: isApprove ? 'success' : 'warning',
+        title: isApprove ? 'Approve submission?' : 'Reject submission?',
+        text: `${s.studentName} — ${s.challenge}`,
+        showCancelButton: true,
+        confirmButtonText: isApprove ? 'Approve' : 'Reject',
+        cancelButtonText: 'Cancel',
+        confirmButtonColor: isApprove ? '#00774E' : '#CD2026'
+    }).then(result => {
+        if (result.isConfirmed) {
+            // remove item from queue (mock)
+            submissionsData = submissionsData.filter(x => x.id !== id);
+            renderAll();
+            showToast(isApprove ? 'Submission approved' : 'Submission rejected');
+        }
+    });
+}
+
+function showToast(message) {
+    toastMsgEl.textContent = message;
+    bsToast.show();
+}
+
+function showInfoAlert(message) {
+    systemAlertEl.innerHTML = `
+        <div class="alert alert-info d-flex align-items-center justify-content-between" role="alert">
+          <div><i class="fa-solid fa-circle-info me-2"></i>${message}</div>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>`;
+}
+
+function updateBadges(total = submissionsData.length) {
+    if (state.isLoading) {
+        queueStatusBadge.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin me-1"></i>Loading';
+        queueStatusBadge.className = 'badge-soft info';
+    } else if (state.error) {
+        queueStatusBadge.innerHTML = '<i class="fa-solid fa-triangle-exclamation me-1"></i>Error';
+        queueStatusBadge.className = 'badge-soft error';
+    } else if (total === 0) {
+        queueStatusBadge.innerHTML = '<i class="fa-solid fa-check me-1"></i>All Caught Up';
+        queueStatusBadge.className = 'badge-soft success';
+    } else {
+        queueStatusBadge.innerHTML = `<i class=\"fa-solid fa-inbox me-1\"></i>${total} Pending`;
+        queueStatusBadge.className = 'badge-soft warning';
+    }
+}
+
+function renderChart(currentData) {
+    const ctx = document.getElementById('classChart');
+    const counts = classesData.map(c => currentData.filter(s => s.className === c).length);
+    const data = {
+        labels: classesData,
+        datasets: [{
+            label: 'Pending',
+            data: counts,
+            backgroundColor: 'rgba(0,128,0,0.3)',
+            borderColor: '#008000',
+            borderWidth: 1,
+            borderRadius: 8,
+            hoverBackgroundColor: 'rgba(0,128,0,0.5)'
+        }]
+    };
+    if (classChart) {
+        classChart.destroy();
+    }
+    classChart = new Chart(ctx, {
+        type: 'bar',
+        data,
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        precision: 0
+                    }
+                }
+            },
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        label: (ctx) => ` ${ctx.formattedValue} pending`
+                    }
+                },
+                legend: {
+                    display: false
+                }
+            }
+        }
+    });
+}
+
+function getFilterSummary() {
+    const parts = [];
+    parts.push(state.selectedClass === 'all' ? 'All Classes' : state.selectedClass);
+    parts.push(state.selectedChallenge === 'all' ? 'All Challenges' : state.selectedChallenge);
+    parts.push(state.sortOrder === 'newest' ? 'Newest First' : 'Oldest First');
+    return parts.join(' • ');
+}
+
+function escapeHtml(str) {
+    return str.replace(/[&<>'"]/g, c => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '\'': '&#39;',
+        '"': '&quot;'
+    } [c]));
+}
+  </script>
+ </body>
+</html>

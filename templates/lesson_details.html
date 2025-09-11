@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   Lesson Details - GreenQuest
+  </title>
+  <!-- Brand Typography -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+   <!-- Font Awesome 6 -->
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
+   <!-- Global Theme Styles -->
+   <link href="style.css" rel="stylesheet"/>
+   <!-- Page-specific CSS -->
+   <link href="lesson_details.css" rel="stylesheet"/>
+  </link>
+ </head>
+ <body>
+  <!-- Left Sidebar (Student) -->
+  <aside class="d-none d-lg-flex flex-column flex-shrink-0 bg-light border-end position-fixed" id="sidebar-student" style="width:260px; height:100vh;">
+   <div class="p-3 border-bottom">
+    <div class="d-flex align-items-center mb-2">
+     <i class="fas fa-leaf me-2" style="color:#008000;">
+     </i>
+     <span class="fw-bold" style="color:#008000;">
+      GreenQuest
+     </span>
+    </div>
+    <div class="d-flex align-items-center">
+     <img alt="avatar" class="rounded-circle me-2" src="https://via.placeholder.com/40"/>
+     <div>
+      <div class="fw-semibold">
+       Student Name
+      </div>
+      <small class="text-muted">
+       Student
+      </small>
+     </div>
+    </div>
+   </div>
+   <nav class="flex-grow-1 overflow-auto p-2">
+    <ul class="nav nav-pills flex-column mb-auto">
+     <li class="nav-item">
+      <a class="nav-link text-dark" href="./student_dashboard.html">
+       <i class="fas fa-home me-2">
+       </i>
+       Dashboard
+      </a>
+     </li>
+     <li>
+      <a aria-expanded="true" class="nav-link text-dark" data-bs-toggle="collapse" href="#learnMenu" role="button">
+       <i class="fas fa-book me-2">
+       </i>
+       Learn
+      </a>
+      <div class="collapse show" id="learnMenu">
+       <ul class="btn-toggle-nav list-unstyled ms-4 my-2">
+        <li>
+         <a class="link-dark d-block py-1 rounded" href="./lesson_library.html">
+          Lesson Library
+         </a>
+        </li>
+       </ul>
+      </div>
+     </li>
+     <li>
+      <a aria-expanded="true" class="nav-link text-dark" data-bs-toggle="collapse" href="#challengeMenu" role="button">
+       <i class="fas fa-tasks me-2">
+       </i>
+       Challenges
+      </a>
+      <div class="collapse show" id="challengeMenu">
+       <ul class="btn-toggle-nav list-unstyled ms-4 my-2">
+        <li>
+         <a class="link-dark d-block py-1 rounded" href="./challenge_library.html">
+          Challenge Library
+         </a>
+        </li>
+       </ul>
+      </div>
+     </li>
+     <li class="nav-item">
+      <a class="nav-link text-dark" href="./leaderboard_page.html">
+       <i class="fas fa-trophy me-2">
+       </i>
+       Leaderboards
+      </a>
+     </li>
+     <li class="nav-item">
+      <a class="nav-link text-dark" href="./community_feed.html">
+       <i class="fas fa-users me-2">
+       </i>
+       Green Feed
+      </a>
+     </li>
+     <li class="nav-item">
+      <a class="nav-link text-dark" href="./join_class.html">
+       <i class="fas fa-sign-in-alt me-2">
+       </i>
+       Join Class
+      </a>
+     </li>
+    </ul>
+   </nav>
+   <div class="p-3 border-top">
+    <a class="btn btn-success w-100 mb-2" href="./challenge_library.html">
+     <i class="fas fa-flag-checkered me-2">
+     </i>
+     Find a Challenge
+    </a>
+    <a class="btn btn-outline-success w-100" href="./lesson_library.html">
+     <i class="fas fa-play-circle me-2">
+     </i>
+     Browse Lessons
+    </a>
+   </div>
+  </aside>
+  <style>
+   #sidebar-student .nav-link.active, #sidebar-student .btn-toggle-nav a.active{ background:#008000; color:white; border-radius:8px; }
+    #sidebar-student a.link-dark:hover, #sidebar-student .nav-link:hover{ background:rgba(0,128,0,.08); border-radius:8px; }
+  </style>
+  <!-- Header -->
+  <header class="navbar navbar-expand-lg navbar-light bg-white border-bottom sticky-top" style="margin-left:260px;">
+   <style>
+    :root { --gq-primary:#008000; --gq-secondary:#00FFFF; }
+      .gq-badge{background:var(--gq-secondary); color:#004a4a;}
+      .gq-nav-icon:hover{background:rgba(0,128,0,0.08); border-radius:8px;}
+   </style>
+   <div class="container-fluid">
+    <button class="btn d-lg-none me-2" data-bs-target="#offcanvasStudent" data-bs-toggle="offcanvas" type="button">
+     <i class="fas fa-bars">
+     </i>
+    </button>
+    <a class="navbar-brand d-none d-lg-inline-block" href="./student_dashboard.html" style="color:#008000; font-weight:600;">
+     Student
+    </a>
+    <form class="d-none d-md-flex ms-2 flex-grow-1" role="search">
+     <div class="input-group">
+      <span class="input-group-text bg-white">
+       <i class="fas fa-search text-muted">
+       </i>
+      </span>
+      <input class="form-control" placeholder="Search lessons or challenges..." type="search"/>
+     </div>
+    </form>
+    <ul class="navbar-nav ms-auto align-items-center">
+     <li class="nav-item me-2">
+      <a class="btn btn-outline-success" href="./challenge_library.html">
+       <i class="fas fa-flag me-1">
+       </i>
+       New Challenge
+      </a>
+     </li>
+     <li class="nav-item me-2 position-relative">
+      <a class="btn gq-nav-icon" href="#notifications" id="notifBell">
+       <i class="fas fa-bell">
+       </i>
+      </a>
+      <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill gq-badge">
+       3
+      </span>
+     </li>
+     <li class="nav-item dropdown">
+      <a class="d-flex align-items-center text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" href="#">
+       <img alt="profile" class="rounded-circle me-2" height="32" src="https://via.placeholder.com/32" width="32"/>
+       <strong>
+        Student
+       </strong>
+      </a>
+      <ul class="dropdown-menu dropdown-menu-end">
+       <li>
+        <h6 class="dropdown-header">
+         <i class="fas fa-user-circle me-2">
+         </i>
+         Student
+        </h6>
+       </li>
+       <li>
+        <a class="dropdown-item" href="./student_dashboard.html">
+         Dashboard
+        </a>
+       </li>
+       <li>
+        <hr class="dropdown-divider"/>
+       </li>
+       <li>
+        <a class="dropdown-item" href="./lesson_library.html">
+         <i class="fas fa-book me-2">
+         </i>
+         Lessons
+        </a>
+       </li>
+       <li>
+        <a class="dropdown-item" href="./challenge_library.html">
+         <i class="fas fa-tasks me-2">
+         </i>
+         Challenges
+        </a>
+       </li>
+       <li>
+        <a class="dropdown-item" href="./leaderboard_page.html">
+         <i class="fas fa-trophy me-2">
+         </i>
+         Leaderboards
+        </a>
+       </li>
+       <li>
+        <a class="dropdown-item" href="./community_feed.html">
+         <i class="fas fa-users me-2">
+         </i>
+         Green Feed
+        </a>
+       </li>
+       <li>
+        <a class="dropdown-item text-danger" href="./login_page.html">
+         <i class="fas fa-sign-out-alt me-2">
+         </i>
+         Logout
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </div>
+   <div class="offcanvas offcanvas-start" id="offcanvasStudent" tabindex="-1">
+    <div class="offcanvas-header">
+     <h5 class="offcanvas-title">
+      Menu
+     </h5>
+     <button class="btn-close" data-bs-dismiss="offcanvas" type="button">
+     </button>
+    </div>
+    <div class="offcanvas-body">
+     <a class="btn w-100 mb-2 btn-outline-success" href="./student_dashboard.html">
+      <i class="fas fa-home me-2">
+      </i>
+      Dashboard
+     </a>
+     <a class="btn w-100 mb-2 btn-outline-success" href="./lesson_library.html">
+      <i class="fas fa-book me-2">
+      </i>
+      Lessons
+     </a>
+     <a class="btn w-100 mb-2 btn-outline-success" href="./challenge_library.html">
+      <i class="fas fa-tasks me-2">
+      </i>
+      Challenges
+     </a>
+     <a class="btn w-100 mb-2 btn-outline-success" href="./leaderboard_page.html">
+      <i class="fas fa-trophy me-2">
+      </i>
+      Leaderboards
+     </a>
+     <a class="btn w-100 mb-2 btn-outline-success" href="./community_feed.html">
+      <i class="fas fa-users me-2">
+      </i>
+      Green Feed
+     </a>
+    </div>
+   </div>
+  </header>
+  <!-- Main Content -->
+  <main class="main-content" data-lesson-id="L-001" data-quiz-id="Q-042" id="lesson-main">
+   <div class="container-fluid container-max">
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb" class="breadcrumb">
+     <ol class="breadcrumb mb-2">
+      <li class="breadcrumb-item">
+       <a href="./lesson_library.html">
+        <i class="fa-solid fa-book-open me-1">
+        </i>
+        Learn
+       </a>
+      </li>
+      <li class="breadcrumb-item">
+       <a href="./lesson_library.html">
+        Lesson Library
+       </a>
+      </li>
+      <li aria-current="page" class="breadcrumb-item active">
+       Lesson Details
+      </li>
+     </ol>
+    </nav>
+    <!-- System alert area -->
+    <div class="alert alert-info d-none" id="system-alert" role="alert">
+     <i class="fa-solid fa-circle-info me-1">
+     </i>
+     Loading latest lesson data...
+    </div>
+    <!-- Lesson Header Card -->
+    <section class="card app-card mb-4" id="lesson-header">
+     <div class="ratio ratio-21x9 lesson-banner-wrapper">
+      <img alt="Lesson banner" class="lesson-banner" id="lesson-banner" onerror="this.onerror=null;this.src='https://picsum.photos/seed/lesson/1280/540'" src="https://picsum.photos/id/1018/1280/540">
+      </img>
+     </div>
+     <div class="card-body">
+      <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-md-between gap-3">
+       <div>
+        <h1 class="mb-2" id="lesson-title">
+         Urban Trees &amp; Air Quality
+        </h1>
+        <p class="text-muted mb-2" id="lesson-summary">
+         Discover how urban forests reduce pollution, cool cities, and boost well-being. Learn practical steps to assess and improve green cover in your neighborhood.
+        </p>
+        <div class="d-flex flex-wrap gap-2 meta-chips">
+         <span class="badge badge-soft info">
+          <i class="fa-solid fa-layer-group me-1">
+          </i>
+          <span id="lesson-category">
+           Environment
+          </span>
+         </span>
+         <span class="badge badge-soft success">
+          <i class="fa-regular fa-clock me-1">
+          </i>
+          <span id="lesson-time">
+           15-20 mins
+          </span>
+         </span>
+         <span class="badge badge-soft primary">
+          <i class="fa-solid fa-graduation-cap me-1">
+          </i>
+          Level: Beginner
+         </span>
+        </div>
+       </div>
+       <div class="text-md-end">
+        <button class="btn btn-light me-2" id="bookmarkBtn">
+         <i class="fa-regular fa-bookmark me-1">
+         </i>
+         Save Lesson
+        </button>
+        <a class="btn btn-outline-primary" href="./lesson_library.html">
+         <i class="fa-solid fa-arrow-left me-1">
+         </i>
+         Back to Library
+        </a>
+       </div>
+      </div>
+     </div>
+    </section>
+    <!-- Reading progress indicator -->
+    <div aria-label="Reading progress" class="reading-progress mb-3">
+     <div class="reading-progress-bar" id="readingProgressBar" role="progressbar" style="width: 0%">
+     </div>
+    </div>
+    <!-- Content and right rail -->
+    <div class="row g-3">
+     <div class="col-12 col-xl-8">
+      <!-- Content Blocks -->
+      <div class="d-grid gap-3" id="content-feed">
+       <!-- Video Block -->
+       <article class="card content-block" data-block-id="video-1" data-block-type="video" id="block-video" tabindex="0">
+        <div class="card-header">
+         <div class="title d-flex align-items-center gap-2">
+          <i class="fa-solid fa-video text-info">
+          </i>
+          Introductory Video: Trees vs. Pollution
+         </div>
+         <span class="text-muted small">
+          3:44
+         </span>
+        </div>
+        <div class="card-body">
+         <div class="ratio ratio-16x9">
+          <video class="w-100 h-100" controls="" id="lessonVideo" poster="https://picsum.photos/id/1040/1200/675" preload="metadata">
+           <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4"/>
+           <track default="" kind="subtitles" label="English" src="https://raw.githubusercontent.com/mdn/learning-area/master/html/multimedia-and-embedding/video-and-audio-content/video/captions.vtt" srclang="en"/>
+           Your browser does not support HTML5 video.
+          </video>
+         </div>
+         <div class="d-flex align-items-center justify-content-between mt-2">
+          <div class="small text-muted">
+           <i class="fa-regular fa-closed-captioning me-1">
+           </i>
+           Subtitles available
+          </div>
+          <div class="small">
+           <span id="videoProgress">
+            0%
+           </span>
+           watched
+          </div>
+         </div>
+        </div>
+       </article>
+       <!-- Text Block 1 -->
+       <article class="card content-block" data-block-id="text-1" data-block-type="text" id="block-text-1" tabindex="0">
+        <div class="card-header">
+         <div class="title d-flex align-items-center gap-2">
+          <i class="fa-solid fa-align-left text-primary">
+          </i>
+          Why Urban Trees Matter
+         </div>
+        </div>
+        <div class="card-body">
+         <div class="formatted-text">
+          <p>
+           Trees in cities act as natural air filters by absorbing pollutants like NO2, O3, and particulate matter. Beyond air quality, they reduce urban heat island effects, support biodiversity, and enhance human well-being.
+          </p>
+          <ul>
+           <li>
+            <strong>
+             Filtration:
+            </strong>
+            Leaves trap harmful particles.
+           </li>
+           <li>
+            <strong>
+             Cooling:
+            </strong>
+            Shade and evapotranspiration lower temperatures.
+           </li>
+           <li>
+            <strong>
+             Carbon Storage:
+            </strong>
+            Trees lock away CO2 over time.
+           </li>
+          </ul>
+          <p>
+           In this lesson, you’ll explore practical strategies to evaluate and expand tree canopy in your neighborhood.
+          </p>
+         </div>
+        </div>
+       </article>
+       <!-- Image Block -->
+       <article class="card content-block" data-block-id="image-1" data-block-type="image" id="block-image-1" tabindex="0">
+        <div class="card-header">
+         <div class="title d-flex align-items-center gap-2">
+          <i class="fa-regular fa-image text-success">
+          </i>
+          Infographic: Canopy Coverage vs. PM2.5
+         </div>
+        </div>
+        <div class="card-body">
+         <figure class="mb-0">
+          <img alt="Infographic showing the relationship between tree canopy coverage and PM2.5 levels" class="img-fluid rounded" onerror="this.onerror=null;this.src='https://picsum.photos/seed/infographic/1200/800'" src="https://picsum.photos/id/1021/1200/800">
+           <figcaption class="small text-muted mt-2">
+            <i class="fa-solid fa-circle-info me-1">
+            </i>
+            Higher canopy coverage often correlates with lower particulate pollution.
+           </figcaption>
+          </img>
+         </figure>
+        </div>
+       </article>
+       <!-- Text Block 2 -->
+       <article class="card content-block" data-block-id="text-2" data-block-type="text" id="block-text-2" tabindex="0">
+        <div class="card-header">
+         <div class="title d-flex align-items-center gap-2">
+          <i class="fa-solid fa-list-check text-warning">
+          </i>
+          Action Steps You Can Take
+         </div>
+        </div>
+        <div class="card-body">
+         <div class="formatted-text">
+          <ol>
+           <li>
+            Map tree canopy on your street using open tools (e.g., local GIS).
+           </li>
+           <li>
+            Identify heat islands using free satellite data (e.g., Sentinel-2).
+           </li>
+           <li>
+            Engage with local councils to request tree planting in priority zones.
+           </li>
+           <li>
+            Set up a neighborhood care routine for young trees.
+           </li>
+          </ol>
+         </div>
+        </div>
+       </article>
+       <!-- Quiz Call To Action -->
+       <section class="card cta-card content-block" data-block-id="cta-quiz" data-block-type="cta" id="quiz-cta" tabindex="0">
+        <div class="card-body d-flex flex-column flex-md-row align-items-md-center justify-content-md-between gap-3">
+         <div>
+          <p class="mb-1 fw-semibold">
+           <i class="fa-solid fa-lightbulb me-1 text-primary">
+           </i>
+           Ready to test your knowledge?
+          </p>
+          <small class="text-muted">
+           Scroll through all content and watch the video to unlock the quiz.
+          </small>
+          <div class="small mt-1">
+           <span id="blocksProgressText">
+            0 of 4 blocks viewed
+           </span>
+          </div>
+         </div>
+         <div class="d-flex align-items-center gap-2">
+          <button class="btn btn-primary" disabled="" id="startQuizBtn">
+           <i class="fa-solid fa-circle-play me-1">
+           </i>
+           Start Quiz
+          </button>
+          <span class="badge badge-soft warning" id="eligibilityTag">
+           <i class="fa-solid fa-lock me-1">
+           </i>
+           Locked
+          </span>
+         </div>
+        </div>
+       </section>
+      </div>
+     </div>
+     <!-- Right Rail: Resources and Progress -->
+     <div class="col-12 col-xl-4">
+      <!-- Progress Widget -->
+      <div class="card mb-3">
+       <div class="card-header">
+        <div class="title d-flex align-items-center gap-2">
+         <i class="fa-solid fa-chart-pie text-success">
+         </i>
+         Your Lesson Progress
+        </div>
+       </div>
+       <div class="card-body">
+        <canvas aria-label="Lesson progress chart" height="160" id="progressChart">
+        </canvas>
+        <div class="d-flex justify-content-between small text-muted mt-2">
+         <span>
+          Completed
+         </span>
+         <span id="progressPct">
+          0%
+         </span>
+        </div>
+       </div>
+      </div>
+      <!-- Resources Table -->
+      <div class="card">
+       <div class="card-header justify-content-between">
+        <div class="title d-flex align-items-center gap-2">
+         <i class="fa-solid fa-book text-primary">
+         </i>
+         Additional Resources
+        </div>
+        <div class="w-50">
+         <input class="form-control form-control-sm" id="resourceFilter" placeholder="Filter resources..." type="text"/>
+        </div>
+       </div>
+       <div class="card-body p-0">
+        <div class="table-responsive">
+         <table class="table table-theme mb-0" id="resourcesTable">
+          <thead>
+           <tr>
+            <th class="sortable" data-sort="title">
+             Title
+             <i class="fa-solid fa-sort ms-1">
+             </i>
+            </th>
+            <th class="sortable" data-sort="type">
+             Type
+             <i class="fa-solid fa-sort ms-1">
+             </i>
+            </th>
+            <th class="sortable text-end" data-sort="length">
+             Length
+             <i class="fa-solid fa-sort ms-1">
+             </i>
+            </th>
+            <th class="sortable" data-sort="date">
+             Added
+            </th>
+            <th class="text-end">
+             Action
+            </th>
+           </tr>
+          </thead>
+          <tbody>
+           <tr>
+            <td>
+             WHO: Urban Air Quality Basics
+            </td>
+            <td>
+             Article
+            </td>
+            <td class="text-end">
+             8 min
+            </td>
+            <td>
+             2024-10-12
+            </td>
+            <td class="text-end">
+             <a class="btn btn-sm btn-light" href="#">
+              View
+             </a>
+            </td>
+           </tr>
+           <tr>
+            <td>
+             FAO Urban Forestry Guide
+            </td>
+            <td>
+             PDF
+            </td>
+            <td class="text-end">
+             24 pages
+            </td>
+            <td>
+             2024-09-21
+            </td>
+            <td class="text-end">
+             <a class="btn btn-sm btn-light" href="#">
+              View
+             </a>
+            </td>
+           </tr>
+           <tr>
+            <td>
+             City Canopy Dashboard
+            </td>
+            <td>
+             Tool
+            </td>
+            <td class="text-end">
+             -
+            </td>
+            <td>
+             2024-07-02
+            </td>
+            <td class="text-end">
+             <a class="btn btn-sm btn-light" href="#">
+              Open
+             </a>
+            </td>
+           </tr>
+           <tr>
+            <td>
+             Heat Islands Explained
+            </td>
+            <td>
+             Video
+            </td>
+            <td class="text-end">
+             6 min
+            </td>
+            <td>
+             2024-11-01
+            </td>
+            <td class="text-end">
+             <a class="btn btn-sm btn-light" href="#">
+              Watch
+             </a>
+            </td>
+           </tr>
+           <tr>
+            <td>
+             Community Tree Care Checklist
+            </td>
+            <td>
+             PDF
+            </td>
+            <td class="text-end">
+             3 pages
+            </td>
+            <td>
+             2024-08-11
+            </td>
+            <td class="text-end">
+             <a class="btn btn-sm btn-light" href="#">
+              Download
+             </a>
+            </td>
+           </tr>
+           <tr>
+            <td>
+             PM2.5 Sensors: Getting Started
+            </td>
+            <td>
+             Article
+            </td>
+            <td class="text-end">
+             10 min
+            </td>
+            <td>
+             2024-06-05
+            </td>
+            <td class="text-end">
+             <a class="btn btn-sm btn-light" href="#">
+              Read
+             </a>
+            </td>
+           </tr>
+          </tbody>
+         </table>
+        </div>
+        <div class="p-2 d-flex justify-content-between align-items-center small text-muted border-top">
+         <div>
+          Showing 1–6 of 6
+         </div>
+         <nav aria-label="Resource pagination">
+          <ul class="pagination pagination-sm mb-0">
+           <li class="page-item disabled">
+            <span class="page-link">
+             Prev
+            </span>
+           </li>
+           <li class="page-item active">
+            <span class="page-link">
+             1
+            </span>
+           </li>
+           <li class="page-item disabled">
+            <span class="page-link">
+             Next
+            </span>
+           </li>
+          </ul>
+         </nav>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+    <!-- Toast container -->
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1100">
+     <div aria-atomic="true" aria-live="assertive" class="toast align-items-center text-bg-primary border-0" id="actionToast" role="alert">
+      <div class="d-flex">
+       <div class="toast-body">
+        <i class="fa-solid fa-check-circle me-1">
+        </i>
+        Progress saved
+       </div>
+       <button aria-label="Close" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" type="button">
+       </button>
+      </div>
+     </div>
+    </div>
+   </div>
+  </main>
+  <!-- Footer -->
+  <footer class="border-top bg-white" style="margin-left:260px;">
+   <div class="container py-3 d-flex flex-wrap justify-content-between align-items-center">
+    <div class="text-muted d-flex align-items-center">
+     <i class="fas fa-leaf me-2" style="color:#008000;">
+     </i>
+     <small>
+      GreenQuest Student
+     </small>
+    </div>
+    <div class="d-flex gap-2">
+     <a class="btn btn-sm btn-success" href="./challenge_library.html">
+      <i class="fas fa-flag me-1">
+      </i>
+      Find Challenge
+     </a>
+     <a class="btn btn-sm btn-outline-success" href="./lesson_library.html">
+      <i class="fas fa-play-circle me-1">
+      </i>
+      Lessons
+     </a>
+    </div>
+    <ul class="nav">
+     <li class="nav-item">
+      <a class="nav-link px-2 text-muted" href="#terms">
+       Terms
+      </a>
+     </li>
+     <li class="nav-item">
+      <a class="nav-link px-2 text-muted" href="#privacy">
+       Privacy
+      </a>
+     </li>
+    </ul>
+   </div>
+  </footer>
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11">
+  </script>
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js">
+  </script>
+  <!-- Bootstrap Bundle JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js">
+  </script>
+  <!-- Page Scripts -->
+  <script>
+   (function() {
+    const progressBar = document.getElementById('readingProgressBar');
+    const blocks = Array.from(document.querySelectorAll('.content-block'));
+    const blocksProgressText = document.getElementById('blocksProgressText');
+    const startQuizBtn = document.getElementById('startQuizBtn');
+    const eligibilityTag = document.getElementById('eligibilityTag');
+    const videoEl = document.getElementById('lessonVideo');
+    const videoProgress = document.getElementById('videoProgress');
+    const progressPct = document.getElementById('progressPct');
+    const systemAlert = document.getElementById('system-alert');
+    const actionToast = document.getElementById('actionToast');
+    const notifBell = document.getElementById('notifBell');
+
+    const totalBlocks = blocks.length - 1; // excluding CTA from required
+    const requiredBlocks = blocks.filter(b => b.dataset.blockType !== 'cta');
+    const viewed = new Set();
+
+    let videoWatchPct = 0; // 0..100
+    let quizEnabled = false;
+
+    // Show loading alert briefly
+    systemAlert.classList.remove('d-none');
+    setTimeout(() => {
+        systemAlert.classList.add('d-none');
+        const toast = new bootstrap.Toast(actionToast);
+        toast.show();
+    }, 1200);
+
+    // IntersectionObserver to track viewed blocks
+    const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const id = entry.target.dataset.blockId;
+                if (id && !viewed.has(id)) {
+                    viewed.add(id);
+                    updateProgress();
+                }
+            }
+        });
+    }, {
+        root: null,
+        threshold: 0.6
+    });
+
+    requiredBlocks.forEach(b => io.observe(b));
+
+    function updateProgress() {
+        const completed = Array.from(viewed).filter(id => id !== 'cta-quiz').length;
+        const pct = Math.round((completed / totalBlocks) * 100);
+        progressBar.style.width = pct + '%';
+        progressPct.textContent = pct + '%';
+        blocksProgressText.textContent = completed + ' of ' + totalBlocks + ' blocks viewed';
+        updateChart(completed, totalBlocks - completed);
+        evaluateEligibility();
+    }
+
+    // Video progress tracking
+    if (videoEl) {
+        videoEl.addEventListener('timeupdate', () => {
+            if (videoEl.duration) {
+                videoWatchPct = Math.min(100, Math.round((videoEl.currentTime / videoEl.duration) * 100));
+                videoProgress.textContent = videoWatchPct + '%';
+                evaluateEligibility();
+            }
+        });
+        videoEl.addEventListener('ended', () => {
+            videoWatchPct = 100;
+            videoProgress.textContent = '100%';
+            evaluateEligibility();
+        });
+        videoEl.addEventListener('error', () => {
+            Swal.fire({
+                icon: 'error',
+                title: 'Video unavailable',
+                text: 'There was an issue loading the video. Please try again later or continue with the text content.'
+            });
+        });
+    }
+
+    function evaluateEligibility() {
+        const completedBlocks = Array.from(viewed).filter(id => id !== 'cta-quiz').length;
+        const blocksComplete = completedBlocks >= totalBlocks;
+        const videoComplete = videoWatchPct >= 90; // require 90% watched
+        const eligible = blocksComplete && videoComplete;
+        if (eligible && !quizEnabled) {
+            quizEnabled = true;
+            startQuizBtn.disabled = false;
+            startQuizBtn.classList.add('btn-success');
+            startQuizBtn.classList.remove('btn-primary');
+            eligibilityTag.className = 'badge badge-soft success';
+            eligibilityTag.innerHTML = '<i class="fa-solid fa-unlock me-1"></i>Ready';
+        }
+    }
+
+    // Quiz CTA handler
+    startQuizBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const quizId = document.getElementById('lesson-main').dataset.quizId || 'Q-000';
+        if (startQuizBtn.disabled) {
+            Swal.fire({
+                icon: 'info',
+                title: 'Complete the lesson',
+                text: 'Scroll through all sections and watch the video to at least 90% to unlock the quiz.'
+            });
+            return;
+        }
+        Swal.fire({
+            title: 'Start Quiz?',
+            text: 'You are about to begin the quiz for this lesson.',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Start',
+            cancelButtonText: 'Cancel'
+        }).then(result => {
+            if (result.isConfirmed) {
+                // simple log and redirect
+                const url = './quiz_page.html?quizId=' + encodeURIComponent(quizId);
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Good luck!',
+                    timer: 900,
+                    showConfirmButton: false
+                });
+                setTimeout(() => {
+                    window.location.href = url;
+                }, 950);
+            }
+        });
+    });
+
+    // Bookmark
+    document.getElementById('bookmarkBtn').addEventListener('click', () => {
+        Swal.fire({
+            icon: 'success',
+            title: 'Lesson saved',
+            timer: 1000,
+            showConfirmButton: false
+        });
+    });
+
+    // Toast trigger from bell
+    notifBell.addEventListener('click', (e) => {
+        e.preventDefault();
+        Swal.fire({
+            title: 'Notifications',
+            html: '<div class="text-start">\n                 <div class="mb-2"><i class="fa-solid fa-bell me-2 text-warning"></i>New challenge available near you</div>\n                 <div class="mb-2"><i class="fa-solid fa-bell me-2 text-info"></i>Reminder: Finish this lesson to take the quiz</div>\n                 <div><i class="fa-solid fa-bell me-2 text-success"></i>3 classmates completed this lesson today</div>\n               </div>',
+            icon: 'info',
+            confirmButtonText: 'Close'
+        });
+    });
+
+    // Resources: simple column sorting and filtering
+    const table = document.getElementById('resourcesTable');
+    const filterInput = document.getElementById('resourceFilter');
+    let sortState = {
+        key: null,
+        asc: true
+    };
+
+    document.querySelectorAll('#resourcesTable thead th.sortable').forEach(th => {
+        th.addEventListener('click', () => {
+            const key = th.dataset.sort;
+            sortState.asc = sortState.key === key ? !sortState.asc : true;
+            sortState.key = key;
+            sortTableBy(key, sortState.asc);
+            updateSortIcons();
+        });
+    });
+
+    function updateSortIcons() {
+        document.querySelectorAll('#resourcesTable thead th.sortable i').forEach(i => i.className = 'fa-solid fa-sort ms-1');
+        const activeTh = document.querySelector(`#resourcesTable thead th.sortable[data-sort="${sortState.key}"] i`);
+        if (activeTh) activeTh.className = sortState.asc ? 'fa-solid fa-sort-up ms-1' : 'fa-solid fa-sort-down ms-1';
+    }
+
+    function sortTableBy(key, asc) {
+        const tbody = table.querySelector('tbody');
+        const rows = Array.from(tbody.querySelectorAll('tr'));
+        const idxMap = {
+            title: 0,
+            type: 1,
+            length: 2,
+            date: 3
+        };
+        const idx = idxMap[key];
+        rows.sort((a, b) => {
+            let va = a.children[idx].innerText.trim();
+            let vb = b.children[idx].innerText.trim();
+            if (key === 'date') {
+                va = new Date(va);
+                vb = new Date(vb);
+            }
+            if (key === 'length') {
+                // normalize: extract numeric minutes or pages
+                va = lengthToNumber(va);
+                vb = lengthToNumber(vb);
+            }
+            if (va < vb) return asc ? -1 : 1;
+            if (va > vb) return asc ? 1 : -1;
+            return 0;
+        });
+        rows.forEach(r => tbody.appendChild(r));
+    }
+
+    function lengthToNumber(txt) {
+        if (txt === '-' || !txt) return Number.MAX_SAFE_INTEGER;
+        const m = txt.match(/(\d+)/);
+        return m ? parseInt(m[1], 10) : Number.MAX_SAFE_INTEGER;
+    }
+
+    filterInput.addEventListener('input', () => {
+        const q = filterInput.value.toLowerCase();
+        const rows = table.querySelectorAll('tbody tr');
+        rows.forEach(r => {
+            const title = r.children[0].innerText.toLowerCase();
+            const type = r.children[1].innerText.toLowerCase();
+            r.classList.toggle('d-none', !(title.includes(q) || type.includes(q)));
+        });
+    });
+
+    // Chart.js progress donut
+    const ctx = document.getElementById('progressChart');
+    const chart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Completed', 'Remaining'],
+            datasets: [{
+                data: [0, totalBlocks],
+                backgroundColor: ['rgba(0,128,0,0.8)', 'rgba(0,128,0,0.15)'],
+                borderWidth: 0
+            }]
+        },
+        options: {
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'bottom'
+                }
+            },
+            responsive: true,
+            cutout: '60%'
+        }
+    });
+
+    function updateChart(completed, remaining) {
+        chart.data.datasets[0].data = [completed, remaining];
+        chart.update();
+    }
+
+    // Initialize progress with the first block in view if visible
+    updateProgress();
+})();
+  </script>
+  <script src="auth.js"></script>
+
+ </body>
+</html>

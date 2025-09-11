@@ -1,0 +1,17 @@
+
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+.kpi-card {
+  border: 1px solid var(--border-color);
+  transition: transform .2s;
+}
+.kpi-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-2);
+}
+
+.card-header {
+  font-weight: 600;
+}

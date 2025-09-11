@@ -1,0 +1,7 @@
+/* join_class.css - Student Join Class Page */
+body { font-family: "Poppins", var(--font-sans); }
+
+.main-content { padding: var(--space-4); }
+.app-card { border: 1px solid var(--border-color); border-radius: var(--radius-2); }
+
+#feedbackArea .alert { margin-top: var(--space-3); }

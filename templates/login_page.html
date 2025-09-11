@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html class="h-100" lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   GreenQuest | Login
+  </title>
+  <style>
+/* Header Styling */
+.login-header {
+  background: linear-gradient(90deg, var(--gq-primary, #008000), #00a86b);
+  padding: 0.75rem 1rem;
+  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* Brand */
+.logo-circle {
+  background: rgba(255,255,255,0.15);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  color: #fff;
+}
+
+.brand-title {
+  font-weight: 700;
+  font-size: 1.2rem;
+  line-height: 1.2;
+}
+
+.brand-subtitle {
+  font-size: 0.8rem;
+  opacity: 0.9;
+}
+
+/* Buttons */
+.login-header .btn {
+  border-radius: 20px;
+  font-size: 0.85rem;
+  padding: 0.35rem 0.75rem;
+  transition: all 0.2s ease;
+}
+
+.login-header .btn-outline-light:hover {
+  background: #fff;
+  color: var(--gq-primary, #008000);
+}
+
+.login-header .btn-light:hover {
+  background: #f8f9fa;
+  color: var(--gq-primary, #008000);
+}
+</style>
+  <!-- Brand typography -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <!-- Font Awesome 6 -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
+  <!-- Site Theme (provided) -->
+  <link href="style.css" rel="stylesheet"/>
+  <!-- Page specific CSS -->
+  <link href="login_page.css" rel="stylesheet"/>
+ </head>
+ <body class="d-flex flex-column min-vh-100">
+  <!-- Header (common component) -->
+  <header class="login-header shadow-sm">
+  <div class="container-fluid d-flex justify-content-between align-items-center">
+    <!-- Brand -->
+    <div class="d-flex align-items-center">
+      <div class="logo-circle me-2">
+        <i class="fas fa-leaf"></i>
+      </div>
+      <div>
+        <div class="brand-title">GreenQuest</div>
+        <div class="brand-subtitle">Government of Punjab</div>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="d-flex gap-2">
+      <a href="#about" class="btn btn-outline-light btn-sm"><i class="fas fa-info-circle me-1"></i> About</a>
+      <a href="#help" class="btn btn-light btn-sm"><i class="fas fa-question-circle me-1"></i> Help</a>
+    </div>
+  </div>
+</header>
+
+  <!-- Main Content -->
+  <main class="flex-grow-1">
+   <section class="container login-view d-flex align-items-center justify-content-center py-5">
+    <div class="login-form-container w-100" style="max-width:480px;">
+     <!-- BrandingSection -->
+     <div class="text-center mb-4">
+      <img alt="GreenQuest logo" class="rounded-circle border" height="88" id="gqLogo" onerror="this.onerror=null;this.src='https://picsum.photos/seed/greenquest-logo/88/88';" src="./assets/logo.svg" width="88"/>
+      <h1 class="h4 fw-bold mt-3 text-strong">
+       Welcome to GreenQuest
+      </h1>
+      <p class="mb-0 text-muted">
+       Join the quest for a greener planet
+      </p>
+     </div>
+     <!-- AuthenticationSection: Google SSO -->
+     <div class="mb-3">
+      <button class="btn btn-success w-100 py-2" id="btnGoogle" type="button">
+       <span class="d-inline-flex align-items-center">
+        <i class="fab fa-google me-2">
+        </i>
+        <span class="btn-text">
+         Sign in with Google
+        </span>
+        <span aria-hidden="true" class="spinner-border spinner-border-sm ms-2 d-none" id="googleSpinner" role="status">
+        </span>
+       </span>
+      </button>
+     </div>
+     <div class="d-flex align-items-center my-3">
+      <hr class="flex-grow-1"/>
+      <span class="mx-2 text-muted small">
+       or
+      </span>
+      <hr class="flex-grow-1"/>
+     </div>
+     <!-- AuthenticationSection: Credentials (for testing) -->
+     <form id="credentialLoginForm" novalidate="">
+      <div class="mb-3">
+       <label class="form-label" for="username">
+        Username
+       </label>
+       <div class="input-group">
+        <span class="input-group-text">
+         <i class="fa-solid fa-user">
+         </i>
+        </span>
+        <input autocomplete="username" class="form-control" id="username" placeholder="e.g., student.ava" required="" type="text"/>
+       </div>
+      </div>
+      <div class="mb-3">
+       <label class="form-label" for="password">
+        Password
+       </label>
+       <div class="input-group" id="passwordGroup">
+        <span class="input-group-text">
+         <i class="fa-solid fa-lock">
+         </i>
+        </span>
+        <input autocomplete="current-password" class="form-control password-input-field" id="password" placeholder="Enter password" required="" type="password"/>
+        <button aria-label="Toggle password visibility" class="btn btn-light" id="togglePassword" type="button">
+         <i class="fa-regular fa-eye">
+         </i>
+        </button>
+       </div>
+      </div>
+      <div class="d-grid">
+       <button class="btn btn-primary" id="btnLogin" type="submit">
+        <span class="d-inline-flex align-items-center">
+         <i class="fa-solid fa-right-to-bracket me-2">
+         </i>
+         <span>
+          Sign in
+         </span>
+         <span aria-hidden="true" class="spinner-border spinner-border-sm ms-2 d-none" id="loginSpinner" role="status">
+         </span>
+        </span>
+       </button>
+      </div>
+     </form>
+     <!-- FeedbackSection -->
+     <div class="mt-3" id="feedbackArea">
+      <div class="alert alert-danger d-none" id="errorAlert" role="alert">
+       <i class="fa-solid fa-circle-exclamation me-2">
+       </i>
+       <span id="errorMessage">
+        Login failed. Please try again.
+       </span>
+      </div>
+      <div class="d-none text-center text-muted" id="loadingIndicator">
+       <div aria-hidden="true" class="spinner-border text-success" role="status">
+       </div>
+       <div class="small mt-2">
+        Signing you in…
+       </div>
+      </div>
+     </div>
+     <p class="text-center text-muted small mt-3 mb-0">
+      By continuing, you agree to our
+      <a href="#terms">
+       Terms
+      </a>
+      and
+      <a href="#privacy">
+       Privacy Policy
+      </a>
+      .
+     </p>
+    </div>
+   </section>
+    <!-- About Section -->
+  <section id="about" class="mb-5">
+    <h3 class="fw-bold text-success"><i class="fas fa-info-circle me-2"></i>About Portal</h3>
+    <p class="text-muted">
+      The GreenQuest portal is an initiative by the <strong>Government of Punjab</strong> to engage students and teachers
+      in sustainability learning. Through lessons, quizzes, eco-challenges, and community activities,
+      the portal helps build environmental awareness and track impact across schools.
+    </p>
+    <ul>
+      <li>📘 Learn about waste segregation, water conservation, and climate action.</li>
+      <li>🏆 Participate in eco-challenges and earn Eco-Points & badges.</li>
+      <li>📊 Track your school’s collective impact via analytics and leaderboards.</li>
+    </ul>
+  </section>
+
+   <!-- Test Accounts (for QA/demo) -->
+   <section class="container pb-5">
+    <div class="card app-card">
+     <div class="card-header">
+      <div class="d-flex align-items-center">
+       <i class="fa-solid fa-vial-circle-check text-success me-2">
+       </i>
+       <span class="widget-title">
+        Test Accounts for Quick QA
+       </span>
+      </div>
+     </div>
+     <div class="card-body">
+      <p class="text-muted mb-3">
+       Use the following credentials to test role-based redirects. All pages are located in the same folder. Links are relative (e.g., ./student_dashboard.html).
+      </p>
+      <div class="table-responsive">
+       <table class="table table-theme align-middle mb-0">
+        <thead>
+         <tr>
+          <th>
+           Role
+          </th>
+          <th>
+           Username
+          </th>
+          <th>
+           Password
+          </th>
+          <th>
+           Redirects To
+          </th>
+          <th class="text-end">
+           Action
+          </th>
+         </tr>
+        </thead>
+        <tbody>
+         <tr>
+          <td>
+           <span class="badge-soft success">
+            Student
+           </span>
+          </td>
+          <td>
+           <code>
+            student.ava
+           </code>
+          </td>
+          <td>
+           <code>
+            pass123
+           </code>
+          </td>
+          <td>
+           <a href="./student_dashboard.html">
+            ./student_dashboard.html
+           </a>
+          </td>
+          <td class="text-end">
+           <button class="btn btn-light btn-sm copy-cred" data-pass="pass123" data-user="student.ava">
+            <i class="fa-regular fa-copy me-1">
+            </i>
+            Copy
+           </button>
+          </td>
+         </tr>
+         <tr>
+          <td>
+           <span class="badge-soft success">
+            Student
+           </span>
+          </td>
+          <td>
+           <code>
+            student.liam
+           </code>
+          </td>
+          <td>
+           <code>
+            pass123
+           </code>
+          </td>
+          <td>
+           <a href="./student_dashboard.html">
+            ./student_dashboard.html
+           </a>
+          </td>
+          <td class="text-end">
+           <button class="btn btn-light btn-sm copy-cred" data-pass="pass123" data-user="student.liam">
+            <i class="fa-regular fa-copy me-1">
+            </i>
+            Copy
+           </button>
+          </td>
+         </tr>
+         <tr>
+          <td>
+           <span class="badge-soft info">
+            Teacher
+           </span>
+          </td>
+          <td>
+           <code>
+            teacher.olivia
+           </code>
+          </td>
+          <td>
+           <code>
+            teach123
+           </code>
+          </td>
+          <td>
+           <a href="./teacher_dashboard.html">
+            ./teacher_dashboard.html
+           </a>
+          </td>
+          <td class="text-end">
+           <button class="btn btn-light btn-sm copy-cred" data-pass="teach123" data-user="teacher.olivia">
+            <i class="fa-regular fa-copy me-1">
+            </i>
+            Copy
+           </button>
+          </td>
+         </tr>
+         <tr>
+          <td>
+           <span class="badge-soft info">
+            Teacher
+           </span>
+          </td>
+          <td>
+           <code>
+            teacher.noah
+           </code>
+          </td>
+          <td>
+           <code>
+            teach123
+           </code>
+          </td>
+          <td>
+           <a href="./teacher_dashboard.html">
+            ./teacher_dashboard.html
+           </a>
+          </td>
+          <td class="text-end">
+           <button class="btn btn-light btn-sm copy-cred" data-pass="teach123" data-user="teacher.noah">
+            <i class="fa-regular fa-copy me-1">
+            </i>
+            Copy
+           </button>
+          </td>
+         </tr>
+         <tr>
+          <td>
+           <span class="badge-soft secondary">
+            Partner
+           </span>
+          </td>
+          <td>
+           <code>
+            partner.eco
+           </code>
+          </td>
+          <td>
+           <code>
+            partner123
+           </code>
+          </td>
+          <td>
+           <a href="./partner_portal.html">
+            ./partner_portal.html
+           </a>
+          </td>
+          <td class="text-end">
+           <button class="btn btn-light btn-sm copy-cred" data-pass="partner123" data-user="partner.eco">
+            <i class="fa-regular fa-copy me-1">
+            </i>
+            Copy
+           </button>
+          </td>
+         </tr>
+         <tr>
+          <td>
+           <span class="badge-soft warning">
+            New User
+           </span>
+          </td>
+          <td>
+           <code>
+            new.user
+           </code>
+          </td>
+          <td>
+           <code>
+            welcome123
+           </code>
+          </td>
+          <td>
+           <a href="./role_selection.html">
+            ./role_selection.html
+           </a>
+          </td>
+          <td class="text-end">
+           <button class="btn btn-light btn-sm copy-cred" data-pass="welcome123" data-user="new.user">
+            <i class="fa-regular fa-copy me-1">
+            </i>
+            Copy
+           </button>
+          </td>
+         </tr>
+        </tbody>
+       </table>
+      </div>
+      <small class="text-muted d-block mt-2">
+       Tip: Click Copy to fill the form automatically.
+      </small>
+     </div>
+    </div>
+   </section>
+   <!-- Help Section -->
+  <section id="help">
+    <h3 class="fw-bold text-success"><i class="fas fa-question-circle me-2"></i>Help & Support</h3>
+    <p class="text-muted">Need help getting started? Here are some quick answers:</p>
+    <div class="accordion" id="helpAccordion">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="q1">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#a1">
+            How do I register as a student?
+          </button>
+        </h2>
+        <div id="a1" class="accordion-collapse collapse" data-bs-parent="#helpAccordion">
+          <div class="accordion-body">
+            Go to the registration page, select your <strong>district</strong>, then your <strong>school</strong>, 
+            and choose <em>Student</em> role. Enter your name, class, and roll number to sign up.
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="q2">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#a2">
+            How do teachers create classes?
+          </button>
+        </h2>
+        <div id="a2" class="accordion-collapse collapse" data-bs-parent="#helpAccordion">
+          <div class="accordion-body">
+            Teachers can register using their Teacher ID, then create a class from the <strong>Teacher Dashboard</strong>.
+            A unique <em>Class Code</em> will be generated to share with students.
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="q3">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#a3">
+            Who can I contact for support?
+          </button>
+        </h2>
+        <div id="a3" class="accordion-collapse collapse" data-bs-parent="#helpAccordion">
+          <div class="accordion-body">
+            For support, please contact your <strong>School Eco-Club Coordinator</strong> 
+            or email <a href="mailto:support@greenquestpunjab.gov">support@greenquestpunjab.gov</a>.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  </main>
+  <!-- Footer (common component) -->
+  <footer class="border-top bg-white mt-auto">
+   <div class="container py-3 d-flex flex-wrap justify-content-between align-items-center">
+    <div class="d-flex align-items-center text-muted">
+     <i class="fas fa-leaf me-2" style="color:#008000;">
+     </i>
+     <small>
+      © GreenQuest
+     </small>
+    </div>
+    <ul class="nav">
+     <li class="nav-item">
+      <a class="nav-link px-2 text-muted" href="#terms">
+       Terms
+      </a>
+     </li>
+     <li class="nav-item">
+      <a class="nav-link px-2 text-muted" href="#privacy">
+       Privacy
+      </a>
+     </li>
+    </ul>
+   </div>
+  </footer>
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.7/dist/sweetalert2.all.min.js">
+  </script>
+  <!-- Bootstrap 5 Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+  </script>
+  <script>
+   (function() {
+    const state = {
+        isLoading: false,
+        errorMessage: ''
+    };
+
+    const btnGoogle = document.getElementById('btnGoogle');
+    const headerGoogleBtn = document.getElementById('headerGoogleBtn');
+    const drawerGoogleBtn = document.getElementById('drawerGoogleBtn');
+    const googleSpinner = document.getElementById('googleSpinner');
+    const loginSpinner = document.getElementById('loginSpinner');
+    const errorAlert = document.getElementById('errorAlert');
+    const errorMessage = document.getElementById('errorMessage');
+    const loadingIndicator = document.getElementById('loadingIndicator');
+    const btnLogin = document.getElementById('btnLogin');
+    const form = document.getElementById('credentialLoginForm');
+    const usernameInput = document.getElementById('username');
+    const passwordInput = document.getElementById('password');
+    const togglePassword = document.getElementById('togglePassword');
+
+    const accounts = {
+        'student.ava': {
+            password: 'pass123',
+            redirect: './student_dashboard.html',
+            role: 'Student'
+        },
+        'student.liam': {
+            password: 'pass123',
+            redirect: './student_dashboard.html',
+            role: 'Student'
+        },
+        'teacher.olivia': {
+            password: 'teach123',
+            redirect: './teacher_dashboard.html',
+            role: 'Teacher'
+        },
+        'teacher.noah': {
+            password: 'teach123',
+            redirect: './teacher_dashboard.html',
+            role: 'Teacher'
+        },
+        'partner.eco': {
+            password: 'partner123',
+            redirect: './partner_portal.html',
+            role: 'Partner'
+        },
+        'new.user': {
+            password: 'welcome123',
+            redirect: './role_selection.html',
+            role: 'New User'
+        }
+    };
+
+    function setLoading(flag) {
+        state.isLoading = flag;
+        [btnGoogle, headerGoogleBtn, drawerGoogleBtn, btnLogin].forEach(el => {
+            if (el) el.disabled = flag;
+        });
+        googleSpinner.classList.toggle('d-none', !flag);
+        loginSpinner.classList.toggle('d-none', !flag);
+        loadingIndicator.classList.toggle('d-none', !flag);
+    }
+
+    function showError(msg) {
+        state.errorMessage = msg || 'Login failed. Please try again.';
+        errorMessage.textContent = state.errorMessage;
+        errorAlert.classList.remove('d-none');
+    }
+
+    function clearError() {
+        state.errorMessage = '';
+        errorAlert.classList.add('d-none');
+    }
+
+    function redirectTo(url) {
+        setTimeout(() => {
+            window.location.href = url;
+        }, 700);
+    }
+
+    function simulateGoogleFlow() {
+        clearError();
+        setLoading(true);
+        // Fake network delay
+        setTimeout(() => {
+            // Selection dialog to simulate auth outcome
+            Swal.fire({
+                title: 'Simulate Google Login',
+                text: 'Choose where to go after authentication',
+                icon: 'question',
+                allowOutsideClick: false,
+                showCancelButton: true,
+                confirmButtonText: 'Continue',
+                cancelButtonText: 'Cancel',
+                input: 'select',
+                inputOptions: {
+                    './student_dashboard.html': 'Existing Student',
+                    './teacher_dashboard.html': 'Existing Teacher',
+                    './partner_portal.html': 'Existing Partner',
+                    './role_selection.html': 'New User (Role Selection)'
+                },
+                inputPlaceholder: 'Select a path'
+            }).then(result => {
+                setLoading(false);
+                if (result.isConfirmed && result.value) {
+                    Swal.fire({
+                        title: 'Authenticated',
+                        text: 'Redirecting…',
+                        icon: 'success',
+                        timer: 900,
+                        showConfirmButton: false
+                    });
+                    redirectTo(result.value);
+                }
+            });
+        }, 900);
+    }
+
+    if (btnGoogle) btnGoogle.addEventListener('click', simulateGoogleFlow);
+    if (headerGoogleBtn) headerGoogleBtn.addEventListener('click', simulateGoogleFlow);
+    if (drawerGoogleBtn) drawerGoogleBtn.addEventListener('click', simulateGoogleFlow);
+
+    // Toggle password visibility
+    togglePassword.addEventListener('click', function() {
+        const isPwd = passwordInput.getAttribute('type') === 'password';
+        passwordInput.setAttribute('type', isPwd ? 'text' : 'password');
+        this.innerHTML = isPwd ? '<i class="fa-regular fa-eye-slash"></i>' : '<i class="fa-regular fa-eye"></i>';
+    });
+
+    // Handle credential login
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        clearError();
+        const u = (usernameInput.value || '').trim();
+        const p = (passwordInput.value || '').trim();
+        if (!u || !p) {
+            showError('Please enter both username and password.');
+            return;
+        }
+        setLoading(true);
+        setTimeout(() => {
+            const acct = accounts[u];
+            if (acct && acct.password === p) {
+                Swal.fire({
+                    title: `Welcome, ${acct.role}!`,
+                    text: 'Redirecting to your destination…',
+                    icon: 'success',
+                    timer: 1000,
+                    showConfirmButton: false
+                });
+                redirectTo(acct.redirect);
+            } else {
+                setLoading(false);
+                showError('Invalid credentials. Check the test accounts below and try again.');
+                Swal.fire({
+                    title: 'Authentication Failed',
+                    text: 'Invalid username or password.',
+                    icon: 'error',
+                    confirmButtonText: 'Okay'
+                });
+            }
+        }, 700);
+    });
+
+    // Copy credential buttons
+    document.querySelectorAll('.copy-cred').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const u = btn.getAttribute('data-user');
+            const p = btn.getAttribute('data-pass');
+            usernameInput.value = u;
+            passwordInput.value = p;
+            clearError();
+            navigator.clipboard.writeText(`${u}:${p}`).catch(() => {});
+            Swal.fire({
+                toast: true,
+                position: 'top-end',
+                icon: 'success',
+                title: 'Filled the form',
+                text: 'Credentials copied to clipboard',
+                showConfirmButton: false,
+                timer: 1400
+            });
+        });
+    });
+})();
+  </script>
+  <script src="auth.js"></script>
+<script src="auth.js"></script>
+<script>
+  function doLogin(role) {
+    const username = document.getElementById("usernameInput").value;
+
+    localStorage.setItem("gqUserName", username || "Guest User");
+    localStorage.setItem("gqUserRole", role); // "Student", "Teacher", or "Organisation"
+    localStorage.setItem("gqAvatar", "https://picsum.photos/seed/" + username + "/40/40");
+
+    if (role === "Student") {
+      window.location.href = "student_dashboard.html";
+    } else if (role === "Teacher") {
+      window.location.href = "teacher_dashboard.html";
+    } else {
+      window.location.href = "partner_dashboard.html";
+    }
+  }
+</script>
+<script src="auth.js"></script>
+<script>
+  // ✅ This section is where Step 3 applies
+  document.getElementById("loginForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const username = document.getElementById("username").value;
+    const role = document.getElementById("role").value;
+
+    // Generate avatar (optional)
+    const avatar = `https://picsum.photos/seed/${username}/40/40`;
+
+    // 🔹 Step 3: Call doLogin() here
+    doLogin(role, username, avatar);
+  });
+</script>
+
+ </body>
+</html>

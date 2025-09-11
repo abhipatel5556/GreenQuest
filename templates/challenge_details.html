@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   Challenge Details • GreenQuest
+  </title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
+  <link href="style.css" rel="stylesheet"/>
+  <link href="challenge_details.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <!-- Left Sidebar (Student) -->
+
+  <aside class="d-none d-lg-flex flex-column flex-shrink-0 bg-light border-end position-fixed" id="sidebar-student" style="width:260px; height:100vh;">
+   <div class="p-3 border-bottom">
+    <div class="d-flex align-items-center mb-2">
+     <i class="fas fa-leaf me-2" style="color:#008000;">
+     </i>
+     <span class="fw-bold" style="color:#008000;">
+      GreenQuest
+     </span>
+    </div>
+    <div class="d-flex align-items-center">
+     <img alt="avatar" class="rounded-circle me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/student/40/40'" src="https://via.placeholder.com/40"/>
+     <div>
+      <div class="fw-semibold">
+       Student Name
+      </div>
+      <small class="text-muted">
+       Student
+      </small>
+     </div>
+    </div>
+    <div class="d-flex align-items-center">
+  <img id="sidebarAvatar" alt="avatar" class="rounded-circle me-2" src="https://via.placeholder.com/40"/>
+  <div>
+    <div class="fw-semibold" id="sidebarName">Guest</div>
+    <small class="text-muted" id="sidebarRole">Visitor</small>
+  </div>
+</div>
+
+   </div>
+   <nav class="flex-grow-1 overflow-auto p-2">
+    <ul class="nav nav-pills flex-column mb-auto">
+     <li class="nav-item">
+      <a class="nav-link text-dark" href="./student_dashboard.html">
+       <i class="fas fa-home me-2">
+       </i>
+       Dashboard
+      </a>
+     </li>
+     <li>
+      <a aria-expanded="true" class="nav-link text-dark" data-bs-toggle="collapse" href="#learnMenu" role="button">
+       <i class="fas fa-book me-2">
+       </i>
+       Learn
+      </a>
+      <div class="collapse show" id="learnMenu">
+       <ul class="btn-toggle-nav list-unstyled ms-4 my-2">
+        <li>
+         <a class="link-dark d-block py-1 rounded" href="./lesson_library.html">
+          Lesson Library
+         </a>
+        </li>
+       </ul>
+      </div>
+     </li>
+     <li>
+      <a aria-expanded="true" class="nav-link text-dark" data-bs-toggle="collapse" href="#challengeMenu" role="button">
+       <i class="fas fa-tasks me-2">
+       </i>
+       Challenges
+      </a>
+      <div class="collapse show" id="challengeMenu">
+       <ul class="btn-toggle-nav list-unstyled ms-4 my-2">
+        <li>
+         <a class="link-dark d-block py-1 rounded" href="./challenge_library.html">
+          Challenge Library
+         </a>
+        </li>
+       </ul>
+      </div>
+     </li>
+     <li class="nav-item">
+      <a class="nav-link text-dark" href="./leaderboard_page.html">
+       <i class="fas fa-trophy me-2">
+       </i>
+       Leaderboards
+      </a>
+     </li>
+     <li class="nav-item">
+      <a class="nav-link text-dark" href="./community_feed.html">
+       <i class="fas fa-users me-2">
+       </i>
+       Green Feed
+      </a>
+     </li>
+     <li class="nav-item">
+      <a class="nav-link text-dark" href="./join_class.html">
+       <i class="fas fa-sign-in-alt me-2">
+       </i>
+       Join Class
+      </a>
+     </li>
+    </ul>
+   </nav>
+   <div class="p-3 border-top">
+    <a class="btn btn-success w-100 mb-2" href="./challenge_library.html">
+     <i class="fas fa-flag-checkered me-2">
+     </i>
+     Find a Challenge
+    </a>
+    <a class="btn btn-outline-success w-100" href="./lesson_library.html">
+     <i class="fas fa-play-circle me-2">
+     </i>
+     Browse Lessons
+    </a>
+   </div>
+  </aside>
+  <style>
+   #sidebar-student .nav-link.active, #sidebar-student .btn-toggle-nav a.active{ background:#008000; color:white; border-radius:8px; }
+    #sidebar-student a.link-dark:hover, #sidebar-student .nav-link:hover{ background:rgba(0,128,0,.08); border-radius:8px; }
+  </style>
+  <!-- Header -->
+  <header class="navbar navbar-expand-lg navbar-light bg-white border-bottom sticky-top" style="margin-left:260px;">
+   <style>
+    :root { --gq-primary:#008000; --gq-secondary:#00FFFF; }
+      .gq-badge{background:var(--gq-secondary); color:#004a4a;}
+      .gq-nav-icon:hover{background:rgba(0,128,0,0.08); border-radius:8px;}
+   </style>
+   <div class="container-fluid">
+    <button class="btn d-lg-none me-2" data-bs-target="#offcanvasStudent" data-bs-toggle="offcanvas" type="button">
+     <i class="fas fa-bars">
+     </i>
+    </button>
+    <a class="navbar-brand d-none d-lg-inline-block" href="./student_dashboard.html" style="color:#008000; font-weight:600;">
+     Student
+    </a>
+    <form class="d-none d-md-flex ms-2 flex-grow-1" role="search">
+     <div class="input-group">
+      <span class="input-group-text bg-white">
+       <i class="fas fa-search text-muted">
+       </i>
+      </span>
+      <input class="form-control" placeholder="Search lessons or challenges..." type="search"/>
+     </div>
+    </form>
+    <ul class="navbar-nav ms-auto align-items-center">
+     <li class="nav-item me-2">
+      <a class="btn btn-outline-success" href="./challenge_library.html">
+       <i class="fas fa-flag me-1">
+       </i>
+       New Challenge
+      </a>
+     </li>
+     <li class="nav-item me-2 position-relative">
+      <a class="btn gq-nav-icon" data-bs-toggle="tooltip" href="#notifications" title="Notifications">
+       <i class="fas fa-bell">
+       </i>
+      </a>
+      <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill gq-badge">
+       3
+      </span>
+     </li>
+     <li class="nav-item dropdown">
+      <a class="d-flex align-items-center text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" href="#">
+       <img alt="student-avatar" class="rounded-circle me-2" height="32" onerror="this.onerror=null;this.src='https://picsum.photos/seed/user/32/32'" src="https://via.placeholder.com/32" width="32"/>
+       <strong>
+        Student
+       </strong>
+      </a>
+      <ul class="dropdown-menu dropdown-menu-end">
+       <li>
+        <h6 class="dropdown-header">
+         <i class="fas fa-user-circle me-2">
+         </i>
+         Student
+        </h6>
+       </li>
+       <li>
+        <a class="dropdown-item" href="./student_dashboard.html">
+         Dashboard
+        </a>
+       </li>
+       <li>
+        <hr class="dropdown-divider"/>
+       </li>
+       <li>
+        <a class="dropdown-item" href="./join_class.html">
+         <i class="fas fa-users-viewfinder me-2">
+         </i>
+         Join Class
+        </a>
+       </li>
+       <li>
+        <a class="dropdown-item" href="#settings">
+         <i class="fas fa-cog me-2">
+         </i>
+         Settings
+        </a>
+       </li>
+       <li>
+        <a class="dropdown-item text-danger" href="./login_page.html">
+         <i class="fas fa-sign-out-alt me-2">
+         </i>
+         Logout
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </div>
+   <div class="offcanvas offcanvas-start" id="offcanvasStudent" tabindex="-1">
+    <div class="offcanvas-header">
+     <h5 class="offcanvas-title">
+      Menu
+     </h5>
+     <button class="btn-close" data-bs-dismiss="offcanvas" type="button">
+     </button>
+    </div>
+   
+  </header>
+  <!-- Main Content -->
+  <main class="main-panel" id="content" style="margin-left:260px;">
+   <div class="container-fluid">
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb" class="breadcrumb mt-3">
+     <ol class="breadcrumb mb-0">
+      <li class="breadcrumb-item">
+       <a href="./student_dashboard.html">
+        Home
+       </a>
+      </li>
+      <li class="breadcrumb-item">
+       <a href="./challenge_library.html">
+        Challenges
+       </a>
+      </li>
+      <li aria-current="page" class="breadcrumb-item active" id="crumb-title">
+       Challenge Details
+      </li>
+     </ol>
+    </nav>
+    <!-- System Alert / Notification Area -->
+    <div class="mt-3" id="system-alerts">
+     <div class="alert alert-warning d-flex align-items-center" role="alert">
+      <i class="fa-solid fa-clock me-2">
+      </i>
+      <div>
+       <strong>
+        Heads up:
+       </strong>
+       You have 2 days left to complete this challenge for full points.
+      </div>
+     </div>
+    </div>
+    <!-- Challenge Header / Hero -->
+    <section class="challenge-hero card overflow-hidden">
+     <img alt="Challenge Banner" class="challenge-hero-img" id="banner-image" onerror="this.onerror=null;this.src='https://picsum.photos/seed/challenge/1200/400'" src="https://picsum.photos/id/433/1200/400"/>
+     <div class="challenge-hero-overlay">
+     </div>
+     <div class="challenge-hero-content">
+      <div class="d-flex align-items-center gap-2 flex-wrap mb-2">
+       <span class="badge-soft info" id="category-tag">
+        <i class="fa-solid fa-tag me-1">
+        </i>
+        <span class="cat-label">
+         Category
+        </span>
+       </span>
+       <span class="badge-soft success" id="difficulty-chip">
+        <i class="fa-solid fa-seedling me-1">
+        </i>
+        <span class="diff-label">
+         Difficulty
+        </span>
+       </span>
+      </div>
+      <h1 class="mb-2" id="challenge-title">
+       Challenge Title
+      </h1>
+      <div aria-label="Difficulty level" class="difficulty-stars" data-bs-toggle="tooltip" id="difficulty-stars" title="Difficulty level">
+       <i class="fa-solid fa-leaf">
+       </i>
+       <i class="fa-solid fa-leaf">
+       </i>
+       <i class="fa-solid fa-leaf">
+       </i>
+      </div>
+     </div>
+    </section>
+    <!-- Main Sections: Info + Impact -->
+    <div class="row g-4 mt-3">
+     <div class="col-12 col-lg-8">
+      <!-- Challenge Information Accordion -->
+      <div class="card">
+       <div class="card-header">
+        <div class="widget-title">
+         About this Challenge
+        </div>
+        <div class="text-muted small">
+         Read description, steps, and guidelines
+        </div>
+       </div>
+       <div class="card-body">
+        <div class="accordion" id="challengeInfoAccordion">
+         <div class="accordion-item">
+          <h2 class="accordion-header" id="headingDesc">
+           <button aria-controls="collapseDesc" aria-expanded="true" class="accordion-button" data-bs-target="#collapseDesc" data-bs-toggle="collapse" type="button">
+            <i class="fa-solid fa-circle-info me-2 text-info">
+            </i>
+            About This Challenge
+           </button>
+          </h2>
+          <div aria-labelledby="headingDesc" class="accordion-collapse collapse show" data-bs-parent="#challengeInfoAccordion" id="collapseDesc">
+           <div class="accordion-body" id="challenge-description">
+            <div class="skeleton" style="height:64px;">
+            </div>
+           </div>
+          </div>
+         </div>
+         <div class="accordion-item">
+          <h2 class="accordion-header" id="headingSteps">
+           <button aria-controls="collapseSteps" aria-expanded="false" class="accordion-button collapsed" data-bs-target="#collapseSteps" data-bs-toggle="collapse" type="button">
+            <i class="fa-solid fa-list-check me-2 text-success">
+            </i>
+            How to Complete
+           </button>
+          </h2>
+          <div aria-labelledby="headingSteps" class="accordion-collapse collapse" data-bs-parent="#challengeInfoAccordion" id="collapseSteps">
+           <div class="accordion-body" id="challenge-instructions">
+            <div class="skeleton" style="height:64px;">
+            </div>
+           </div>
+          </div>
+         </div>
+         <div class="accordion-item">
+          <h2 class="accordion-header" id="headingGuide">
+           <button aria-controls="collapseGuide" aria-expanded="false" class="accordion-button collapsed" data-bs-target="#collapseGuide" data-bs-toggle="collapse" type="button">
+            <i class="fa-solid fa-shield-halved me-2 text-warning">
+            </i>
+            Submission Guidelines
+           </button>
+          </h2>
+          <div aria-labelledby="headingGuide" class="accordion-collapse collapse" data-bs-parent="#challengeInfoAccordion" id="collapseGuide">
+           <div class="accordion-body" id="challenge-guidelines">
+            <div class="skeleton" style="height:64px;">
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <!-- Recent Submissions Table -->
+      <div class="card mt-4">
+       <div class="card-header">
+        <div class="d-flex align-items-center gap-2">
+         <i class="fa-solid fa-users-line text-primary">
+         </i>
+         <div class="widget-title">
+          Recent Submissions (Classmates)
+         </div>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+         <select class="form-select form-select-sm" id="statusFilter" style="min-width: 180px;">
+          <option value="all">
+           All statuses
+          </option>
+          <option value="approved">
+           Approved
+          </option>
+          <option value="pending">
+           Pending
+          </option>
+          <option value="rejected">
+           Rejected
+          </option>
+         </select>
+         <div class="input-group input-group-sm" style="width: 220px;">
+          <span class="input-group-text">
+           <i class="fa-solid fa-magnifying-glass">
+           </i>
+          </span>
+          <input class="form-control" id="searchSubmissions" placeholder="Search by name" type="text"/>
+         </div>
+        </div>
+       </div>
+       <div class="card-body p-0">
+        <div class="table-responsive">
+         <table class="table table-theme mb-0" id="submissionsTable">
+          <thead>
+           <tr>
+            <th data-sort="name" role="button">
+             Student
+             <i class="fa-solid fa-sort ms-1">
+             </i>
+            </th>
+            <th data-sort="date" role="button">
+             Submitted On
+             <i class="fa-solid fa-sort ms-1">
+             </i>
+            </th>
+            <th>
+             Status
+            </th>
+            <th class="text-end" data-sort="points" role="button">
+             Points
+             <i class="fa-solid fa-sort ms-1">
+             </i>
+            </th>
+            <th>
+             Action
+            </th>
+           </tr>
+          </thead>
+          <tbody id="submissionsBody">
+           <!-- Rows injected by JS -->
+          </tbody>
+         </table>
+        </div>
+       </div>
+       <div class="card-footer d-flex justify-content-between align-items-center">
+        <small class="text-muted" id="paginationInfo">
+         Showing 1–5 of 18
+        </small>
+        <div>
+         <button class="btn btn-light btn-sm me-1" disabled="" id="prevPage">
+          <i class="fa-solid fa-angle-left">
+          </i>
+         </button>
+         <button class="btn btn-light btn-sm" id="nextPage">
+          <i class="fa-solid fa-angle-right">
+          </i>
+         </button>
+        </div>
+       </div>
+      </div>
+     </div>
+     <div class="col-12 col-lg-4">
+      <!-- Impact / Mini Chart Card -->
+      <div class="card h-100">
+       <div class="card-header">
+        <div class="d-flex align-items-center gap-2">
+         <i class="fa-solid fa-chart-line text-success">
+         </i>
+         <div class="widget-title">
+          Estimated Impact
+         </div>
+        </div>
+       </div>
+       <div class="card-body">
+        <p class="text-muted mb-2">
+         Average CO₂ saved per week by students who completed this challenge.
+        </p>
+        <canvas aria-label="CO2 savings chart" height="180" id="impactChart">
+        </canvas>
+        <div class="d-flex gap-3 mt-3">
+         <span class="badge-soft success">
+          <i class="fa-solid fa-leaf me-1">
+          </i>
+          Avg 1.8 kg CO₂
+         </span>
+         <span class="badge-soft info">
+          <i class="fa-solid fa-user-check me-1">
+          </i>
+          124 completions
+         </span>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+   <!-- Sticky Rewards and Submission Status (desktop) -->
+   <div aria-label="Rewards and Submission" class="sticky-cta-card card shadow-2 d-none d-lg-block" id="ctaCard" role="region">
+    <div class="card-body">
+     <div class="d-flex align-items-center justify-content-between mb-3">
+      <div class="d-flex align-items-center gap-3">
+       <div class="points-display">
+        <div class="metric-title">
+         Eco-Points
+        </div>
+        <div class="metric-value" id="pointsValue">
+         —
+        </div>
+       </div>
+       <div class="vr">
+       </div>
+       <div class="badge-display d-flex align-items-center gap-2">
+        <img alt="Badge" class="rounded" height="44" id="badgeImage" onerror="this.onerror=null;this.src='https://picsum.photos/seed/badge/44/44'" src="" style="display:none;" width="44"/>
+        <div>
+         <div class="small text-muted">
+          Badge
+         </div>
+         <div class="fw-semibold" id="badgeName">
+          None
+         </div>
+        </div>
+       </div>
+      </div>
+      <div>
+       <button class="btn btn-success" id="btnSubmitProof">
+        <i class="fa-solid fa-upload me-2">
+        </i>
+        <span class="btn-label">
+         Submit Proof
+        </span>
+       </button>
+      </div>
+     </div>
+     <div class="alert d-none mb-2" id="statusBanner" role="status">
+     </div>
+     <div class="small text-muted d-none" id="teacherFeedback">
+      <i class="fa-solid fa-comment-dots me-1">
+      </i>
+      <span class="feedback-text">
+      </span>
+     </div>
+    </div>
+   </div>
+   <!-- Sticky Action Bar (mobile) -->
+   <div class="sticky-bottom-cta d-lg-none bg-white border-top">
+    <div class="container py-2 d-flex align-items-center justify-content-between">
+     <div class="d-flex align-items-center gap-2">
+      <span class="badge-soft success">
+       <i class="fa-solid fa-seedling me-1">
+       </i>
+       <span id="pointsValueMobile">
+        —
+       </span>
+       pts
+      </span>
+      <span class="badge-soft info" id="badgeNameMobile" style="display:none;">
+      </span>
+     </div>
+     <button class="btn btn-success btn-sm" id="btnSubmitProofMobile">
+      <i class="fa-solid fa-upload me-2">
+      </i>
+      <span class="btn-label">
+       Submit
+      </span>
+     </button>
+    </div>
+   </div>
+  </main>
+  <!-- Footer -->
+  <footer class="border-top bg-white" style="margin-left:260px;">
+   <div class="container py-3 d-flex flex-wrap justify-content-between align-items-center">
+    <div class="text-muted d-flex align-items-center">
+     <i class="fas fa-leaf me-2" style="color:#008000;">
+     </i>
+     <small>
+      GreenQuest Student
+     </small>
+    </div>
+    <div class="d-flex gap-2">
+     <a class="btn btn-sm btn-success" href="./challenge_library.html">
+      <i class="fas fa-flag me-1">
+      </i>
+      Find Challenge
+     </a>
+     <a class="btn btn-sm btn-outline-success" href="./lesson_library.html">
+      <i class="fas fa-play-circle me-1">
+      </i>
+      Lessons
+     </a>
+    </div>
+    <ul class="nav">
+     <li class="nav-item">
+      <a class="nav-link px-2 text-muted" href="#terms">
+       Terms
+      </a>
+     </li>
+     <li class="nav-item">
+      <a class="nav-link px-2 text-muted" href="#privacy">
+       Privacy
+      </a>
+     </li>
+    </ul>
+   </div>
+  </footer>
+  <!-- Toast Container -->
+  <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1100;">
+   <div aria-atomic="true" aria-live="assertive" class="toast" id="actionToast" role="alert">
+    <div class="toast-header">
+     <i class="fa-solid fa-circle-check text-success me-2">
+     </i>
+     <strong class="me-auto">
+      Action
+     </strong>
+     <small>
+      Now
+     </small>
+     <button aria-label="Close" class="btn-close ms-2 mb-1" data-bs-dismiss="toast" type="button">
+     </button>
+    </div>
+    <div class="toast-body">
+     Link copied to clipboard.
+    </div>
+   </div>
+  </div>
+  <!-- Dependencies -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.7/dist/sweetalert2.all.min.js">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js">
+  </script>
+  <script>
+   // Bootstrap tooltips
+[].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]')).map(el => new bootstrap.Tooltip(el));
+
+// Challenge mock data and state loading
+const params = new URLSearchParams(window.location.search);
+const challengeId = params.get('challengeId') || 'eco-101';
+const statusParam = (params.get('status') || '').toLowerCase(); // 'pending', 'approved', 'rejected'
+
+const challenge = {
+    id: challengeId,
+    title: 'Home Waste Segregation Sprint',
+    category: 'Waste Segregation',
+    difficulty: 'Medium', // Easy, Medium, Hard
+    bannerImageUrl: 'https://picsum.photos/id/433/1200/400',
+    ecoPoints: 50,
+    badge: {
+        name: 'Waste Warrior',
+        imageUrl: 'https://picsum.photos/seed/wastewarrior/96/96'
+    },
+    description: 'Separate household waste into clearly labeled bins: biodegradable, recyclable, and landfill. This challenge builds daily habits that significantly reduce landfill contribution and improve recycling efficiency.',
+    instructions: [
+        'Label three bins: Recyclables, Organic, and Landfill.',
+        'For one week, sort all household waste accordingly.',
+        'Weigh or estimate the volume per bin at the end of the week.',
+        'Take clear photos of the labeled bins and your sorting in action.',
+        'Submit your proof with a short reflection on what you learned.'
+    ],
+    guidelines: 'Upload at least two photos: (1) your labeled bins, (2) an action shot. Include a brief 2–3 sentence reflection. Ensure photos are well-lit and show labels clearly. Do not include identifiable personal information.'
+};
+
+const userSubmission = {
+    status: ['pending', 'approved', 'rejected'].includes(statusParam) ? statusParam : null,
+    feedback: 'Please add clearer labels to your bins and resubmit with better lighting.'
+};
+
+// Populate hero and content
+document.getElementById('challenge-title').textContent = challenge.title;
+document.getElementById('crumb-title').textContent = challenge.title;
+const imgEl = document.getElementById('banner-image');
+imgEl.src = challenge.bannerImageUrl;
+
+const categoryTag = document.getElementById('category-tag');
+categoryTag.querySelector('.cat-label').textContent = challenge.category;
+
+const diffChip = document.getElementById('difficulty-chip');
+diffChip.querySelector('.diff-label').textContent = challenge.difficulty;
+
+// Difficulty stars (3 leaves scale)
+const stars = document.getElementById('difficulty-stars').querySelectorAll('i');
+const levelMap = {
+    'easy': 1,
+    'medium': 2,
+    'hard': 3
+};
+const lvl = levelMap[challenge.difficulty.toLowerCase()] || 2;
+stars.forEach((leaf, idx) => leaf.classList.toggle('inactive', idx >= lvl));
+
+// Description
+document.getElementById('challenge-description').innerHTML = `
+      <p>${challenge.description}</p>
+      <div class="mt-3">
+        <button class="btn btn-light btn-sm me-2" id="shareBtn"><i class="fa-solid fa-share-nodes me-1"></i> Share</button>
+        <button class="btn btn-outline-danger btn-sm" id="reportBtn"><i class="fa-solid fa-flag me-1"></i> Report Issue</button>
+      </div>
+    `;
+
+// Instructions
+document.getElementById('challenge-instructions').innerHTML = `
+      <ol class="ps-3 mb-0">${challenge.instructions.map(step => `<li class="mb-2">${step}</li>`).join('')}</ol>
+    `;
+
+// Guidelines
+document.getElementById('challenge-guidelines').innerHTML = `
+      <p>${challenge.guidelines}</p>
+      <div class="alert alert-info mt-3"><i class="fa-solid fa-circle-exclamation me-2"></i>Tip: Add labels like <em>Plastic</em>, <em>Paper</em>, <em>Organic</em> to boost approval chances.</div>
+    `;
+
+// Rewards and status
+const pointsValue = document.getElementById('pointsValue');
+const pointsValueMobile = document.getElementById('pointsValueMobile');
+pointsValue.textContent = challenge.ecoPoints;
+pointsValueMobile.textContent = challenge.ecoPoints;
+
+const badgeImg = document.getElementById('badgeImage');
+const badgeName = document.getElementById('badgeName');
+const badgeNameMobile = document.getElementById('badgeNameMobile');
+if (challenge.badge && challenge.badge.imageUrl) {
+    badgeImg.src = challenge.badge.imageUrl;
+    badgeImg.style.display = 'inline-block';
+    badgeName.textContent = challenge.badge.name;
+    badgeNameMobile.textContent = `Badge: ${challenge.badge.name}`;
+    badgeNameMobile.style.display = 'inline-flex';
+} else {
+    badgeName.textContent = '—';
+    badgeNameMobile.style.display = 'none';
+}
+
+const banner = document.getElementById('statusBanner');
+const feedbackEl = document.getElementById('teacherFeedback');
+const feedbackText = feedbackEl.querySelector('.feedback-text');
+
+const btnSubmit = document.getElementById('btnSubmitProof');
+const btnSubmitMobile = document.getElementById('btnSubmitProofMobile');
+const setCTAState = () => {
+    const st = userSubmission.status;
+    let label = 'Submit Proof';
+    let disabled = false;
+    banner.classList.add('d-none');
+    feedbackEl.classList.add('d-none');
+
+    if (!st) {
+        label = 'Submit Proof';
+    } else if (st === 'rejected') {
+        label = 'Resubmit Proof';
+        feedbackEl.classList.remove('d-none');
+        feedbackText.textContent = userSubmission.feedback;
+    } else if (st === 'pending') {
+        label = 'Submit Proof';
+        disabled = true;
+        banner.classList.remove('d-none');
+        banner.className = 'alert alert-warning mb-2';
+        banner.textContent = 'Submission Pending — Your teacher is reviewing your proof.';
+    } else if (st === 'approved') {
+        label = 'Submit Proof';
+        disabled = true;
+        banner.classList.remove('d-none');
+        banner.className = 'alert alert-success mb-2';
+        banner.textContent = 'Approved — Great job! You earned your points and badge.';
+    }
+    btnSubmit.querySelector('.btn-label').textContent = label;
+    btnSubmit.disabled = disabled;
+    btnSubmitMobile.querySelector('.btn-label').textContent = (label === 'Submit Proof' ? 'Submit' : 'Resubmit');
+    btnSubmitMobile.disabled = disabled;
+};
+setCTAState();
+
+const goToSubmission = () => {
+    const url = `./proof_submission.html?challengeId=${encodeURIComponent(challenge.id)}`;
+    Swal.fire({
+        title: 'Start Submission?',
+        text: 'You will be taken to the submission page. Make sure you have your photos ready.',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Proceed',
+        confirmButtonColor: '#008000'
+    }).then(res => {
+        if (res.isConfirmed) window.location.href = url;
+    });
+};
+
+btnSubmit.addEventListener('click', goToSubmission);
+btnSubmitMobile.addEventListener('click', goToSubmission);
+
+// Share and Report actions
+const toastEl = document.getElementById('actionToast');
+const toast = new bootstrap.Toast(toastEl);
+document.getElementById('shareBtn').addEventListener('click', async () => {
+    try {
+        await navigator.clipboard.writeText(window.location.href);
+        toast.show();
+    } catch (e) {
+        Swal.fire({
+            icon: 'info',
+            title: 'Link',
+            text: 'Copy this link: ' + window.location.href
+        });
+    }
+});
+
+document.getElementById('reportBtn').addEventListener('click', () => {
+    Swal.fire({
+        title: 'Report Issue',
+        input: 'textarea',
+        inputLabel: 'Describe the issue you noticed',
+        inputPlaceholder: 'Type your message here...',
+        showCancelButton: true,
+        confirmButtonText: 'Submit',
+        confirmButtonColor: '#CD2026'
+    }).then(r => {
+        if (r.isConfirmed) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Thanks!',
+                text: 'Your report has been submitted.'
+            });
+        }
+    });
+});
+
+// Chart.js demo
+const ctx = document.getElementById('impactChart');
+const impactChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6'],
+        datasets: [{
+            label: 'kg CO₂ saved',
+            data: [1.2, 1.6, 1.8, 2.1, 1.9, 2.3],
+            fill: true,
+            borderColor: '#008000',
+            backgroundColor: 'rgba(0,128,0,0.08)',
+            tension: 0.35,
+            pointRadius: 3,
+            pointHoverRadius: 5
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                display: false
+            },
+            tooltip: {
+                enabled: true
+            }
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                grid: {
+                    color: 'rgba(0,0,0,0.06)'
+                }
+            },
+            x: {
+                grid: {
+                    display: false
+                }
+            }
+        }
+    }
+});
+
+// Submissions mock data
+const submissions = [{
+    name: 'Aaliyah Chen',
+    date: '2025-09-01',
+    status: 'approved',
+    points: 50
+}, {
+    name: 'Diego Ramirez',
+    date: '2025-09-02',
+    status: 'pending',
+    points: 0
+}, {
+    name: 'Fatima Khan',
+    date: '2025-09-03',
+    status: 'rejected',
+    points: 0
+}, {
+    name: 'Noah Williams',
+    date: '2025-09-04',
+    status: 'approved',
+    points: 50
+}, {
+    name: 'Priya Patel',
+    date: '2025-09-06',
+    status: 'approved',
+    points: 50
+}, {
+    name: 'Oliver Smith',
+    date: '2025-09-07',
+    status: 'pending',
+    points: 0
+}, {
+    name: 'Sofia Rossi',
+    date: '2025-09-08',
+    status: 'approved',
+    points: 50
+}, {
+    name: 'Lucas Müller',
+    date: '2025-09-08',
+    status: 'rejected',
+    points: 0
+}];
+
+// Simple table render, filter, sort, paginate
+let currentPage = 1;
+const pageSize = 5;
+let currentSort = {
+    key: 'date',
+    dir: 'desc'
+};
+
+function formatStatus(s) {
+    const map = {
+        approved: 'success',
+        pending: 'warning',
+        rejected: 'danger'
+    };
+    const label = s.charAt(0).toUpperCase() + s.slice(1);
+    return `<span class="badge-soft ${s==='approved'?'success':s==='pending'?'warning':'error'}">${label}</span>`;
+}
+
+function renderTable() {
+    const filter = document.getElementById('statusFilter').value;
+    const query = document.getElementById('searchSubmissions').value.toLowerCase();
+    let rows = submissions.filter(r => (filter === 'all' || r.status === filter) && r.name.toLowerCase().includes(query));
+
+    // sort
+    rows.sort((a, b) => {
+        let va = a[currentSort.key],
+            vb = b[currentSort.key];
+        if (currentSort.key === 'date') {
+            va = new Date(va).getTime();
+            vb = new Date(vb).getTime();
+        }
+        if (va < vb) return currentSort.dir === 'asc' ? -1 : 1;
+        if (va > vb) return currentSort.dir === 'asc' ? 1 : -1;
+        return 0;
+    });
+
+    const total = rows.length;
+    const totalPages = Math.max(1, Math.ceil(total / pageSize));
+    currentPage = Math.min(currentPage, totalPages);
+    const start = (currentPage - 1) * pageSize;
+    const pageRows = rows.slice(start, start + pageSize);
+
+    const tbody = document.getElementById('submissionsBody');
+    tbody.innerHTML = pageRows.map(r => `
+        <tr>
+          <td>${r.name}</td>
+          <td>${new Date(r.date).toLocaleDateString()}</td>
+          <td>${formatStatus(r.status)}</td>
+          <td class="text-end">${r.points.toLocaleString()}</td>
+          <td>
+            <a href="./proof_submission.html?challengeId=${encodeURIComponent(challenge.id)}" class="btn btn-sm btn-light"><i class="fa-solid fa-eye me-1"></i>View</a>
+          </td>
+        </tr>
+      `).join('');
+
+    document.getElementById('paginationInfo').textContent = total ? `Showing ${start+1}–${Math.min(start+pageSize,total)} of ${total}` : 'No results';
+    document.getElementById('prevPage').disabled = currentPage === 1;
+    document.getElementById('nextPage').disabled = currentPage === totalPages;
+}
+
+// Events for table
+document.getElementById('statusFilter').addEventListener('change', () => {
+    currentPage = 1;
+    renderTable();
+});
+document.getElementById('searchSubmissions').addEventListener('input', () => {
+    currentPage = 1;
+    renderTable();
+});
+document.getElementById('prevPage').addEventListener('click', () => {
+    if (currentPage > 1) {
+        currentPage--;
+        renderTable();
+    }
+});
+document.getElementById('nextPage').addEventListener('click', () => {
+    currentPage++;
+    renderTable();
+});
+document.querySelectorAll('#submissionsTable thead th[role="button"]').forEach(th => {
+    th.addEventListener('click', () => {
+        const key = th.getAttribute('data-sort');
+        if (currentSort.key === key) {
+            currentSort.dir = currentSort.dir === 'asc' ? 'desc' : 'asc';
+        } else {
+            currentSort.key = key;
+            currentSort.dir = 'asc';
+        }
+        renderTable();
+    });
+});
+
+renderTable();
+
+// Responsive layout fixes: handled in CSS too, but ensure tooltips re-init after offcanvas close
+const offcanvasEl = document.getElementById('offcanvasStudent');
+offcanvasEl && offcanvasEl.addEventListener('hidden.bs.offcanvas', () => {
+    [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]')).map(el => new bootstrap.Tooltip(el));
+});
+  </script>
+
+  <script src="auth.js"></script>
+
+ </body>
+</html>

@@ -1,0 +1,8 @@
+/* community_feed.css */
+.feed-post {
+  border-radius: var(--radius-2);
+  transition: box-shadow 0.2s;
+}
+.feed-post:hover {
+  box-shadow: var(--shadow-2);
+}

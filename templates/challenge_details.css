@@ -1,0 +1,88 @@
+/* challenge_details.css - page-specific styles (avoid duplicating global theme) */
+/* Use Poppins for this page (fallback to theme stack) */
+body {
+    font-family: "Poppins", var(--font-sans)
+    }
+/* Hero section */
+.challenge-hero {
+    position: relative;
+    border: 1px solid var(--border-color)
+    }
+.challenge-hero-img {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    display: block
+    }
+.challenge-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.45) 80%)
+    }
+.challenge-hero-content {
+    position: absolute;
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+    color: var(--text-inverse)
+    }
+.challenge-hero-content h1 {
+    color: var(--text-inverse);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35)
+    }
+/* Difficulty stars using leaf icons */
+.difficulty-stars i {
+    color: #00a86b;
+    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.1))
+    }
+.difficulty-stars i.inactive {
+    color: rgba(255, 255, 255, 0.6);
+    opacity: 0.6
+    }
+/* Sticky CTA card (desktop) */
+.sticky-cta-card {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    width: 360px;
+    z-index: 1016;
+    border: 1px solid var(--border-color)
+    }
+.sticky-cta-card .metric-title {
+    font-size: var(--font-size-sm);
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em
+    }
+.sticky-cta-card .metric-value {
+    font-weight: 800;
+    color: var(--text-strong)
+    }
+/* Mobile bottom action bar */
+.sticky-bottom-cta {
+    position: sticky;
+    bottom: 0;
+    z-index: var(--z-bottom-bar)
+    }
+/* Table tweaks */
+#submissionsTable thead th[role="button"] {
+    user-select: none
+    }
+#submissionsTable tbody tr:hover {
+    background: rgba(0, 0, 0, 0.02)
+    }
+/* Responsive adjustments for fixed sidebar layout */
+@media (max-width: 991.98px) {
+    header[style*="margin-left:260px"], footer[style*="margin-left:260px"], .main-panel[style*="margin-left:260px"] {
+        margin-left: 0 !important
+        }
+    .challenge-hero-img {
+        height: 240px
+        }
+    }
+/* Utility: ensure offcanvas takes precedence over sticky cta on mobile */
+@media (max-width: 575.98px) {
+    .sticky-cta-card {
+        display: none !important
+        }
+    }

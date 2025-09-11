@@ -1,0 +1,72 @@
+/* proof_submission.css - page specific styles for Proof Submission Page */
+/* Use Poppins as primary font for this page */
+body {
+    font-family: "Poppins", var(--font-sans), system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif
+    }
+/* Ensure layout works with fixed sidebar/header/footer across breakpoints */
+#sidebar-student {
+    display: none
+    }
+header.navbar[style], footer[style], main#mainContent {
+    margin-left: 0 !important
+    }
+@media (min-width: 992px) {
+    #sidebar-student {
+        display: flex
+        }
+    header.navbar[style] {
+        margin-left: 260px !important
+        }
+    footer[style] {
+        margin-left: 260px !important
+        }
+    main#mainContent {
+        margin-left: 260px !important
+        }
+    }
+/* Dropzone styling */
+.dropzone {
+    background: var(--surface-0);
+    border: 2px dashed var(--border-color) !important;
+    border-radius: var(--radius-2);
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease
+    }
+.dropzone:hover {
+    background: var(--neutral-soft)
+    }
+.dropzone.drag-over {
+    background: var(--primary-soft);
+    border-color: var(--color-primary) !important
+    }
+.preview-media img {
+    max-height: 360px;
+    object-fit: contain
+    }
+.preview-media video {
+    max-height: 420px
+    }
+/* Progress bar visibility spacing */
+#uploadProgressWrap {
+    transition: opacity 0.2s ease
+    }
+/* Improve breadcrumb spacing on small screens */
+.breadcrumb {
+    padding-top: 4px;
+    padding-bottom: 4px
+    }
+/* Buttons and states */
+#submitBtn[disabled] {
+    cursor: not-allowed;
+    opacity: 0.85
+    }
+/* System feedback alert spacing */
+#sysFeedback {
+    border-style: dashed
+    }
+/* Card spacing on larger screens */
+@media (min-width: 1200px) {
+    .app-card {
+        margin-bottom: var(--space-4)
+        }
+    }

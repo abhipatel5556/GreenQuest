@@ -1,0 +1,70 @@
+/* create_post.css - page specific styles for Create Post Page */
+/* Brand typography override for page */
+body {
+    font-family: "Poppins", var(--font-sans)
+    }
+/* Layout alignment with fixed sidebar */
+@media (min-width: 992px) {
+    /* Ensure main content respects sidebar width */
+    #mainContent {
+        margin-left: 260px
+        }
+    }
+/* Override inline margins for header/footer on small screens */
+@media (max-width: 991.98px) {
+    header.navbar.sticky-top {
+        margin-left: 0 !important
+        }
+    footer.border-top {
+        margin-left: 0 !important
+        }
+    }
+/* Create Post Card specifics */
+.create-post-card {
+    max-width: 960px;
+    margin: 0 auto
+    }
+.create-post-card .card-header {
+    background: var(--surface-muted)
+    }
+/* Character counter */
+#charCount {
+    font-variant-numeric: tabular-nums
+    }
+/* Add photo area */
+.add-photo-area {
+    border: 1px dashed var(--border-color) !important
+    }
+.add-photo-area .btn {
+    border-radius: var(--radius-1)
+    }
+/* Image preview */
+.image-preview-wrapper .image-preview {
+    width: 100%;
+    max-height: 420px
+    }
+.image-preview-wrapper img {
+    object-fit: cover;
+    height: 100%
+    }
+/* Sticky form actions within the card */
+.form-actions-bar {
+    position: sticky;
+    bottom: 0;
+    background: var(--surface-0);
+    border-top: 1px solid var(--border-color);
+    padding: 12px 0 0 0;
+    margin-top: 16px
+    }
+/* Accessibility focus ring leverage */
+#addPhotoBtn:focus-visible, #removeImageBtn:focus-visible, #postBtn:focus-visible, #cancelBtn:focus-visible, #postText:focus-visible {
+    outline: none
+    }
+/* Improve breadcrumb spacing on page */
+.breadcrumb {
+    padding: 4px 0
+    }
+/* Small visual polish */
+.page-title {
+    letter-spacing: 0.2px
+    }

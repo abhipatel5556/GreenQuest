@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   Submit Proof | GreenQuest
+  </title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <!-- Poppins Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <!-- Font Awesome 6 -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
+  <!-- Global Theme CSS -->
+  <link href="style.css" rel="stylesheet"/>
+  <!-- Page Specific CSS -->
+  <link href="proof_submission.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <!-- Left Sidebar (include on non-login pages) -->
+  <aside class="d-flex flex-column flex-shrink-0 bg-light border-end position-fixed" id="sidebar-student" style="width:260px; height:100vh;">
+   <div class="p-3 border-bottom">
+    <div class="d-flex align-items-center mb-2">
+     <i class="fas fa-leaf me-2" style="color:#008000;">
+     </i>
+     <span class="fw-bold" style="color:#008000;">
+      GreenQuest
+     </span>
+    </div>
+    <div class="d-flex align-items-center">
+     <img alt="avatar" class="rounded-circle me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/student/40/40';" src="https://via.placeholder.com/40"/>
+     <div>
+      <div class="fw-semibold">
+       Student Name
+      </div>
+      <small class="text-muted">
+       Student
+      </small>
+     </div>
+    </div>
+   </div>
+   <nav class="flex-grow-1 overflow-auto p-2">
+    <ul class="nav nav-pills flex-column mb-auto">
+     <li class="nav-item">
+      <a class="nav-link text-dark" href="./student_dashboard.html">
+       <i class="fas fa-home me-2">
+       </i>
+       Dashboard
+      </a>
+     </li>
+     <li>
+      <a aria-expanded="true" class="nav-link text-dark" data-bs-toggle="collapse" href="#learnMenu" role="button">
+       <i class="fas fa-book me-2">
+       </i>
+       Learn
+      </a>
+      <div class="collapse show" id="learnMenu">
+       <ul class="btn-toggle-nav list-unstyled ms-4 my-2">
+        <li>
+         <a class="link-dark d-block py-1 rounded" href="./lesson_library.html">
+          Lesson Library
+         </a>
+        </li>
+       </ul>
+      </div>
+     </li>
+     <li>
+      <a aria-expanded="true" class="nav-link text-dark" data-bs-toggle="collapse" href="#challengeMenu" role="button">
+       <i class="fas fa-tasks me-2">
+       </i>
+       Challenges
+      </a>
+      <div class="collapse show" id="challengeMenu">
+       <ul class="btn-toggle-nav list-unstyled ms-4 my-2">
+        <li>
+         <a class="link-dark d-block py-1 rounded" href="./challenge_library.html">
+          Challenge Library
+         </a>
+        </li>
+       </ul>
+      </div>
+     </li>
+     <li class="nav-item">
+      <a class="nav-link text-dark" href="./leaderboard_page.html">
+       <i class="fas fa-trophy me-2">
+       </i>
+       Leaderboards
+      </a>
+     </li>
+     <li class="nav-item">
+      <a class="nav-link text-dark" href="./community_feed.html">
+       <i class="fas fa-users me-2">
+       </i>
+       Green Feed
+      </a>
+     </li>
+     <li class="nav-item">
+      <a class="nav-link text-dark" href="./join_class.html">
+       <i class="fas fa-sign-in-alt me-2">
+       </i>
+       Join Class
+      </a>
+     </li>
+    </ul>
+   </nav>
+   <div class="p-3 border-top">
+    <a class="btn btn-success w-100 mb-2" href="./challenge_library.html">
+     <i class="fas fa-flag-checkered me-2">
+     </i>
+     Find a Challenge
+    </a>
+    <a class="btn btn-outline-success w-100" href="./lesson_library.html">
+     <i class="fas fa-play-circle me-2">
+     </i>
+     Browse Lessons
+    </a>
+   </div>
+  </aside>
+  <style>
+   #sidebar-student .nav-link.active, #sidebar-student .btn-toggle-nav a.active{ background:#008000; color:white; border-radius:8px; }
+    #sidebar-student a.link-dark:hover, #sidebar-student .nav-link:hover{ background:rgba(0,128,0,.08); border-radius:8px; }
+  </style>
+  <!-- Header (Top Navbar) -->
+  <header class="navbar navbar-expand-lg navbar-light bg-white border-bottom sticky-top" style="margin-left:260px;">
+   <style>
+    :root { --gq-primary:#008000; --gq-secondary:#00FFFF; }
+      .gq-badge{background:var(--gq-secondary); color:#004a4a;}
+      .gq-nav-icon:hover{background:rgba(0,128,0,0.08); border-radius:8px;}
+   </style>
+   <div class="container-fluid">
+    <button class="btn d-lg-none me-2" data-bs-target="#offcanvasStudent" data-bs-toggle="offcanvas" type="button">
+     <i class="fas fa-bars">
+     </i>
+    </button>
+    <a class="navbar-brand d-none d-lg-inline-block" href="./student_dashboard.html" style="color:#008000; font-weight:600;">
+     Student
+    </a>
+    <form class="d-none d-md-flex ms-2 flex-grow-1" role="search">
+     <div class="input-group">
+      <span class="input-group-text bg-white">
+       <i class="fas fa-search text-muted">
+       </i>
+      </span>
+      <input class="form-control" placeholder="Search lessons or challenges..." type="search"/>
+     </div>
+    </form>
+    <ul class="navbar-nav ms-auto align-items-center">
+     <li class="nav-item me-2">
+      <a class="btn btn-outline-success" href="./challenge_library.html">
+       <i class="fas fa-flag me-1">
+       </i>
+       New Challenge
+      </a>
+     </li>
+     <li class="nav-item me-2 position-relative">
+      <a aria-label="Notifications" class="btn gq-nav-icon" href="#notifications" id="btnNotifications">
+       <i class="fas fa-bell">
+       </i>
+      </a>
+      <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill gq-badge">
+       3
+      </span>
+     </li>
+     <li class="nav-item dropdown">
+      <a class="d-flex align-items-center text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" href="#">
+       <img alt="avatar" class="rounded-circle me-2" height="32" onerror="this.onerror=null;this.src='https://picsum.photos/seed/avatar/32/32';" src="https://via.placeholder.com/32" width="32"/>
+       <strong>
+        Student
+       </strong>
+      </a>
+      <ul class="dropdown-menu dropdown-menu-end">
+       <li>
+        <h6 class="dropdown-header">
+         <i class="fas fa-user-circle me-2">
+         </i>
+         Student
+        </h6>
+       </li>
+       <li>
+        <a class="dropdown-item" href="./student_dashboard.html">
+         Dashboard
+        </a>
+       </li>
+       <li>
+        <hr class="dropdown-divider"/>
+       </li>
+       <li>
+        <a class="dropdown-item" href="./student_dashboard.html#settings">
+         <i class="fas fa-cog me-2">
+         </i>
+         Settings
+        </a>
+       </li>
+       <li>
+        <a class="dropdown-item text-danger" href="./login_page.html">
+         <i class="fas fa-sign-out-alt me-2">
+         </i>
+         Logout
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </div>
+   <div class="offcanvas offcanvas-start" id="offcanvasStudent" tabindex="-1">
+    <div class="offcanvas-header">
+     <h5 class="offcanvas-title">
+      Menu
+     </h5>
+     <button class="btn-close" data-bs-dismiss="offcanvas" type="button">
+     </button>
+    </div>
+    <div class="offcanvas-body">
+     <a class="btn w-100 mb-2 btn-outline-success" href="./student_dashboard.html">
+      <i class="fas fa-home me-2">
+      </i>
+      Dashboard
+     </a>
+     <a class="btn w-100 mb-2 btn-outline-success" href="./lesson_library.html">
+      <i class="fas fa-book me-2">
+      </i>
+      Lessons
+     </a>
+     <a class="btn w-100 mb-2 btn-outline-success" href="./challenge_library.html">
+      <i class="fas fa-tasks me-2">
+      </i>
+      Challenges
+     </a>
+     <a class="btn w-100 mb-2 btn-outline-success" href="./leaderboard_page.html">
+      <i class="fas fa-trophy me-2">
+      </i>
+      Leaderboards
+     </a>
+     <a class="btn w-100 mb-2 btn-outline-success" href="./community_feed.html">
+      <i class="fas fa-users me-2">
+      </i>
+      Green Feed
+     </a>
+    </div>
+   </div>
+  </header>
+  <!-- Main Content -->
+  <main class="pb-4" id="mainContent" style="margin-left:260px;">
+   <div class="container-fluid container-max pt-3">
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb" class="breadcrumb">
+     <ol class="breadcrumb mb-2">
+      <li class="breadcrumb-item">
+       <a href="./student_dashboard.html">
+        Dashboard
+       </a>
+      </li>
+      <li class="breadcrumb-item">
+       <a href="./challenge_library.html">
+        Challenges
+       </a>
+      </li>
+      <li class="breadcrumb-item">
+       <a href="./challenge_details.html" id="crumbChallengeDetails">
+        Challenge Details
+       </a>
+      </li>
+      <li aria-current="page" class="breadcrumb-item active">
+       Submit Proof
+      </li>
+     </ol>
+    </nav>
+    <!-- Page Header -->
+    <div class="page-header">
+     <div>
+      <h1 class="page-title d-flex align-items-center gap-2">
+       <i class="fa-solid fa-file-circle-check text-success">
+       </i>
+       Submit Proof
+      </h1>
+      <small class="text-muted">
+       Upload a photo or video and add a short description, then submit for teacher verification.
+      </small>
+     </div>
+     <div aria-hidden="true" class="view-switcher d-none d-md-inline-flex">
+      <div class="option active">
+       Form
+      </div>
+     </div>
+    </div>
+    <!-- System feedback placeholder (hidden by default) -->
+    <div class="alert alert-warning d-none" id="sysFeedback" role="alert">
+     <i class="fa-solid fa-circle-info me-2">
+     </i>
+     <span id="sysFeedbackText">
+      Important: Make sure your upload clearly shows the completed challenge.
+     </span>
+    </div>
+    <!-- Submission Card -->
+    <div class="app-card mb-4">
+     <div class="card-header">
+      <div class="title d-flex align-items-center gap-2">
+       <span class="widget-title">
+        <i class="fa-solid fa-seedling text-success">
+        </i>
+        <span id="challengeTitle">
+         Eco-Challenge Title
+        </span>
+       </span>
+      </div>
+      <span class="badge-soft info">
+       <i class="fa-solid fa-hashtag">
+       </i>
+       <span id="challengeIdBadge">
+        ID: N/A
+       </span>
+      </span>
+     </div>
+     <div class="card-body">
+      <!-- Instructions / Summary -->
+      <div class="mb-3">
+       <p class="mb-0" id="challengeInstructions">
+        Complete the task as described and upload clear evidence of your work.
+       </p>
+      </div>
+      <!-- FORM: SubmissionForm -->
+      <form id="proofForm" novalidate="">
+       <input id="challengeId" name="challengeId" type="hidden" value="">
+        <!-- FileUpload -->
+        <div class="mb-3">
+         <label class="form-label fw-semibold">
+          Upload Photo or Video
+         </label>
+         <div class="dropzone border border-dashed rounded p-4 text-center" id="dropzone">
+          <input accept="image/*,video/*" class="visually-hidden" id="fileInput" name="file" type="file"/>
+          <div class="dz-empty" id="dzEmpty">
+           <i class="fa-solid fa-cloud-arrow-up fa-2x text-primary mb-2">
+           </i>
+           <div class="mb-1">
+            Tap or drag-and-drop to upload evidence (JPG, PNG, MP4)
+           </div>
+           <small class="text-muted">
+            Max size: Images 10MB, Videos 100MB
+           </small>
+          </div>
+          <div class="dz-preview d-none" id="dzPreview">
+           <div class="preview-media mb-2" id="previewMedia">
+           </div>
+           <div class="d-flex align-items-center justify-content-center gap-2">
+            <button class="btn btn-light btn-sm" id="btnChangeFile" type="button">
+             <i class="fa-solid fa-rotate">
+             </i>
+             Change
+            </button>
+            <button class="btn btn-outline-danger btn-sm" id="btnRemoveFile" type="button">
+             <i class="fa-solid fa-trash">
+             </i>
+             Remove
+            </button>
+           </div>
+          </div>
+         </div>
+         <div class="form-text" id="fileHelp">
+          Accepted types: .jpg, .jpeg, .png, .mp4
+         </div>
+         <div class="invalid-feedback d-block d-none" id="fileError">
+          <i class="fa-solid fa-triangle-exclamation me-1">
+          </i>
+          <span>
+          </span>
+         </div>
+        </div>
+        <!-- DescriptionInput -->
+        <div class="mb-3">
+         <label class="form-label fw-semibold" for="descriptionText">
+          Description (optional)
+         </label>
+         <textarea class="form-control" id="descriptionText" maxlength="500" name="description" placeholder="Add a short description... What did you do, where, and when?" rows="4"></textarea>
+         <div class="d-flex justify-content-between mt-1">
+          <small class="text-muted">
+           Max 500 characters
+          </small>
+          <small class="text-muted" id="charCount">
+           0 / 500
+          </small>
+         </div>
+        </div>
+        <!-- Progress -->
+        <div class="mb-3 d-none" id="uploadProgressWrap">
+         <label class="form-label">
+          Uploading...
+         </label>
+         <div class="progress">
+          <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="0" class="progress-bar progress-bar-striped progress-bar-animated" id="uploadProgress" role="progressbar" style="width: 0%">
+           0%
+          </div>
+         </div>
+        </div>
+        <!-- ActionButtons -->
+        <div class="d-flex align-items-center gap-2">
+         <button class="btn btn-success" disabled="" id="submitBtn" type="submit">
+          <span class="btn-label">
+           <i class="fa-solid fa-paper-plane me-1">
+           </i>
+           Submit for Verification
+          </span>
+          <span aria-hidden="true" class="spinner-border spinner-border-sm d-none" role="status">
+          </span>
+         </button>
+         <a class="btn btn-light" href="./challenge_details.html" id="cancelLink">
+          Cancel
+         </a>
+         <span class="text-muted ms-2" id="submissionStatus">
+         </span>
+        </div>
+       </input>
+      </form>
+     </div>
+    </div>
+    <!-- Help / Tips Card -->
+    <div class="app-card bg-muted">
+     <div class="card-body">
+      <div class="d-flex align-items-start gap-3">
+       <i class="fa-solid fa-lightbulb text-warning fa-lg mt-1">
+       </i>
+       <div>
+        <strong>
+         Tips for a great submission
+        </strong>
+        <ul class="mb-0 mt-1">
+         <li>
+          Ensure the photo/video clearly shows the completed challenge steps.
+         </li>
+         <li>
+          Include any required items (e.g., timestamp, location, or materials).
+         </li>
+         <li>
+          Write a brief description to help your teacher verify your work.
+         </li>
+        </ul>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </main>
+  <!-- Footer -->
+  <footer class="border-top bg-white" style="margin-left:260px;">
+   <div class="container py-3 d-flex flex-wrap justify-content-between align-items-center">
+    <div class="text-muted d-flex align-items-center">
+     <i class="fas fa-leaf me-2" style="color:#008000;">
+     </i>
+     <small>
+      GreenQuest Student
+     </small>
+    </div>
+    <div class="d-flex gap-2">
+     <a class="btn btn-sm btn-success" href="./challenge_library.html">
+      <i class="fas fa-flag me-1">
+      </i>
+      Find Challenge
+     </a>
+     <a class="btn btn-sm btn-outline-success" href="./lesson_library.html">
+      <i class="fas fa-play-circle me-1">
+      </i>
+      Lessons
+     </a>
+    </div>
+    <ul class="nav">
+     <li class="nav-item">
+      <a class="nav-link px-2 text-muted" href="#terms">
+       Terms
+      </a>
+     </li>
+     <li class="nav-item">
+      <a class="nav-link px-2 text-muted" href="#privacy">
+       Privacy
+      </a>
+     </li>
+    </ul>
+   </div>
+  </footer>
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.7/dist/sweetalert2.all.min.js">
+  </script>
+  <!-- Bootstrap 5 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+  </script>
+  <!-- Page Script: Proof Submission -->
+  <script>
+   (function() {
+    const params = new URLSearchParams(window.location.search);
+    const challengeId = params.get('challengeId') || 'ECO-2025-042';
+    const title = params.get('challengeTitle') || 'Plant a Tree Near Your School';
+    const instructions = params.get('challengeInstructions') || 'Plant a sapling in an approved area. Capture a photo or a short video of the planting process and the final planted sapling. Mention the location in the description.';
+
+    // Populate header
+    document.getElementById('challengeId').value = challengeId;
+    document.getElementById('challengeIdBadge').textContent = 'ID: ' + challengeId;
+    document.getElementById('challengeTitle').textContent = title;
+    document.getElementById('challengeInstructions').textContent = instructions;
+    const crumb = document.getElementById('crumbChallengeDetails');
+    crumb.href = `./challenge_details.html?challengeId=${encodeURIComponent(challengeId)}`;
+
+    // Elements
+    const form = document.getElementById('proofForm');
+    const dropzone = document.getElementById('dropzone');
+    const input = document.getElementById('fileInput');
+    const dzEmpty = document.getElementById('dzEmpty');
+    const dzPreview = document.getElementById('dzPreview');
+    const previewMedia = document.getElementById('previewMedia');
+    const fileError = document.getElementById('fileError');
+    const submitBtn = document.getElementById('submitBtn');
+    const submitSpinner = submitBtn.querySelector('.spinner-border');
+    const submissionStatus = document.getElementById('submissionStatus');
+    const progressWrap = document.getElementById('uploadProgressWrap');
+    const progressBar = document.getElementById('uploadProgress');
+    const cancelLink = document.getElementById('cancelLink');
+    const desc = document.getElementById('descriptionText');
+    const charCount = document.getElementById('charCount');
+    const btnChange = document.getElementById('btnChangeFile');
+    const btnRemove = document.getElementById('btnRemoveFile');
+
+    let selectedFile = null;
+    let previewUrl = null;
+    let isSubmitting = false;
+
+    // Character count
+    const updateCharCount = () => {
+        charCount.textContent = `${desc.value.length} / 500`;
+    };
+    desc.addEventListener('input', updateCharCount);
+    updateCharCount();
+
+    // Helpers
+    const resetError = () => {
+        fileError.classList.add('d-none');
+        fileError.querySelector('span').textContent = '';
+    };
+    const showError = (msg) => {
+        fileError.classList.remove('d-none');
+        fileError.querySelector('span').textContent = msg;
+    };
+    const clearPreview = () => {
+        if (previewUrl) {
+            URL.revokeObjectURL(previewUrl);
+            previewUrl = null;
+        }
+        selectedFile = null;
+        previewMedia.innerHTML = '';
+        dzPreview.classList.add('d-none');
+        dzEmpty.classList.remove('d-none');
+        submitBtn.disabled = true;
+    };
+
+    // Validation
+    const IMAGE_MAX = 10 * 1024 * 1024; // 10MB
+    const VIDEO_MAX = 100 * 1024 * 1024; // 100MB
+    const VALID_IMAGE = ['image/jpeg', 'image/png', 'image/jpg'];
+    const VALID_VIDEO = ['video/mp4', 'video/quicktime'];
+
+    function validateFile(file) {
+        if (!file) return {
+            ok: false,
+            msg: 'No file selected.'
+        };
+        const type = file.type;
+        const size = file.size;
+        const isImage = type.startsWith('image/');
+        const isVideo = type.startsWith('video/');
+        if (!isImage && !isVideo) {
+            return {
+                ok: false,
+                msg: 'Unsupported file type. Please upload JPG, PNG, or MP4.'
+            };
+        }
+        if (isImage && !VALID_IMAGE.includes(type)) {
+            return {
+                ok: false,
+                msg: 'Please upload a JPG or PNG image.'
+            };
+        }
+        if (isVideo && !VALID_VIDEO.includes(type)) {
+            return {
+                ok: false,
+                msg: 'Please upload an MP4 (H.264) or MOV video.'
+            };
+        }
+        if (isImage && size > IMAGE_MAX) {
+            return {
+                ok: false,
+                msg: 'Image is too large. Max size is 10MB.'
+            };
+        }
+        if (isVideo && size > VIDEO_MAX) {
+            return {
+                ok: false,
+                msg: 'Video is too large. Max size is 100MB.'
+            };
+        }
+        return {
+            ok: true
+        };
+    }
+
+    // File handling
+    const handleFileSelected = (file) => {
+        resetError();
+        const result = validateFile(file);
+        if (!result.ok) {
+            showError(result.msg);
+            clearPreview();
+            return;
+        }
+        selectedFile = file;
+        if (previewUrl) URL.revokeObjectURL(previewUrl);
+        previewUrl = URL.createObjectURL(file);
+        renderPreview(file);
+        dzEmpty.classList.add('d-none');
+        dzPreview.classList.remove('d-none');
+        submitBtn.disabled = false;
+    };
+
+    const renderPreview = (file) => {
+        const isImage = file.type.startsWith('image/');
+        previewMedia.innerHTML = '';
+        if (isImage) {
+            const img = document.createElement('img');
+            img.src = previewUrl;
+            img.alt = 'Selected upload preview';
+            img.className = 'img-fluid rounded';
+            img.onerror = function() {
+                this.onerror = null;
+                this.src = 'https://picsum.photos/seed/upload/600/400';
+            };
+            previewMedia.appendChild(img);
+        } else {
+            const vid = document.createElement('video');
+            vid.src = previewUrl;
+            vid.controls = true;
+            vid.className = 'w-100 rounded';
+            previewMedia.appendChild(vid);
+        }
+    };
+
+    // Dropzone interactions
+    dropzone.addEventListener('click', () => input.click());
+    input.addEventListener('change', (e) => {
+        const file = e.target.files && e.target.files[0];
+        if (file) handleFileSelected(file);
+    });
+
+    ;
+    ['dragenter', 'dragover'].forEach(ev => dropzone.addEventListener(ev, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        dropzone.classList.add('drag-over');
+    }));;
+    ['dragleave', 'drop'].forEach(ev => dropzone.addEventListener(ev, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        dropzone.classList.remove('drag-over');
+    }));
+    dropzone.addEventListener('drop', (e) => {
+        const file = e.dataTransfer.files && e.dataTransfer.files[0];
+        if (file) handleFileSelected(file);
+    });
+
+    btnChange.addEventListener('click', () => input.click());
+    btnRemove.addEventListener('click', () => {
+        input.value = '';
+        clearPreview();
+    });
+
+    // Cancel navigation guard if there are unsaved changes
+    cancelLink.addEventListener('click', (e) => {
+        if (selectedFile || desc.value.trim().length > 0) {
+            e.preventDefault();
+            Swal.fire({
+                title: 'Discard submission?',
+                text: 'You have unsaved changes. Are you sure you want to leave?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Discard',
+                cancelButtonText: 'Stay',
+                confirmButtonColor: '#CD2026'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = cancelLink.getAttribute('href') + `?challengeId=${encodeURIComponent(challengeId)}`;
+                }
+            });
+        }
+    });
+
+    // Simulate upload
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        resetError();
+        if (!selectedFile) {
+            showError('Please select a file to submit.');
+            return;
+        }
+        isSubmitting = true;
+        submitBtn.disabled = true;
+        submitSpinner.classList.remove('d-none');
+        submissionStatus.textContent = 'Submitting...';
+        progressWrap.classList.remove('d-none');
+
+        // Simulate progress
+        let progress = 0;
+        const timer = setInterval(() => {
+            progress = Math.min(progress + Math.random() * 18 + 5, 100);
+            progressBar.style.width = progress.toFixed(0) + '%';
+            progressBar.setAttribute('aria-valuenow', progress.toFixed(0));
+            progressBar.textContent = progress.toFixed(0) + '%';
+            if (progress >= 100) {
+                clearInterval(timer);
+                setTimeout(() => {
+                    isSubmitting = false;
+                    submitSpinner.classList.add('d-none');
+                    submissionStatus.textContent = 'Submitted!';
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Submission received',
+                        html: `<div class="text-start">\n                  <p>Your proof for <strong>${title}</strong> has been submitted for teacher verification.</p>\n                  <ul class="mb-0">\n                    <li>Challenge ID: <code>${challengeId}</code></li>\n                    <li>Description length: ${desc.value.length} characters</li>\n                  </ul>\n                </div>`,
+                        confirmButtonText: 'Back to Challenge',
+                        showDenyButton: true,
+                        denyButtonText: 'Go to Dashboard'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = `./challenge_details.html?challengeId=${encodeURIComponent(challengeId)}`;
+                        } else if (result.isDenied) {
+                            window.location.href = `./student_dashboard.html`;
+                        }
+                    });
+                    // Reset form state after success
+                    form.reset();
+                    clearPreview();
+                    progressWrap.classList.add('d-none');
+                    progressBar.style.width = '0%';
+                    progressBar.textContent = '0%';
+                    submitBtn.disabled = true;
+                }, 300);
+            }
+        }, 300);
+    });
+
+    // Simple notification click
+    document.getElementById('btnNotifications').addEventListener('click', (e) => {
+        e.preventDefault();
+        Swal.fire({
+            title: 'Notifications',
+            html: '<ul class="text-start mb-0"><li>Your class teacher approved 2 submissions.</li><li>New challenge: Community Clean-Up Drive.</li><li>Reminder: Submit proof before Friday.</li></ul>',
+            icon: 'info'
+        });
+    });
+
+    // Responsive adjustments handled by CSS; nothing else needed here.
+})();
+  </script>
+  <script src="auth.js"></script>
+
+ </body>
+</html>

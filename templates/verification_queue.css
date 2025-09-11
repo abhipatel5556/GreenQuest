@@ -1,0 +1,72 @@
+/* Verification Queue - Page Specific Styles */
+/* Use Poppins for this page */
+body {
+    font-family: "Poppins", var(--font-sans)
+    }
+/* Ensure main content respects the fixed sidebar */
+@media (min-width: 992px) {
+    main.main-panel {
+        padding-top: var(--space-4)
+        }
+    }
+/* Filters layout enhancements */
+.queue-filters .form-select {
+    min-width: 180px
+    }
+.queue-filters .btn {
+    white-space: nowrap
+    }
+/* Submission card styling */
+.submission-card.card {
+    border-radius: var(--radius-2);
+    border: 1px solid var(--border-color)
+    }
+.submission-card.card:hover {
+    box-shadow: var(--shadow-2)
+    }
+.submission-card .student-name {
+    font-weight: 700;
+    color: var(--text-strong)
+    }
+.class-badge {
+    white-space: nowrap
+    }
+/* Truncation utilities */
+.text-truncate-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden
+    }
+/* Submission list grid responsive spacing */
+.submission-list {
+    grid-template-columns: 1fr
+    }
+@media (min-width: 768px) {
+    .submission-list {
+        grid-template-columns: 1fr
+        }
+    }
+/* Chart container height */
+#classChart {
+    max-height: 220px
+    }
+/* Breadcrumbs spacing tweak */
+.breadcrumb {
+    margin-bottom: var(--space-2)
+    }
+/* Hover effect for subtle elevation */
+.hover-shadow {
+    transition: box-shadow 0.2s ease, transform 0.2s ease
+    }
+.hover-shadow:hover {
+    transform: translatey(-1px)
+    }
+/* Toast z-index above other cards */
+.toast {
+    z-index: var(--z-toast)
+    }
+/* Loading skeleton spacing */
+.loading-state .skeleton {
+    height: 18px
+    }

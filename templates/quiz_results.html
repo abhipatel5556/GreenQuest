@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Quiz Results • GreenQuest</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
+  <link href="style.css" rel="stylesheet"/>
+  <link href="quiz_result.css" rel="stylesheet"/>
+</head>
+<body>
+  <!-- Sidebar -->
+  <aside class="d-none d-lg-flex flex-column flex-shrink-0 bg-light border-end position-fixed" style="width:260px; height:100vh;">
+    <div class="p-3 border-bottom">
+      <div class="d-flex align-items-center mb-2">
+        <i class="fas fa-leaf me-2" style="color:#008000;"></i>
+        <span class="fw-bold" style="color:#008000;">GreenQuest</span>
+      </div>
+      <div class="d-flex align-items-center">
+        <img id="sidebarAvatar" class="rounded-circle me-2" src="https://via.placeholder.com/40"/>
+        <div>
+          <div class="fw-semibold" id="sidebarName">Guest</div>
+          <small class="text-muted" id="sidebarRole">Visitor</small>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Header -->
+  <header class="navbar navbar-light bg-white border-bottom sticky-top" style="margin-left:260px;">
+    <div class="container-fluid">
+      <h1 class="h5 mb-0 text-success"><i class="fas fa-check-circle me-2"></i>Quiz Results</h1>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="main-content" style="margin-left:260px;">
+    <div class="container py-5 text-center">
+      <div class="card p-4">
+        <h2 class="text-success"><i class="fas fa-trophy me-2"></i>Well Done!</h2>
+        <p id="scoreText" class="lead"></p>
+        <p class="mb-3">You earned <strong class="text-success">50 Eco-Points</strong> 🎉</p>
+        <a href="student_dashboard.html" class="btn btn-success">Back to Dashboard</a>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-top bg-white" style="margin-left:260px;">
+    <div class="container py-3 text-muted small">© GreenQuest Student</div>
+  </footer>
+
+  <script src="auth.js"></script>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const score = params.get("score") || 0;
+    const total = params.get("total") || 10;
+    document.getElementById("scoreText").textContent = `Your Score: ${score}/${total}`;
+  </script>
+</body>
+</html>

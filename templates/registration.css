@@ -1,0 +1,18 @@
+/* registration.css */
+.register-card {
+  background: #fff;
+  border-radius: var(--radius-2);
+  box-shadow: var(--shadow-2);
+  max-width: 550px;
+  width: 100%;
+}
+.register-card h2 {
+  color: var(--gq-primary);
+}
+h5 {
+  color: var(--gq-primary);
+  margin-top: 1rem;
+}
+.role-fields {
+  margin-top: 1rem;
+}

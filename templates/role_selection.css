@@ -1,0 +1,68 @@
+/* Role Selection Page (role_selection.css) */
+/* Typography override for this page: prefer Poppins while honoring theme fallback */
+body {
+    font-family: "Poppins", var(--font-sans)
+    }
+/* Layout helpers */
+#main-content {
+    background: var(--bg-gradient), var(--surface-bg)
+    }
+/* Role cards */
+.role-card {
+    cursor: pointer;
+    border: 1px solid var(--border-color);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.18s ease, background-color 0.2s ease
+    }
+.role-card:hover {
+    box-shadow: var(--shadow-2);
+    transform: translatey(-2px)
+    }
+.role-card:focus-visible {
+    outline: none
+    }
+.role-card.selected {
+    border-color: var(--color-primary);
+    background: var(--primary-soft);
+    box-shadow: var(--shadow-2)
+    }
+/* Role media/icon */
+.role-media {
+    min-width: 120px
+    }
+.role-icon {
+    width: 56px;
+    height: 56px;
+    display: inline-grid;
+    place-items: center;
+    border-radius: 14px;
+    font-size: 1.5rem;
+    box-shadow: var(--shadow-1)
+    }
+.role-illustration {
+    width: 120px;
+    height: 120px;
+    object-fit: cover
+    }
+/* Toast look consistent with theme */
+.toast {
+    box-shadow: var(--shadow-2);
+    border-color: var(--border-color)
+    }
+/* Breadcrumb spacing tweak */
+.breadcrumb {
+    padding-top: var(--space-2)
+    }
+/* Confirmation button state */
+#confirmBtn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed
+    }
+/* Small responsiveness tweak to ensure cards stack nicely on narrow screens */
+@media (max-width: 575.98px) {
+    .role-media {
+        min-width: 72px
+        }
+    .role-illustration {
+        display: none !important
+        }
+    }

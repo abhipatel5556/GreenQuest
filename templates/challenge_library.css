@@ -1,0 +1,15 @@
+/* challenge_library.css */
+body { font-family: "Poppins", sans-serif; }
+
+.challenge-card {
+  transition: transform .2s, box-shadow .2s;
+  border: 1px solid var(--border-color);
+}
+.challenge-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-2);
+}
+
+.card-title {
+  font-weight: 600;
+}
