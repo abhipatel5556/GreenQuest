@@ -91,12 +91,3 @@ button, .btn {
     margin-left: 0 !important;
   }
 }
-/* Adjust header and footer padding on small screens */
-@media (max-width: 600px) {
-  header, footer {
-    padding: 10px !important;
-  }
-  header h1 {
-    font-size: 1.5rem !important;
-  }
-}
