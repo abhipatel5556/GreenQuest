@@ -1,0 +1,84 @@
+/* ===== Responsive Design Boilerplate ===== */
+
+/* Make sure everything scales properly */
+* {
+  box-sizing: border-box;
+}
+
+/* General responsive container */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* Images flexible */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Text sizing */
+body {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* Responsive navigation */
+nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+nav ul li {
+  flex: 1 1 auto;
+  text-align: center;
+}
+
+/* Buttons touch-friendly */
+button, .btn {
+  padding: 12px 18px;
+  font-size: 1rem;
+  border-radius: 8px;
+}
+
+/* --- Mobile First --- */
+@media (max-width: 600px) {
+  .card, .section, .box {
+    flex: 1 1 100%;
+  }
+  
+  nav ul {
+    flex-direction: column;
+  }
+
+  h1 { font-size: 1.6rem; }
+  h2 { font-size: 1.3rem; }
+  p  { font-size: 1rem; }
+}
+
+/* --- Tablet --- */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .card, .section, .box {
+    flex: 1 1 48%;
+  }
+
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.5rem; }
+  p  { font-size: 1.1rem; }
+}
+
+/* --- Desktop --- */
+@media (min-width: 1025px) {
+  .card, .section, .box {
+    flex: 1 1 30%;
+  }
+
+  h1 { font-size: 2.4rem; }
+  h2 { font-size: 1.8rem; }
+  p  { font-size: 1.2rem; }
+}
