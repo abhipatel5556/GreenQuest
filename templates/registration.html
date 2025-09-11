@@ -265,37 +265,35 @@
       if (this.value === 'organisation') organisationFields.classList.remove('d-none');
     });
 
-    // Submit form -> Redirect to success page
-    document.getElementById('registrationForm').addEventListener('submit', function(e) {
+    // Registration form submit: call doLogin, then redirect to success page
+    document.getElementById("registrationForm").addEventListener("submit", function(e) {
       e.preventDefault();
+
+      // Collect form values (add more as needed)
+      const role = document.getElementById("roleSelect").value;
+      let username = "";
+      // Try to get username from visible fields
+      if (role === "student") {
+        username = document.querySelector("#studentFields input[type='text']")?.value || "";
+      } else if (role === "teacher") {
+        username = document.querySelector("#teacherFields input[type='text']")?.value || "";
+      } else if (role === "organisation") {
+        username = document.querySelector("#organisationFields input[type='text']")?.value || "";
+      }
+      const avatar = `https://picsum.photos/seed/${username}/40/40`;
+
+      // Call doLogin if available
+      if (typeof doLogin === "function") {
+        doLogin(role, username, avatar);
+      }
+
+      // Redirect to success page
       window.location.href = "./success.html";
     });
   </script>
 
 
 <script src="auth.js"></script>
-<script>
-  // ✅ Hook into registration submit
-  document.getElementById("registrationForm").addEventListener("submit", function(e) {
-    e.preventDefault();
-
-    // Collect form values
-    const name = document.getElementById("name").value;
-    const role = document.getElementById("role").value;   // Student | Teacher | Organization
-    const username = document.getElementById("username").value || name;
-    const avatar = `https://picsum.photos/seed/${username}/40/40`;
-
-    // Optional: collect extra student/teacher fields
-    const studentClass = document.getElementById("class")?.value;
-    const rollNo = document.getElementById("rollNo")?.value;
-    const teacherId = document.getElementById("teacherId")?.value;
-
-    // Here you’d normally send data to backend (AJAX / fetch)
-    // For now, simulate success:
-
-    // 🔹 Call doLogin() so the sidebar + dashboard works
-    doLogin(role, username, avatar);
-  });
-</script>
+// ...existing code...
 </body>
 </html>
