@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+< lang="en">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -11,6 +11,27 @@
   <link href="registration.css" rel="stylesheet"/>
 </head>
 <body>
+    <header class="login-header shadow-sm">
+  <div class="container-fluid d-flex justify-content-between align-items-center">
+    <!-- Brand -->
+    <div class="d-flex align-items-center">
+      <div class="logo-circle me-2">
+        <i class="fas fa-leaf"></i>
+      </div>
+      <div>
+        <div class="brand-title">GreenQuest</div>
+        <div class="brand-subtitle">Government of Punjab</div>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="d-flex gap-2">
+      <a href="#about" class="btn btn-outline-light btn-sm"><i class="fas fa-info-circle me-1"></i> About</a>
+      <a href="#help" class="btn btn-light btn-sm"><i class="fas fa-question-circle me-1"></i> Help</a>
+    </div>
+  </div>
+</header>
+
   <main class="d-flex align-items-center justify-content-center vh-100 bg-light">
     <div class="register-card p-4">
       <div class="text-center mb-3">
@@ -85,6 +106,66 @@
         </button>
       </form>
     </div>
+     <!-- About Section -->
+  <section id="about" class="mb-5">
+    <h3 class="fw-bold text-success"><i class="fas fa-info-circle me-2"></i>About Portal</h3>
+    <p class="text-muted">
+      The GreenQuest portal is an initiative by the <strong>Government of Punjab</strong> to engage students and teachers
+      in sustainability learning. Through lessons, quizzes, eco-challenges, and community activities,
+      the portal helps build environmental awareness and track impact across schools.
+    </p>
+    <ul>
+      <li>📘 Learn about waste segregation, water conservation, and climate action.</li>
+      <li>🏆 Participate in eco-challenges and earn Eco-Points & badges.</li>
+      <li>📊 Track your school’s collective impact via analytics and leaderboards.</li>
+    </ul>
+  </section>
+  <section id="help">
+    <h3 class="fw-bold text-success"><i class="fas fa-question-circle me-2"></i>Help & Support</h3>
+    <p class="text-muted">Need help getting started? Here are some quick answers:</p>
+    <div class="accordion" id="helpAccordion">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="q1">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#a1">
+            How do I register as a student?
+          </button>
+        </h2>
+        <div id="a1" class="accordion-collapse collapse" data-bs-parent="#helpAccordion">
+          <div class="accordion-body">
+            Go to the registration page, select your <strong>district</strong>, then your <strong>school</strong>, 
+            and choose <em>Student</em> role. Enter your name, class, and roll number to sign up.
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="q2">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#a2">
+            How do teachers create classes?
+          </button>
+        </h2>
+        <div id="a2" class="accordion-collapse collapse" data-bs-parent="#helpAccordion">
+          <div class="accordion-body">
+            Teachers can register using their Teacher ID, then create a class from the <strong>Teacher Dashboard</strong>.
+            A unique <em>Class Code</em> will be generated to share with students.
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="q3">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#a3">
+            Who can I contact for support?
+          </button>
+        </h2>
+        <div id="a3" class="accordion-collapse collapse" data-bs-parent="#helpAccordion">
+          <div class="accordion-body">
+            For support, please contact your <strong>School Eco-Club Coordinator</strong> 
+            or email <a href="mailto:support@greenquestpunjab.gov">support@greenquestpunjab.gov</a>.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   </main>
 
   <script>
@@ -108,7 +189,8 @@
       window.location.href = "./success.html";
     });
   </script>
-</body>
+
+
 <script src="auth.js"></script>
 <script>
   // ✅ Hook into registration submit
@@ -133,5 +215,5 @@
     doLogin(role, username, avatar);
   });
 </script>
-
+</body>
 </html>
