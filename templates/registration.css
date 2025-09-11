@@ -5,6 +5,7 @@
   box-shadow: var(--shadow-2);
   max-width: 550px;
   width: 100%;
+  align-self: center;
 }
 .register-card h2 {
   color: var(--gq-primary);
