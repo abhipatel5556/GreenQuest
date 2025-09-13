@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Waste Segregation Game</title>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      text-align: center;
+      background: #f4f9f4;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #008000;
+    }
+
+    #items, #bins {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin: 20px 0;
+    }
+
+    .item {
+      background: white;
+      padding: 10px 15px;
+      border: 2px solid #008000;
+      border-radius: 8px;
+      cursor: grab;
+      font-size: 18px;
+    }
+
+    .bin {
+      width: 180px;
+      height: 180px;
+      border: 3px dashed #ccc;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      font-size: 18px;
+      background: #fff;
+      transition: 0.3s;
+    }
+
+    /* Add specific colors to each bin */
+    #wetBin {
+      border-color: #5cb85c;
+      background: #dff0d8;
+    }
+
+    #dryBin {
+      border-color: #f0ad4e;
+      background: #fcf8e3;
+    }
+
+    #recycleBin {
+      border-color: #337ab7;
+      background: #d9edf7;
+    }
+    
+    .bin:hover {
+      opacity: 0.8; /* A simple hover effect to show interaction */
+    }
+
+    #score {
+      margin-top: 20px;
+      font-size: 22px;
+      font-weight: bold;
+      color: #444;
+    }
+
+    #message {
+      font-size: 20px;
+      color: #006400;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>♻ Waste Segregation Game</h1>
+  <p>Drag items into the correct bin!</p>
+
+  <div id="items"></div>
+
+  <div id="bins">
+    <div id="wetBin" class="bin" ondrop="drop(event, 'wet')" ondragover="allowDrop(event)">🌱 Wet Waste</div>
+    <div id="dryBin" class="bin" ondrop="drop(event, 'dry')" ondragover="allowDrop(event)">📰 Dry Waste</div>
+    <div id="recycleBin" class="bin" ondrop="drop(event, 'recyclable')" ondragover="allowDrop(event)">♻ Recyclable</div>
+  </div>
+
+  <p id="score">Score: 0</p>
+  <p id="message"></p>
+
+  <script>
+    let score = 0;
+    let currentRound = 0;
+    let itemsLeft = 0;
+
+    // All rounds data
+    const rounds = [
+      [
+        { id: "banana", text: "🍌 Banana Peel", bin: "wet" },
+        { id: "paper", text: "📄 Paper", bin: "dry" },
+        { id: "bottle", text: "🍼 Plastic Bottle", bin: "recyclable" }
+      ],
+      [
+        { id: "tomato", text: "🍅 Tomato", bin: "wet" },
+        { id: "cardboard", text: "📦 Cardboard", bin: "dry" },
+        { id: "can", text: "🥤 Aluminum Can", bin: "recyclable" }
+      ],
+      [
+        { id: "apple", text: "🍎 Apple Core", bin: "wet" },
+        { id: "magazine", text: "📚 Magazine", bin: "dry" },
+        { id: "glass", text: "🍾 Glass Bottle", bin: "recyclable" }
+      ]
+    ];
+
+    // Load round
+    function loadRound(roundIndex) {
+      document.getElementById("items").innerHTML = "";
+      document.getElementById("message").innerText = "";
+
+      if (roundIndex >= rounds.length) {
+        document.getElementById("message").innerText = "🎉 Congratulations! You completed all rounds!";
+        return;
+      }
+
+      const round = rounds[roundIndex];
+      itemsLeft = round.length;
+
+      round.forEach(item => {
+        let div = document.createElement("div");
+        div.id = item.id;
+        div.className = "item";
+        div.innerText = item.text;
+        div.setAttribute("draggable", "true");
+        div.setAttribute("data-bin", item.bin);
+        div.ondragstart = drag;
+        document.getElementById("items").appendChild(div);
+      });
+    }
+
+    // Drag & Drop functions
+    function allowDrop(ev) {
+      ev.preventDefault();
+    }
+
+    function drag(ev) {
+      ev.dataTransfer.setData("text", ev.target.id);
+    }
+
+    function drop(ev, binType) {
+      ev.preventDefault();
+      let data = ev.dataTransfer.getData("text");
+      let item = document.getElementById(data);
+
+      let correctBin = item.getAttribute("data-bin");
+
+      if (binType === correctBin) {
+        score += 10;
+        itemsLeft--;
+        document.getElementById("score").innerText = "Score: " + score;
+        ev.target.appendChild(item);
+        item.setAttribute("draggable", "false");
+        item.style.opacity = "0.6";
+
+        if (itemsLeft === 0) {
+          document.getElementById("message").innerText = "✅ Round Completed!";
+          setTimeout(() => {
+            currentRound++;
+            loadRound(currentRound);
+          }, 1500);
+        }
+      } else {
+        alert("❌ Oops! Wrong bin.");
+      }
+    }
+
+    // Start first round
+    loadRound(currentRound);
+  </script>
+</body>
+</html>
