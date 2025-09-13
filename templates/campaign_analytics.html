@@ -13,9 +13,61 @@
   <link href="campaign_analytics.css" rel="stylesheet"/>
 </head>
 <body>
-  <aside class="sidebar-partner">…same as partner_portal sidebar…</aside>
-  <header class="page-header">Campaign Analytics</header>
-  <main class="main-content">
+<aside class="d-none d-lg-flex flex-column flex-shrink-0 bg-light border-end position-fixed" id="sidebar-partner" style="width:260px; height:100vh;">
+   <div class="p-3 border-bottom">
+    <div class="d-flex align-items-center mb-2">
+     <i class="fas fa-handshake me-2" style="color:#007bff;"></i>
+     <span class="fw-bold" style="color:#007bff;">Partner Portal</span>
+    </div>
+    <div class="d-flex align-items-center">
+     <img alt="avatar" class="rounded-circle me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/partner/40/40'" src="https://via.placeholder.com/40"/>
+     <div>
+      <div class="fw-semibold">NGO Partner</div>
+      <small class="text-muted">Partner</small>
+     </div>
+    </div>
+   </div>
+   <nav class="flex-grow-1 overflow-auto p-2">
+    <ul class="nav nav-pills flex-column mb-auto">
+     <li class="nav-item">
+      <a class="nav-link text-dark" href="./partner_portal.html">
+       <i class="fas fa-home me-2"></i>
+       Dashboard
+      </a>
+     </li>
+     <li class="nav-item">
+      <a class="nav-link text-dark" href="./create_campaign.html">
+       <i class="fas fa-plus-circle me-2"></i>
+       Create Campaign
+      </a>
+     </li>
+     <li class="nav-item">
+      <a class="nav-link text-dark" href="./campaign_analytics.html">
+       <i class="fas fa-chart-bar me-2"></i>
+       Analytics
+      </a>
+     </li>
+    </ul>
+   </nav>
+   <div class="p-3 border-top">
+    <a class="btn btn-success w-100 mb-2" href="./create_campaign.html">
+     <i class="fas fa-plus me-2"></i>
+     Start New Campaign
+    </a>
+    <a class="btn btn-outline-success w-100" href="./campaign_analytics.html">
+     <i class="fas fa-chart-line me-2"></i>
+     View Analytics
+    </a>
+   </div>
+   <div class="d-flex align-items-center p-3 border-top">
+    <img id="sidebarAvatar" alt="avatar" class="rounded-circle me-2" src="https://via.placeholder.com/40"/>
+    <div>
+      <div class="fw-semibold" id="sidebarName">Guest</div>
+      <small class="text-muted" id="sidebarRole">Visitor</small>
+    </div>
+   </div>
+  </aside>  <header class="page-header">Campaign Analytics</header>
+  <main class="main-content" style="margin-left:260px;">
     <div class="container py-4">
       <h1 class="h4 mb-3"><i class="fas fa-chart-bar text-primary me-2"></i>Analytics Dashboard</h1>
       <div class="row g-4">
