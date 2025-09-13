@@ -273,16 +273,11 @@
 
     document.getElementById("registrationForm").addEventListener("submit", function(e) {
       e.preventDefault();
-      
       // Check if all required fields are filled out
       if (this.checkValidity()) {
-        alert("Registration form submitted successfully! (This is a front-end simulation only. A server is required for a real registration.)");
-        // In a real application, you would send the form data to a backend server here
-        // e.g., using `fetch()` or `axios`
-        // fetch('/api/register', { method: 'POST', body: new FormData(this) });
+        // Redirect to success page
+        window.location.href = "./success.html";
       } else {
-        // This part is automatically handled by the browser for 'required' fields
-        // but it's good to keep in mind for custom validation
         this.reportValidity();
       }
     });
