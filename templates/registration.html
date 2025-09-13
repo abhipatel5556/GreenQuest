@@ -136,19 +136,19 @@
         <div class="mb-3">
           <label class="form-label">District</label>
           <select class="form-select" id="districtSelect" name="district" required>
-            <option value="" disabled selected>Select District</option>
-            <option>Amritsar</option>
-            <option>Ludhiana</option>
-            <option>Patiala</option>
-            <option>Jalandhar</option>
-            <option>Bathinda</option>
+            <option value="" disabled>Select District</option>
+            <option value="Amritsar" selected>Amritsar</option>
+            <option value="Ludhiana">Ludhiana</option>
+            <option value="Patiala">Patiala</option>
+            <option value="Jalandhar">Jalandhar</option>
+            <option value="Bathinda">Bathinda</option>
           </select>
         </div>
         <div class="mb-3">
           <label class="form-label">School</label>
           <select class="form-select" id="schoolSelect" name="school" required>
-            <option value="" disabled selected>Select School</option>
-            <option value="12345">12345 – Govt. High School, Amritsar</option>
+            <option value="" disabled>Select School</option>
+            <option value="12345" selected>12345 – Govt. High School, Amritsar</option>
             <option value="23456">23456 – Govt. Girls School, Ludhiana</option>
             <option value="34567">34567 – Govt. Senior Secondary School, Patiala</option>
           </select>
@@ -157,20 +157,21 @@
         <h5 class="fw-bold mt-4 mb-3">Role</h5>
         <div class="mb-3">
           <select class="form-select" id="roleSelect" name="role" required>
-            <option value="" disabled selected>Select Role</option>
-            <option value="student">Student</option>
+            <option value="" disabled>Select Role</option>
+            <option value="student" selected>Student</option>
             <option value="teacher">Teacher</option>
             <option value="organisation">Organisation</option>
           </select>
         </div>
 
          <div id="studentFields" class="role-fields d-none">
-          <div class="mb-3"><label class="form-label">Full Name</label><input type="text" class="form-control" name="student_name" required></div>
+          <div class="mb-3"><label class="form-label">Full Name</label><input type="text" class="form-control" name="student_name" required placeholder="e.g. Aman Singh" value="Aman Singh"></div>
           <!-- Updated 'Class' section to a dropdown list -->
           <div class="mb-3">
             <label class="form-label">Class</label>
             <select class="form-select" id="classSelect" name="student_class" required>
-              <option value="" disabled selected>Select Class</option>
+              <option value="" disabled>Select Class</option>
+              <option selected>Class 10</option>
               <option>Nursery</option>
               <option>LKG</option>
               <option>UKG</option>
@@ -183,29 +184,28 @@
               <option>Class 7</option>
               <option>Class 8</option>
               <option>Class 9</option>
-              <option>Class 10</option>
               <option>Class 11</option>
               <option>Class 12</option>
             </select>
           </div>
-          <div class="mb-3"><label class="form-label">Roll No</label><input type="text" class="form-control" name="student_rollno" required></div>
-          <div class="mb-3"><label class="form-label">Email</label><input type="email" class="form-control" name="student_email" required></div>
-          <div class="mb-3"><label class="form-label">Password</label><input type="password" class="form-control" name="student_password" required></div>
+          <div class="mb-3"><label class="form-label">Roll No</label><input type="text" class="form-control" name="student_rollno" required placeholder="e.g. 101" value="101"></div>
+          <div class="mb-3"><label class="form-label">Email</label><input type="email" class="form-control" name="student_email" required placeholder="e.g. aman@email.com" value="aman@email.com"></div>
+          <div class="mb-3"><label class="form-label">Password</label><input type="password" class="form-control" name="student_password" required placeholder="Enter password" value="password123"></div>
         </div>
 
         <div id="teacherFields" class="role-fields d-none">
-          <div class="mb-3"><label class="form-label">Full Name</label><input type="text" class="form-control" name="teacher_name" required></div>
-          <div class="mb-3"><label class="form-label">Email</label><input type="email" class="form-control" name="teacher_email" required></div>
-          <div class="mb-3"><label class="form-label">Username</label><input type="text" class="form-control" name="teacher_username" required></div>
-          <div class="mb-3"><label class="form-label">Teacher ID</label><input type="text" class="form-control" name="teacher_id" required></div>
-          <div class="mb-3"><label class="form-label">Password</label><input type="password" class="form-control" name="teacher_password" required></div>
+          <div class="mb-3"><label class="form-label">Full Name</label><input type="text" class="form-control" name="teacher_name" required placeholder="e.g. Suman Kaur" value="Suman Kaur"></div>
+          <div class="mb-3"><label class="form-label">Email</label><input type="email" class="form-control" name="teacher_email" required placeholder="e.g. suman@email.com" value="suman@email.com"></div>
+          <div class="mb-3"><label class="form-label">Username</label><input type="text" class="form-control" name="teacher_username" required placeholder="e.g. suman.kaur" value="suman.kaur"></div>
+          <div class="mb-3"><label class="form-label">Teacher ID</label><input type="text" class="form-control" name="teacher_id" required placeholder="e.g. T123" value="T123"></div>
+          <div class="mb-3"><label class="form-label">Password</label><input type="password" class="form-control" name="teacher_password" required placeholder="Enter password" value="password456"></div>
         </div>
 
         <div id="organisationFields" class="role-fields d-none">
-          <div class="mb-3"><label class="form-label">Organisation Name</label><input type="text" class="form-control" name="org_name" required></div>
-          <div class="mb-3"><label class="form-label">Contact Person</label><input type="text" class="form-control" name="org_contact" required></div>
-          <div class="mb-3"><label class="form-label">Email</label><input type="email" class="form-control" name="org_email" required></div>
-          <div class="mb-3"><label class="form-label">Password</label><input type="password" class="form-control" name="org_password" required></div>
+          <div class="mb-3"><label class="form-label">Organisation Name</label><input type="text" class="form-control" name="org_name" required placeholder="e.g. EcoCare" value="EcoCare"></div>
+          <div class="mb-3"><label class="form-label">Contact Person</label><input type="text" class="form-control" name="org_contact" required placeholder="e.g. Rajiv Sharma" value="Rajiv Sharma"></div>
+          <div class="mb-3"><label class="form-label">Email</label><input type="email" class="form-control" name="org_email" required placeholder="e.g. eco@email.com" value="eco@email.com"></div>
+          <div class="mb-3"><label class="form-label">Password</label><input type="password" class="form-control" name="org_password" required placeholder="Enter password" value="orgpass789"></div>
         </div>
 
         <button type="submit" class="btn btn-success w-100 mt-3">
@@ -292,6 +292,18 @@
 
     document.getElementById("registrationForm").addEventListener("submit", function(e) {
       e.preventDefault();
+      // Remove 'required' from all hidden fields before validation
+      document.querySelectorAll('.role-fields').forEach(function(group) {
+        if (group.classList.contains('d-none')) {
+          group.querySelectorAll('input,select').forEach(function(input) {
+            input.removeAttribute('required');
+          });
+        } else {
+          group.querySelectorAll('input,select').forEach(function(input) {
+            input.setAttribute('required', '');
+          });
+        }
+      });
       // Check if all required fields are filled out
       if (this.checkValidity()) {
         // Redirect to login page
