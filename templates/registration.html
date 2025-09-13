@@ -135,7 +135,7 @@
         <h5 class="fw-bold mb-3">Institution Details</h5>
         <div class="mb-3">
           <label class="form-label">District</label>
-          <select class="form-select" id="districtSelect" required>
+          <select class="form-select" id="districtSelect" name="district" required>
             <option value="" disabled selected>Select District</option>
             <option>Amritsar</option>
             <option>Ludhiana</option>
@@ -146,7 +146,7 @@
         </div>
         <div class="mb-3">
           <label class="form-label">School</label>
-          <select class="form-select" id="schoolSelect" required>
+          <select class="form-select" id="schoolSelect" name="school" required>
             <option value="" disabled selected>Select School</option>
             <option value="12345">12345 – Govt. High School, Amritsar</option>
             <option value="23456">23456 – Govt. Girls School, Ludhiana</option>
@@ -156,7 +156,7 @@
 
         <h5 class="fw-bold mt-4 mb-3">Role</h5>
         <div class="mb-3">
-          <select class="form-select" id="roleSelect" required>
+          <select class="form-select" id="roleSelect" name="role" required>
             <option value="" disabled selected>Select Role</option>
             <option value="student">Student</option>
             <option value="teacher">Teacher</option>
@@ -165,11 +165,11 @@
         </div>
 
          <div id="studentFields" class="role-fields d-none">
-          <div class="mb-3"><label class="form-label">Full Name</label><input type="text" class="form-control" required></div>
+          <div class="mb-3"><label class="form-label">Full Name</label><input type="text" class="form-control" name="student_name" required></div>
           <!-- Updated 'Class' section to a dropdown list -->
           <div class="mb-3">
             <label class="form-label">Class</label>
-            <select class="form-select" id="classSelect" required>
+            <select class="form-select" id="classSelect" name="student_class" required>
               <option value="" disabled selected>Select Class</option>
               <option>Nursery</option>
               <option>LKG</option>
@@ -188,24 +188,24 @@
               <option>Class 12</option>
             </select>
           </div>
-          <div class="mb-3"><label class="form-label">Roll No</label><input type="text" class="form-control" required></div>
-          <div class="mb-3"><label class="form-label">Email</label><input type="email" class="form-control" required></div>
-          <div class="mb-3"><label class="form-label">Password</label><input type="password" class="form-control" required></div>
+          <div class="mb-3"><label class="form-label">Roll No</label><input type="text" class="form-control" name="student_rollno" required></div>
+          <div class="mb-3"><label class="form-label">Email</label><input type="email" class="form-control" name="student_email" required></div>
+          <div class="mb-3"><label class="form-label">Password</label><input type="password" class="form-control" name="student_password" required></div>
         </div>
 
         <div id="teacherFields" class="role-fields d-none">
-          <div class="mb-3"><label class="form-label">Full Name</label><input type="text" class="form-control" required></div>
-          <div class="mb-3"><label class="form-label">Email</label><input type="email" class="form-control" required></div>
-          <div class="mb-3"><label class="form-label">Username</label><input type="text" class="form-control" required></div>
-          <div class="mb-3"><label class="form-label">Teacher ID</label><input type="text" class="form-control" required></div>
-          <div class="mb-3"><label class="form-label">Password</label><input type="password" class="form-control" required></div>
+          <div class="mb-3"><label class="form-label">Full Name</label><input type="text" class="form-control" name="teacher_name" required></div>
+          <div class="mb-3"><label class="form-label">Email</label><input type="email" class="form-control" name="teacher_email" required></div>
+          <div class="mb-3"><label class="form-label">Username</label><input type="text" class="form-control" name="teacher_username" required></div>
+          <div class="mb-3"><label class="form-label">Teacher ID</label><input type="text" class="form-control" name="teacher_id" required></div>
+          <div class="mb-3"><label class="form-label">Password</label><input type="password" class="form-control" name="teacher_password" required></div>
         </div>
 
         <div id="organisationFields" class="role-fields d-none">
-          <div class="mb-3"><label class="form-label">Organisation Name</label><input type="text" class="form-control" required></div>
-          <div class="mb-3"><label class="form-label">Contact Person</label><input type="text" class="form-control" required></div>
-          <div class="mb-3"><label class="form-label">Email</label><input type="email" class="form-control" required></div>
-          <div class="mb-3"><label class="form-label">Password</label><input type="password" class="form-control" required></div>
+          <div class="mb-3"><label class="form-label">Organisation Name</label><input type="text" class="form-control" name="org_name" required></div>
+          <div class="mb-3"><label class="form-label">Contact Person</label><input type="text" class="form-control" name="org_contact" required></div>
+          <div class="mb-3"><label class="form-label">Email</label><input type="email" class="form-control" name="org_email" required></div>
+          <div class="mb-3"><label class="form-label">Password</label><input type="password" class="form-control" name="org_password" required></div>
         </div>
 
         <button type="submit" class="btn btn-success w-100 mt-3">
