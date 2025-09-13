@@ -129,9 +129,7 @@
         <p class="text-muted">For Government Schools of Punjab</p>
       </div>
       
-      <div class="alert alert-info text-center" role="alert">
-        This is a **front-end only** simulation. A server-side back-end is required for real registration.
-      </div>
+      
 
       <form id="registrationForm">
         <h5 class="fw-bold mb-3">Institution Details</h5>
@@ -147,7 +145,7 @@
           </select>
         </div>
         <div class="mb-3">
-          <label class="form-label">School / Collage</label>
+          <label class="form-label">School</label>
           <select class="form-select" id="schoolSelect" required>
             <option value="" disabled selected>Select School</option>
             <option value="12345">12345 – Govt. High School, Amritsar</option>
@@ -166,9 +164,6 @@
           </select>
         </div>
 
-        <div id="studentFields" class="role-fields d-none">
-          <div class="mb-3"><label class="form-label">Full Name</label><input type="text" class="form-control" required></div>
-          <div class="mb-3"><label class="form-label">Class</label><input type="text" class="form-control" required></div>
          <div id="studentFields" class="role-fields d-none">
           <div class="mb-3"><label class="form-label">Full Name</label><input type="text" class="form-control" required></div>
           <!-- Updated 'Class' section to a dropdown list -->
@@ -193,6 +188,7 @@
               <option>Class 12</option>
             </select>
           </div>
+          <div class="mb-3"><label class="form-label">Roll No</label><input type="text" class="form-control" required></div>
           <div class="mb-3"><label class="form-label">Email</label><input type="email" class="form-control" required></div>
           <div class="mb-3"><label class="form-label">Password</label><input type="password" class="form-control" required></div>
         </div>
